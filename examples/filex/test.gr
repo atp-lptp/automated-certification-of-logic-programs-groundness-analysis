@@ -1,0 +1,24 @@
+
+:- assert_clauses(n(leq,2),[
+ clause([n(leq,2),[n(0,0)],$(0)],
+  [&],
+  [0]/1),
+ clause([n(leq,2),[n(s,1),$(x)],[n(s,1),$(y)]],
+  [n(leq,2),$(x),$(y)],
+  [x,y]/0)
+]).
+
+:- assert_clauses(n(sup,2),[
+ clause([n(sup,2),[n(s,1),$(0)],[n(0,0)]],
+  [&],
+  [0]/1),
+ clause([n(sup,2),[n(s,1),$(x)],[n(s,1),$(y)]],
+  [n(sup,2),$(x),$(y)],
+  [x,y]/0)
+]).
+
+:- assert_clauses(n(test3,1),[
+ clause([n(test3,1),$(x)],
+  [&,[=,$(x),[n(s,1),[n(0,0)]]],[=,$(y),[n(0,0)]],[n(test3,1),$(y)]],
+  [x,y]/0)
+]).

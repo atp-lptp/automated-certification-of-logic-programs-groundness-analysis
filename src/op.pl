@@ -4,6 +4,57 @@
 /* Filename: op.pl */
 /* Abstract: Operator declarations. Comments on built-in predicates. */
 
+:- module(lptp, [
+	bye/0,
+	bye/1,
+
+	by/2,
+
+	check/1,
+
+	exec/1,
+
+	initialize/0,
+
+	log__info/2,
+	log__error/1,
+
+	mark/1,
+
+	needs_gr/1,
+	needs_thm/1,
+
+    derive_groundness_property/3,
+	prove/4,
+	prove_groundness_property/4,
+    prove_with_premises/5,
+
+	prt__write/1,
+
+	thm_file/1,
+
+    build_lemmas/4,
+	groundness_analysis/2,
+	groundness_analysis_common/4,
+	groundness_analysis_lptp/2,
+	groundness_invariant/4,
+	infer_groundness_prop_with_cti/2,
+	invariant_from_facts_and_hypothesis/4,
+    is_compound_form_except_list_question_mark/1,
+	prove_groundness_prop/2,
+	matching_dnf/1,
+	model_formula/4,
+    remove_qm_steps/3,
+    sccs_having_mutually_recursive_predicates/3,
+	simplify/2,
+	sols_vars_dnf/3,
+	sols_vars_dnf_aux/4,
+	sol_vars_cond/3,
+	sol_vars_cond_aux/4,
+	write_lemmas/2
+]).
+:- use_module('./cga-lptp/groundness_analysis').
+
 %% Special characters (ISO Prolog): # $ & * + - . / : < = > ? @ ^ ~ \
 
 %% Since the backslash \ behaves differently in quoted names in different
@@ -35,6 +86,8 @@
 :- op(700,xfy,=<).		% less than or equal (built-in)
 :- op(700,xfy,@<).		% less (nat)
 :- op(700,xfy,@=<).		% less than or equal (nat)
+:- op(700,xfy,@@<).		% less (nat)
+:- op(700,xfy,lte).		% less than or equal (nat)
 :- op(700,xfy,#<).		% less (int)
 :- op(700,xfy,#=<).		% less than or equal (int)
 :- op(700,xfy,'!leq').		% less than or equal (TeX)

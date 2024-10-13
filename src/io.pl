@@ -14,6 +14,53 @@
 % 	io__tell(X)
 % 	io__close(X)		side effect: io__postamble(X)
 
+:- op(980,xfy,by).		% ... by ...
+:- op(970,xfy,:).		% two Peano dots, right associative
+:- op(960,yfx,<=>).		% equivalence
+:- op(950,xfy,=>).		% implication (-> is an operator of Prolog)
+:- op(940,yfx,\/).		% disjunction (v can be used as name)
+:- op(930,yfx,&).		% conjunction
+:- op(900,fy,~).		% negation (cf. not, \+)
+:- op(900,fy,not).		% negation
+:- op(900,xfy,'!,').		% empty operator (TeX)
+:- op(900,fy,def).		% def
+:- op(900,fy,succeeds).		% succeeds
+:- op(900,fy,fails).		% fails
+:- op(900,fy,terminates).	% terminates
+:- op(800,fy,all).		% universal quantifier
+:- op(800,fy,ex).		% existential quantifier
+:- op(700,yfx,=).		% equality
+:- op(700,yfx,:=).		% assignment
+:- op(700,yfx,'!eq').		% equality (TeX)
+:- op(700,xfy,<>).		% different
+:- op(700,xfy,'!neq').		% different (TeX)
+:- op(700,xfy,<).		% less (built-in)
+:- op(700,xfy,=<).		% less than or equal (built-in)
+:- op(700,xfy,@<).		% less (nat)
+:- op(700,xfy,@=<).		% less than or equal (nat)
+:- op(700,xfy,#<).		% less (int)
+:- op(700,xfy,#=<).		% less than or equal (int)
+:- op(700,xfy,'!leq').		% less than or equal (TeX)
+:- op(700,xfy,'!prec').         % less than (TeX)
+:- op(700,xfy,'!preceq').       % less than or equal (TeX)
+:- op(700,xfy,'!sub').		% subset (TeX)
+:- op(700,xfx,'!is').		% is (TeX)
+:- op(600,yfx,//).		% application of substitutions
+:- op(600,yfx,'!apply').	% application of substitutions (TeX)
+:- op(600,yfx,**).		% concatenation
+:- op(600,yfx,'!app').		% concatenation (TeX)
+:- op(550,xfy,imp).
+:- op(500,yfx,@+).		% sum (nat)
+:- op(500,yfx,#+).		% sum (int)
+:- op(500,yfx,or).
+:- op(500,yfx,#-).		% subtraction (int)
+:- op(400,yfx,@*).		% product (nat)
+:- op(400,yfx,and).
+:- op(400,yfx,#*).		% product (int)
+:- op(300,fy,#-).		% minus (int)
+:- op(300,fy,neg).
+:- op(100,fy,?).		% variables: ?x, ?y, ?z, ?v, ?0, ?1, ?2
+
 
 %%d db__is_open(gr::in)
 %%d db__stream(gr::in,gr::out)
@@ -95,6 +142,7 @@ io__close_output :-
 db__alias(lptp,Path) :- io__lptp_home(Path).
 db__alias(lib,$(lptp)/lib).
 db__alias(tmp,$(lptp)/tmp).
+db__alias(src,$(lptp)/src).
 db__alias(tex,$(lptp)/tex).
 db__alias(test,$(lptp)/test).
 db__alias(examples,$(lptp)/examples).

@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+set -Eeuo pipefail
+
+function lptp_swi() {
+  cd /Users/Shared/logic-program-theorem-prover-swipl || exit
+  /opt/homebrew/bin/swipl --quiet -s /Users/Shared/logic-program-theorem-prover-swipl/src/lptp.qlf
+}
+lptp_swi
+
+set +Eeuo pipefail
+

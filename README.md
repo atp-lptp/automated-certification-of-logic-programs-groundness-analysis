@@ -1,26 +1,89 @@
-# LPTP - A Logic Program Theorem Prover
+# Vers une automatisation de la certification des propriétés de clôture pour Prolog
 
-## How to learn LPTP?
+## Pré-requis:
 
-1. Install the LPTP system (see the file [INSTALL.md](INSTALL.md)).
+- SWI-Prolog [^1]
+- GNU Bash [^2]
+- GNU Make [^3]
 
-2. The directory `lptp/doc` contains the documentation (user.ps).
+## Configuration
 
-3.  In Chapter 1 you will find an example session.
-    - Read Chapter 1 (Introduction). Try it out yourself.
+Mettre à jour le chemin vers la racine de LPTP dans le fichier `./src/system.pl` 
+en modifiant l'argument passé au prédicat `io__lptp_home/1`. Par exemple :
 
-4. Read Appendix B (Emacs mode) of the documentation.
+```
+% [...]
+% git clone https://github.com/atp-lptp/lptp /Users/local/lptp
+io__lptp_home('/Users/local/lptp'),
+% [...]
+```
 
-5. Read Chapter 2 (Basic concepts of LPTP) of the documentation.
+Voir également [doc/README.md](./doc/README.md) original du projet LPTP en anglais.
 
-6.  Read Section 3.1 (Syntax and Grammar) of Chapter 3 of the  documentation.
+## Exécution
 
-7. Take the file `lptp/lib/list/list.pr`.
-   - Delete all proofs. 
-   - Do the proofs yourself using LPTP.
+```
+# Construire le binaire de LPTP à partir de la configuration précédente
+make lptp-swi
 
-8. Read the rest of the documentation.
+# Lancer le benchmark
+make run-benchmark 
+```
 
-## For more information contact: 
+Entrer les commandes ci-avant dans le terminal depuis la racine de LPTP afin
+- d'obtenir des relations inter-arguments par interprétation abstraite,
+- de dériver des propriétés de clôture et
+- de certifier les dérivations avec LPTP les programmes suivants.
 
-Robert F. Staerk, staerk@inf.ethz.ch
+```
+examples/filex/elem.pl
+examples/filex/ex30.pl
+examples/filex/expmr.pl
+examples/filex/extrait_peep.pl
+examples/filex/lex.pl
+examples/filex/loop.pl
+examples/filex/mini.pl
+examples/filex/mr.pl
+examples/filex/pi.pl
+examples/filex/pq.pl
+examples/filex/test.pl
+examples/filex/testneg.pl
+examples/filex/tiny.pl
+examples/filex/addmul.pl
+examples/filex/apprev.pl
+examples/filex/average1.pl
+examples/filex/derivDLS.pl
+examples/filex/fib.pl
+examples/filex/for.pl
+examples/filex/mc_pera.pl
+examples/filex/member.pl
+examples/filex/micgram.pl
+examples/filex/split.pl
+examples/filex/testapp3.pl
+examples/filex/trans.pl
+lib/graph/transitiveclosure.pl
+lib/list/list.pl
+lib/list/permutation.pl
+lib/list/reverse.pl
+lib/list/suffix.pl
+lib/nat/ackermann.pl
+lib/nat/int.pl
+lib/nat/nat.pl
+lib/sort/mergesort.pl
+lib/sort/sort.pl
+ ```
+
+## License
+
+See [License](./COPYING)
+
+## Copyright
+
+Copyright (C) 2024-...  
+Thierry Marianne -- thierry.marianne@univ-reunion.fr  
+Fred Mesnard -- frederic.mesnard@univ-reunion.fr  
+Etienne Payet -- etienne.payet@univ-reunion.fr
+
+[^1]: https://www.swi-prolog.org/Download.html
+[^2]: https://www.gnu.org/software/bash/
+[^3]: https://www.gnu.org/software/make/#download

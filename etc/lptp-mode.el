@@ -26,7 +26,7 @@
 ;;
 ;; Include the following into your `.emacs' file (change the path name):
 ;;
-;;      (autoload 'lptp-mode "/home/staerk/lptp/etc/lptp-mode" 
+;;      (autoload 'lptp-mode "/Users/Shared/logic-program-theorem-prover-mode-swipl/etc/lptp-mode"
 ;;	  "Major mode for editing formal proofs" t)
 ;;
 ;;	(setq auto-mode-alist
@@ -60,16 +60,16 @@
 
 ;;; Code:
 
-(defvar prolog-program-name "/usr/local/bin/sicstus"
+(defvar prolog-program-name "/Users/Shared/logic-program-theorem-prover-swipl/bin/lptp"
   "Program name for invoking an inferior Prolog process.")
 
-(defvar prolog-start-file nil
+(defvar prolog-start-file nil 
   "Input from this file is sent to the inferior Prolog process.")
 
 (defvar prolog-switch ""
   "The arguments for the Prolog program")
 
-(defvar lptp-start-string "load('/home/staerk/lptp/bin/lptp').\n"
+(defvar lptp-start-string ""
   "The Prolog command to load the LPTP system into Prolog.")
 
 (defvar lptp-running-xemacs (string-match "XEmacs\\|Lucid" emacs-version)
@@ -144,6 +144,7 @@
   (define-key map "\C-ciu"   'lptp-tactic-unfold)
   (define-key map "\C-cix"   'lptp-tactic-ex)
   (define-key map "\C-ciy"   'lptp-send-yes)
+  (define-key map "\C-ciz"   'lptp-tactic-autogr)
   (define-key map "\C-ci~"   'lptp-backup-buffer)
   (define-key map "\n"       'newline-and-indent))
 
@@ -176,6 +177,7 @@
     (define-key map [comp]    '("Tactic: comp".     lptp-tactic-comp))
     (define-key map [case]    '("Tactic: case".     lptp-tactic-case))
     (define-key map [auto]    '("Tactic: auto".     lptp-tactic-auto))
+    (define-key map [autogr]  '("Tactic: autogr".   lptp-tactic-auto))
     (define-key map [sep1]    '("--"))
     (define-key map [get]     '("Get output".       lptp-get))
     (define-key map [send]    '("Send buffer".      lptp-save-send-buffer))))
@@ -199,6 +201,7 @@
     ["Get output"       lptp-get t]
     "---"
     ["Tactic: auto"     lptp-tactic-auto t]
+    ["Tactic: autogr"   lptp-tactic-autog t]
     ["Tactic: case"     lptp-tactic-case t]
     ["Tactic: comp"     lptp-tactic-comp t]
     ["Tactic: elim"     lptp-tactic-elim t]
@@ -340,19 +343,19 @@ imitating normal Unix input editing.
   "Display the definition of the region in the *lptp* buffer."
   (interactive "r")
   (let ((string (buffer-substring beg end)))
-    (process-send-string "lptp" (format "def(%s).\n" string))))
+    (process-send-string "lptp" (format "lptp:def('%s').\n" string))))
 
 (defun lptp-mark-assumption (beg end)
   "Send the region as marked assumption to the *lptp* buffer."
   (interactive "r")
   (let ((string (buffer-substring beg end)))
-    (process-send-string "lptp" (format "mark(%s).\n" string))))
+    (process-send-string "lptp" (format "lptp:mark('%s').\n" string))))
 
 (defun lptp-list-facts (beg end)
   "List all theorems about the region in the *lptp* buffer."
   (interactive "r")
   (let ((string (buffer-substring beg end)))
-    (process-send-string "lptp" (format "facts(%s).\n" string))))
+    (process-send-string "lptp" (format "lptp:facts('%s').\n" string))))
 
 (defun lptp-send-yes ()
   "Send `y' to the LPTP process"
@@ -453,6 +456,11 @@ imitating normal Unix input editing.
   "Try to prove the current formula by a known fact."
   (interactive)
   (lptp-tactic "fact"))
+
+(defun lptp-tactic-autogr ()
+  "Try to prove the current formulas by autoground."
+  (interactive)
+  (lptp-tactic "autoground"))
 
 (defun lptp-tactic-ind ()
   "Try to prove the current formulas by induction."
@@ -652,7 +660,7 @@ imitating normal Unix input editing.
     (indent-region beg end nil)
     (goto-char pos)))
 
-;; Use `M-x font-lock-mode' to fontify proofs.
+        ;; Use `M-x font-lock-mode' to fontify proofs.
 
 (defvar lptp-font-lock-keywords
   '(("^:-[ ]*\\([a-z_]*\\)" 1 font-lock-keyword-face)
@@ -673,6 +681,7 @@ imitating normal Unix input editing.
     ("\\(lemma\\)(" 1 font-lock-keyword-face)
     ("\\(corollary\\)(" 1 font-lock-keyword-face)
     ("\\(theorem\\)(" 1 font-lock-keyword-face)
+    ("\\(autoground\\)(" 1 font-lock-keyword-face)
     ("\\(assume\\)(" 1 font-lock-keyword-face)
     ("\\(cases\\)(" 1 font-lock-keyword-face)
     ("\\(case\\)(" 1 font-lock-keyword-face)

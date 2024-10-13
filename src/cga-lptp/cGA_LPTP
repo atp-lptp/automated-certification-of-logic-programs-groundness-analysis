@@ -1,0 +1,142 @@
+#!/usr/bin/env swipl
+
+
+:- op(100, fy,  ?).
+:- op(150, xfy, :).
+:- op(140, xfy, =>).
+:- op(130, yfx, \/).
+:- op(120, yfx, &).
+:- op(110, fy,  ~).
+:- op(100, fy,  all).
+:- op(700, xfy, @<).		% less (nat) - builtin
+:- op(700, xfy, @=<).		% less than or equal (nat) - builtin
+:- op(700, xfy, lte).		% less than or equal (nat)
+:- op(900, fy,  succeeds).		
+:- op(900, fy,  fails).	
+:- op(980, xfy, by).	
+
+:- initialization(main, main).
+
+%%%
+%:- use_module(library(readutil)).
+%:- use_module(library(clpb)).
+%%%
+%:- use_module(groundness_analysis).
+%:- use_module(utils).
+:- use_module('../lptp').
+%%%
+
+preamble(Stream) :-
+    write(Stream, ':- initialize.'),nl(Stream),
+    write(Stream, ':- needs_thm($(examples)/axiom_2_5/axiom_2_5).'), nl(Stream).
+
+add_compile_gr_directive(Stream, DirAlias, FileBasename) :-
+    (   getenv('ADD_COMPILE_GR_DIRECTIVE', 'true')
+    ->  write(Stream, ':- compile_gr('),
+        write(Stream, DirAlias),
+        write(Stream, '/'),
+        write(Stream, FileBasename),
+        write(Stream, ').'),
+        nl(Stream)
+    ;   true    ).
+
+add_needs_gr_directive(Stream, DirAlias, FileBasename) :-
+    write(Stream, ':- needs_gr('),
+    write(Stream, DirAlias),
+    write(Stream, '/'),
+    write(Stream, FileBasename),
+    write(Stream, ').'),
+    nl(Stream).
+
+main(Argv) :-
+    Argv = [FileName|_],
+
+    working_directory(Dir, Dir),
+    atom_concat(Dir, FileName, AbsoluteFilePath),
+
+    getenv('CGA_LPTP_MODE', Mode),
+
+    (
+        Mode = 'infer_groundness_prop_with_cti'
+    ->  Args = [FileName, _PIs]
+    ;   Mode = 'prove_groundness_prop',
+        Args = [FileName, Ls]
+    ;   Mode = 'check_with_lptp_swi_prolog'
+    ;   write('unknown mode'),
+        fail
+    ), !,
+
+    (
+        Mode \= 'check_with_lptp_swi_prolog'
+    ->
+        (   exists_file(AbsoluteFilePath)
+        ->
+            Term =.. [Mode|Args],
+            statistics(cputime, Start),
+            call(Term), !,
+            statistics(cputime, End),
+            ElapsedTime is (End - Start) * 1000,
+
+            (   getenv('FORMAT_PROOF', _)
+            ->  true
+            ;   format(string(ElapsedTimedStr), '~1f', [ElapsedTime]),
+                write(ElapsedTimedStr)  ),
+
+            (   Mode = 'infer_groundness_prop_with_cti'
+            ->  halt
+            ;   true    )
+        ;   write('file does not exist.') )
+    ;   true ),
+
+    atom_concat(F,'.pl',FileName),
+
+    (   \+ getenv('FORMAT_PROOF', _)
+    ->  atom_concat(F,'_gr.pr',ProofFile)
+    ;   atom_concat(F,'_gr_formatted.pr',ProofFile)   ),
+
+    (
+        Mode \= 'check_with_lptp_swi_prolog'
+    ->
+        (
+            atom_concat('lib/', WithoutLibPrefix, F),
+            F \= WithoutLibPrefix
+        ->  DirAlias = '$(lib)',
+            atom_concat('lib/', FileBasename, F)
+        ;   DirAlias = '$(examples)',
+            atom_concat('examples/', FileBasename, F)
+        ),
+
+        open(ProofFile,write,Stream),
+        preamble(Stream),
+        add_compile_gr_directive(Stream, DirAlias, FileBasename),
+        add_needs_gr_directive(Stream, DirAlias, FileBasename),
+        write_lemmas(Stream, Ls),
+        write(Stream,':- bye.'), nl(Stream),
+        close(Stream),
+
+        (   getenv('FORMAT_PROOF', _)
+        ->  nl,
+            halt
+        ;   true    )
+
+    ;   (
+            Mode = 'check_with_lptp_swi_prolog',
+            atom_concat(F,'_gr',FileToCheck),
+
+            (
+                Mode = 'check_with_lptp_swi_prolog'
+            ->  LptpBin='./bin/lptp',
+                atom_concat(LptpBin,' <<< \'catch_with_backtrace(check(',CheckCmdPrefix),
+                atom_concat(CheckCmdPrefix,FileToCheck,Cmd0),
+                atom_concat(Cmd0,'),Error,print_message(error, Error)),halt.\'',Cmd),
+                shell(Cmd)
+            ;   LptpBin = '~/Desktop/lptp/bin/lptp',
+                atom_concat(LptpBin,' <<< \'check(',CheckCmdPrefix),
+                atom_concat(CheckCmdPrefix,FileToCheck,Cmd0),
+                atom_concat(Cmd0,'),halt.\'',Cmd),
+                shell(Cmd)
+            )
+        )
+    )
+    ;   true.
+

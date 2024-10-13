@@ -1,5 +1,5 @@
-/*   Author: Robert Staerk <staerk@math.stanford.edu> */
-/*  Created: Fri Dec  2 15:53:24 1994 */
+/* Author: Robert Staerk <staerk@math.stanford.edu> */
+/* Created: Fri Dec  2 15:53:24 1994 */
 /* Filename: lst.pl */
 /* Abstract: List processing predicates. */
 
@@ -99,6 +99,9 @@ lst__not_disjoint(L1,L2) :-
 
 lst__list_form([]).
 lst__list_form([_|_]).
+lst__list_form(Form) :-
+    functor(Form,F,_),
+    F = '[|]'.
 
 %%d lst__set_minus(grL::in,grL::in,grL::out)
 

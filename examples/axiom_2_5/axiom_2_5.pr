@@ -1,0 +1,69 @@
+:- initialize.
+
+:- thm_file($(examples)/axiom_2_5/axiom_2_5).
+
+:- lemma(axiom_2_5,
+all [x1,x2]: gr([?x1|?x2]) <=> gr(?x1) & gr(?x2) ,
+[assume(gr([?x1|?x2]),[],gr(?x1) & gr(?x2)),
+ assume(gr(?x1) & gr(?x2),
+  [],
+  gr([?x1|?x2])),
+ gr([?x1|?x2]) <=> gr(?x1) & gr(?x2)]
+).
+
+:- lemma(axiom_2_5_de_morgan,
+all [x1,x2]: ~ gr([?x1|?x2]) <=> ~ gr(?x1) \/ ~ gr(?x2),
+[assume(
+  ~gr([?x1|?x2]),
+  [gr([?x1|?x2]) => gr(?x1) & gr(?x2),
+     indirect(
+      ~ ( ~ gr(?x1) \/ ~ gr(?x2) ),
+      [indirect(~ gr(?x1), [~ gr(?x1) \/ ~ gr(?x2), ff]),
+       indirect(~ gr(?x2), [~ gr(?x1) \/ ~ gr(?x2), ff]),
+       gr(?x1) & gr(?x2), gr([?x1|?x2]), ~ gr([?x1|?x2]), ff]),
+       ~ gr(?x1) \/ ~ gr(?x2)],
+  ~ gr(?x1) \/ ~ gr(?x2)),
+ assume(~ gr(?x1) \/ ~ gr(?x2),
+  cases(~ gr(?x1),
+   contra(gr([?x1|?x2]),
+    [
+     gr(?x1),~gr(?x1),
+     ff]),
+   ~ gr(?x2),
+   contra(gr([?x1|?x2]),
+    [
+     gr(?x2),~gr(?x2),
+     ff]),
+   ~ gr([?x1|?x2])),
+  ~ gr([?x1|?x2])),
+ ~ gr([?x1|?x2]) <=> ~ gr(?x1) \/ ~ gr(?x2)]
+).
+
+:- lemma(axiom_2_5_single_element_list,
+all [x1]: gr([?x1]) <=> gr(?x1),
+[assume(gr([?x1]),[],gr(?x1)),
+ assume(gr(?x1),
+  [],
+  gr([?x1])),
+ gr([?x1]) <=> gr(?x1)]
+).
+
+:- lemma(axiom_2_5_single_element_list_de_morgan,
+all [x1]: ~ gr([?x1]) <=> ~ gr(?x1),
+[assume(~ gr([?x1]),
+  contra(gr(?x1),
+   [
+    gr([?x1]),
+    ~ gr([?x1]),
+    ff ]),~ gr(?x1)),
+ assume(~ gr(?x1),
+  contra(gr([?x1]),
+   [
+    gr(?x1),
+    ~ gr(?x1),
+    ff ]),
+  ~ gr([?x1])),
+ ~ gr([?x1]) <=> ~ gr(?x1)]
+).
+
+:- bye.

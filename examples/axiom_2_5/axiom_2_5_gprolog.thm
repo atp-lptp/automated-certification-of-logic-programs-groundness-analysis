@@ -1,0 +1,4 @@
+:- assert_fact(lemma,axiom_2_5,@(all,[x1,x2],[<=>,[gr,[n('.',2),$(x1),$(x2)]],[&,[gr,$(x1)],[gr,$(x2)]]])).
+:- assert_fact(lemma,axiom_2_5_de_morgan,@(all,[x1,x2],[<=>,[~,[gr,[n('.',2),$(x1),$(x2)]]],[\/,[~,[gr,$(x1)]],[~,[gr,$(x2)]]]])).
+:- assert_fact(lemma,axiom_2_5_single_element_list,@(all,[x1],[<=>,[gr,[n('.',2),$(x1),[n([],0)]]],[gr,$(x1)]])).
+:- assert_fact(lemma,axiom_2_5_single_element_list_de_morgan,@(all,[x1],[<=>,[~,[gr,[n('.',2),$(x1),[n([],0)]]]],[~,[gr,$(x1)]]])).

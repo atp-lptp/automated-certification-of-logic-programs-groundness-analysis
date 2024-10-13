@@ -1,0 +1,18 @@
+
+:- assert_clauses(n(popt3,2),[
+ clause([n(popt3,2),[n([],0)],[n([],0)]],
+  [&],
+  []/0),
+ clause([n(popt3,2),$rest,$pil],
+  [n(popt31,2),$rest,$pil],
+  [rest,pil]/0),
+ clause([n(popt3,2),[n('[|]',2),$inst,$0],$pil],
+  [&,[=,$pil,[n('[|]',2),$inst,$pil1]],[n(popt3,2),$pil,$pil1]],
+  [inst,0,pil,pil1]/1)
+]).
+
+:- assert_clauses(n(popt31,2),[
+ clause([n(popt31,2),[n('[|]',2),[n(g,1),$0],$rest],$optRest],
+  [n(popt3,2),$rest,$optRest],
+  [0,rest,optRest]/1)
+]).

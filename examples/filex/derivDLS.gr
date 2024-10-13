@@ -1,0 +1,18 @@
+
+:- assert_clauses(n(deriv,3),[
+ clause([n(deriv,3),[n(d,1),[n(t,0)]],[n(t,0)],[n(1,0)]],
+  [&],
+  []/0),
+ clause([n(deriv,3),[n(d,1),$n],[n(t,0)],[n(0,0)]],
+  [n(atom,1),$n],
+  [n]/0),
+ clause([n(deriv,3),[n(d,1),[n(+,2),$x,$y]],[n(t,0)],[n(+,2),$l,$m]],
+  [&,[n(deriv,3),[n(d,1),$x],[n(t,0)],$l],[n(deriv,3),[n(d,1),$y],[n(t,0)],$m]],
+  [x,y,l,m]/0),
+ clause([n(deriv,3),[n(d,1),[n(*,2),$x,$y]],[n(t,0)],[n(+,2),[n(*,2),$x,$l],[n(*,2),$y,$m]]],
+  [&,[n(deriv,3),[n(d,1),$x],[n(t,0)],$m],[n(deriv,3),[n(d,1),$y],[n(t,0)],$l]],
+  [x,y,l,m]/0),
+ clause([n(deriv,3),[n(d,1),[n(d,1),$x]],[n(t,0)],$l],
+  [&,[n(deriv,3),[n(d,1),$x],[n(t,0)],$m],[n(deriv,3),[n(d,1),$m],[n(t,0)],$l]],
+  [x,l,m]/0)
+]).

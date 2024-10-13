@@ -1,0 +1,18 @@
+
+:- assert_clauses(n(for,2),[
+ clause([n(for,2),$n,$n],
+  [&],
+  [n]/0),
+ clause([n(for,2),$i,$n],
+  [&,[n(less,2),$i,$n],[n(for,2),[n(s,1),$i],$n]],
+  [i,n]/0)
+]).
+
+:- assert_clauses(n(less,2),[
+ clause([n(less,2),[n(0,0)],[n(s,1),$'_X']],
+  [&],
+  ['_X']/0),
+ clause([n(less,2),[n(s,1),$x],[n(s,1),$y]],
+  [n(less,2),$x,$y],
+  [x,y]/0)
+]).

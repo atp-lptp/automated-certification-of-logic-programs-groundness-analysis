@@ -12,7 +12,7 @@ show :-			ctl__show.
 set(Flag) :-		ctl__set_flag(Flag).
 unset(Flag) :-		ctl__unset_flag(Flag).
 
-bye :- 			io__close_output.
+bye :- 				io__close_output.
 bye(File) :- 		io__close_output(File).
 needs_gr(Path) :- 	io__consult(Path,gr).
 needs_thm(Path) :- 	io__consult_thm(Path).
@@ -21,7 +21,14 @@ tex_file(Path) :- 	io__open(tex,Path).
 thm_file(Path) :- 	io__open(thm,Path).
 set(Alias,Path) :-	io__set_alias(Alias,Path).
 exec(File) :-		io__exec_file(File).
-check(Path) :-		once(io__consult(Path,pr)).
+check(Path) :-
+    statistics(cputime, Start),
+    once(io__consult(Path,pr)),
+    statistics(cputime, End),
+    ElapsedTime is (End - Start) * 1000,
+    io__tell_user,
+    format(string(ElapsedTimedStr), '~1f', [ElapsedTime]),
+    ctl__write([ElapsedTimedStr]).
 
 def(EForm) :-		once(ctl__prt_definition(EForm)).
 facts(PTerm) :- 	ctl__print_facts(PTerm).
@@ -37,9 +44,11 @@ pp(PTerm) :- 		prt__write(PTerm).
 
 depends(Fact) :-	dep__print_dependencies(Fact).
 
-banner :- 
-	write('LPTP, Version 1.06, July 21, 1999.'), nl,
-	write('Copyright (C) 1999 by Robert F. Staerk'), nl.
+banner :-
+    (   current_prolog_flag(test_environment, true)
+    ->  true
+    ;   write('LPTP, Version 1.06, July 21, 1999.'), nl,
+        write('Copyright (C) 1999 by Robert F. Staerk'), nl ).
 
 :- initialization(banner).
 

@@ -1,0 +1,15 @@
+:- axiom(lte21,
+ all [x1,x2]:
+  (succeeds (?x1 lte ?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1))).
+
+:- axiom(split31,
+ all [x1,x2,x3]:
+  (succeeds split(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+    gr(?x3) & ~ gr(?x2) & ~ gr(?x1) \/ ~ gr(?x3) & gr(?x2) & ~ gr(?x1) \/
+    ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1))).
+
+:- axiom(merge31,
+ all [x1,x2,x3]:
+  (succeeds merge(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+    ~ gr(?x3) & gr(?x2) & ~ gr(?x1) \/ ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1))).

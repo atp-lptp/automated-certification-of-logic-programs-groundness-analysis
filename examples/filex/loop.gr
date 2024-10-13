@@ -1,0 +1,12 @@
+
+:- assert_clauses(n(loop,0),[
+ clause([n(loop,0)],
+  [n(loop,0)],
+  []/0)
+]).
+
+:- assert_clauses(n(test,0),[
+ clause([n(test,0)],
+  [n(loop,0)],
+  []/0)
+]).

@@ -1,0 +1,27 @@
+
+:- assert_clauses(n(p,1),[
+ clause([n(p,1),$x],
+  [~,[=,$x,[n(0,0)]]],
+  [x]/0)
+]).
+
+:- assert_clauses(n(r,1),[
+ clause([n(r,1),$x],
+  [\/,[=,$x,[n(0,0)]],[=,$x,[n(1,0)]]],
+  [x]/0)
+]).
+
+:- assert_clauses(n(t,1),[
+ clause([n(t,1),$x],
+  [&],
+  [x]/0),
+ clause([n(t,1),$x],
+  [\/],
+  [x]/0)
+]).
+
+:- assert_clauses(n(u,1),[
+ clause([n(u,1),$x],
+  [~,[&]],
+  [x]/0)
+]).

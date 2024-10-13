@@ -592,8 +592,13 @@ pr__step_err(Step,V,Gamma,Form) :-
 	(	pr__step(Step,V,Gamma,Form) -> 
 		true
 	;	i2e__derivation_step(Step,X),
-		ctl__error([incorrect,derivation,step,p(X)])
-	).
+
+	    db__flag(debug),
+	    with_output_to(string(Proof), prt__write(X)),
+        log__info('incorrect derivation step', [Proof]),
+		ctl__error([incorrect,derivation,step]),
+        log__info('failing proof', X),
+        throw(X)    ).
 
 %%d pr__derivable_err(varL::in,fmlL::in,fml::in)
 
@@ -609,18 +614,25 @@ pr__derivable_err(V,Gamma,Form) :-
 pr__debug(V,Gamma,Form,_) :-
 	i2e__expressionL(Gamma,XL),
 	i2e__expression(Form,X),
-	io__tell_user, nl,
-	write('Protected Variables: '),
-	write(V), nl,
-	write('Available Formulas: '), nl,
-	prt__write(XL), nl,
-	write('To show: '), nl,
-	prt__write(X), nl.
+%	io__tell_user, nl,
+%	write('Protected Variables: '),
+%	write(V), nl,
+%	write('Available Formulas: '), nl,
+%	prt__write(XL), nl,
+%	write('To show: '), nl,
+%   prt__write(X), nl.
+	log__info('Protected Variables', V),
+    with_output_to(string(Derivation), prt__write(XL)),
+	log__info('Available Formulas', Derivation),
+	log__info('To show', [X]).
 
 
 %%d pr__statistics(in::gr)
 
 pr__statistics(_).
+
+%pr__statistics(Kind) :-
+%	log__info("kind of proof: ", Kind).
 
 % The following definition is used for statistics.
 

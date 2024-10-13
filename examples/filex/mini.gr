@@ -1,0 +1,42 @@
+
+:- assert_clauses(n(expr,3),[
+ clause([n(expr,3),$a,$b,$c],
+  [&,[n(term,3),$d,$b,$e],[n(exprr,4),$d,$a,$e,$c]],
+  [a,b,c,d,e]/0)
+]).
+
+:- assert_clauses(n(exprr,4),[
+ clause([n(exprr,4),$a,$b,$c,$d],
+  [&,[=,$c,[n('[|]',2),[n(aop,1),$e],$f]],[n(term,3),$g,$f,$h],[n(exprr,4),[n(bin,3),$e,$a,$g],$b,$h,$d]],
+  [a,b,c,d,e,f,g,h]/0),
+ clause([n(exprr,4),$a,$a,$b,$c],
+  [=,$c,$b],
+  [a,b,c]/0)
+]).
+
+:- assert_clauses(n(factor,3),[
+ clause([n(factor,3),$a,$b,$c],
+  [&,[=,$b,[n('[|]',2),[n(leftpar,0)],$d]],[n(expr,3),$a,$d,$e],[=,$e,[n('[|]',2),[n(rightpar,0)],$c]]],
+  [a,b,c,d,e]/0),
+ clause([n(factor,3),[n(var,1),$a],$b,$c],
+  [=,$b,[n('[|]',2),[n(id,1),$a],$c]],
+  [a,b,c]/0),
+ clause([n(factor,3),[n(con,1),$a],$b,$c],
+  [=,$b,[n('[|]',2),[n(num,1),$a],$c]],
+  [a,b,c]/0)
+]).
+
+:- assert_clauses(n(term,3),[
+ clause([n(term,3),$a,$b,$c],
+  [&,[n(factor,3),$d,$b,$e],[n(termr,4),$d,$a,$e,$c]],
+  [a,b,c,d,e]/0)
+]).
+
+:- assert_clauses(n(termr,4),[
+ clause([n(termr,4),$a,$b,$c,$d],
+  [&,[=,$c,[n('[|]',2),[n(mop,1),$e],$f]],[n(factor,3),$g,$f,$h],[n(termr,4),[n(bin,3),$e,$a,$g],$b,$h,$d]],
+  [a,b,c,d,e,f,g,h]/0),
+ clause([n(termr,4),$a,$a,$b,$c],
+  [=,$c,$b],
+  [a,b,c]/0)
+]).

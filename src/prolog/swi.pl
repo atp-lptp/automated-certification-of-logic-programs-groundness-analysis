@@ -14,11 +14,20 @@
 
 %%d io__lptp_home(gr::out)
 
-io__lptp_home('/home/staerk/lptp').
+io__lptp_home('/Users/Shared/logic-program-theorem-prover-swipl').
 
 %%d io__path_sep(gr::out)
 
 io__path_sep(/).
+
+%%d atomic_length(gr::in,int::out)
+
+atomic_length(Atom,N) :-
+	(	atom(Atom) ->
+		atom_length(Atom,N)
+	;	number_chars(Atom,CharL),
+		length(CharL,N)
+	).
 
 %%d io__get_stream(gr::in,gr::in,gr::out)
 
@@ -62,6 +71,6 @@ io__exec_file(File) :- consult(File).
 
 %%d initialization(any)
 
-initialization(Goal) :- call(Goal).
+% initialization(Goal) :- call(Goal).
 
 % swi.pl ends here

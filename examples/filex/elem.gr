@@ -1,0 +1,6 @@
+
+:- assert_clauses(n(elem,2),[
+ clause([n(elem,2),$x,[n(f,2),$0,$c]],
+  [&,[n(!,0)],[n(elem,2),$x,$c]],
+  [x,0,c]/1)
+]).

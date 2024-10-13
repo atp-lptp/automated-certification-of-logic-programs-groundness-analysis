@@ -1,0 +1,21 @@
+
+:- assert_clauses(n(p,2),[
+ clause([n(p,2),[n(0,0)],$0],
+  [&],
+  [0]/1),
+ clause([n(p,2),[n(s,1),$x],$0],
+  [n(q,2),$x,$1],
+  [x,0,1]/2)
+]).
+
+:- assert_clauses(n(q,2),[
+ clause([n(q,2),$x,$0],
+  [n(r,1),$x],
+  [x,0]/1)
+]).
+
+:- assert_clauses(n(r,1),[
+ clause([n(r,1),$x],
+  [n(p,2),$x,$0],
+  [x,0]/1)
+]).

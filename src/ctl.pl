@@ -80,10 +80,12 @@ db__flag(thm_output).				% write the .thm files
 %db__flag(print_names).				% print names of theorems
 %db__flag(debug).				% debug mode
 %db__flag(write_dependencies).			% write dependencies on .thm
+%db__flag(print_names).         % print names of theorems
+%db__flag(write_dependencies).  % write dependencies on .thm
 
 % The following flags are set by the system. Do not change them.
 
-%db__flag(global_error).			% there is a global error
+%db__flag(global_error).		% there is a global error
 
 %%d ctl__set_flag(gr::in)
 

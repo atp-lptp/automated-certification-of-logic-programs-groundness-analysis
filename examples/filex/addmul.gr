@@ -1,0 +1,18 @@
+
+:- assert_clauses(n(a,3),[
+ clause([n(a,3),[n(0,0)],$y,$y],
+  [&],
+  [y]/0),
+ clause([n(a,3),[n(s,1),$x],$y,[n(s,1),$z]],
+  [n(a,3),$x,$y,$z],
+  [x,y,z]/0)
+]).
+
+:- assert_clauses(n(m,3),[
+ clause([n(m,3),[n(0,0)],$'_Y',[n(0,0)]],
+  [&],
+  ['_Y']/0),
+ clause([n(m,3),[n(s,1),$x],$y,$p],
+  [&,[n(m,3),$x,$y,$pxy],[n(a,3),$y,$pxy,$p]],
+  [x,y,p,pxy]/0)
+]).

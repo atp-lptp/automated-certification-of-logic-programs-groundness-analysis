@@ -1,3 +1,9 @@
+nat(0).
+nat(s(X)) :- nat(X).
+
+plus(0,Y,Y).
+plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
+
 int(X) :- nat(X).
 int(-s(X)) :- nat(X).
 

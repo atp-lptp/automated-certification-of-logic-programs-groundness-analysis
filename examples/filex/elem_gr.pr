@@ -1,0 +1,7 @@
+:- initialize.
+:- needs_thm($(examples)/axiom_2_5/axiom_2_5).
+:- needs_gr($(examples)/filex/elem).
+
+:- lemma(elem21,all[x1,x2]:(fails elem(?x1,?x2)),ff by gap).
+
+:- bye.

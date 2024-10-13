@@ -1,0 +1,9 @@
+
+:- assert_clauses(n(split,3),[
+ clause([n(split,3),[n([],0)],[n([],0)],[n([],0)]],
+  [&],
+  []/0),
+ clause([n(split,3),[n('[|]',2),$x,$xs],[n('[|]',2),$x,$ys],$zs],
+  [n(split,3),$xs,$zs,$ys],
+  [x,xs,ys,zs]/0)
+]).

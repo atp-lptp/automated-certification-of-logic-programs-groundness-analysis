@@ -16,7 +16,6 @@ SOURCES =	op.pl \
 		ind.pl \
 		eq.pl \
 		mgu.pl \
-		tac.pl \
 		ai.pl \
 		ctl.pl \
 		prt.pl \
@@ -51,13 +50,13 @@ allg:	all.pl
 initg: init.pl
 	sed "s/consult/include/" init.pl > initg.pl
 
-# Conncatenate all Prolog source files into one big file `lptp.pl'.
+# Concatenate all Prolog source files into one big file `lptp.pl'.
 # Don't forget to change `io__lptp_home' in `system.pl'.
-lptp: $(SOURCES) 
-	cat $(SOURCES) > lptp.pl
+lptp: clean $(SOURCES)
+	\cat $(SOURCES) > lptp.pl
 
 # Compile LPTP (SICStus Prolog)
-sicstus: lptp
+sicstus: test
 	echo "[op]. prolog_flag(compiling,_,fastcode). fcompile(lptp)."\
 	| sicstus
 
@@ -67,10 +66,10 @@ profile: $(SOURCES)
 	| sicstus
 
 # Compile LPTP for GNU Prolog
-gprolog: lptp
+gprolog: test
 	gplc --global-size 16384 -o lptp lptp.pl
 
 clean:
 	$(RM) *~ *mist mist* prolog/*~ *.ql lptp.pl lptp.qlf \
-	pred.txt doc.txt lptp
+	pred.txt doc.txt
 

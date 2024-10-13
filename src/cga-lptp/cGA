@@ -1,0 +1,20 @@
+#!/usr/bin/env swipl
+
+:- initialization(main, main).
+
+%%%
+:- use_module(library(readutil)).
+:- use_module(library(clpb)).
+%%%
+:- use_module(groundness_analysis).
+:- use_module(utils).
+%%%
+
+
+
+main(Argv) :-
+    %trace,
+    Argv = [FileName|_],
+    groundness_analysis(FileName, RelsGroundness),
+    write_list(RelsGroundness).
+     

@@ -1,47 +1,34 @@
-/*   Author: Robert Staerk <staerk@math.stanford.edu> */
-/*  Created: Fri Dec  2 15:49:51 1994 */
-% Updated: Wed Jul 21 17:10:49 1999
-/* Filename: sicstus.pl */
-/* Abstract: System predicates for SICStus 3, SunOS. */
+/*   Author: Frank Young <Frank.Young@sensors.wpafb.af.mil> */
+/*  Created: 21 Jul 98 */
+/* Updated: Wed Jul 21 17:02:00 1999 */
+/* Filename: swi.pl */
+/* Abstract: System predicates for SWI-Prolog. */ 
 
-% Compiling with SICStus Prolog:
+% Compiling with SWI-Prolog:
 %
-%	?- prolog_flag(compiling,_,fastcode). 
-% 	?- consult('op.pl').
-% 	?- fcompile('lptp.pl').
+%	?- qcompile('lptp.pl').
 % 	?- halt.
+%
+% A file `lptp.qlf' is created.
+
+:- use_module(library(date)).
 
 %%d io__lptp_home(gr::out)
 
-io__lptp_home('/home/staerk/lptp12').
+io__lptp_home('/Users/Shared/lptp-swipl').
 
 %%d io__path_sep(gr::out)
 
 io__path_sep(/).
 
-%%d once(gr::in)
-
-once(Goal) :- call(Goal), !.
-
-%%d concat_atom(grL::in,gr::out)
-
-concat_atom(AtomL,Atom) :-
-	concat_atomL(AtomL,CharL),
-	name(Atom,CharL).
-
-%%d concat_atomL(grL::in,grL::out)
-
-concat_atomL([],[]).
-concat_atomL([Atom|AtomL],Char3L) :-
-	concat_atomL(AtomL,Char1L),
-	name(Atom,Char2L),
-	lst__concat(Char2L,Char1L,Char3L).
-
 %%d atomic_length(gr::in,int::out)
 
 atomic_length(Atom,N) :-
-	name(Atom,CharL),
-	length(CharL,N).
+	(	atomic(Atom) ->
+		atom_length(Atom,N)
+	;	number_chars(Atom,CharL),
+		length(CharL,N)
+	).
 
 %%d io__get_stream(gr::in,gr::in,gr::out)
 
@@ -71,9 +58,62 @@ io__original_user(user).
 read_with_variables(Term,VarL) :-
 	read_term(Term,[variable_names(VarL)]).
 
+ctl__write([]) :- nl.
+ctl__write([X|L]) :-
+	write(X),
+	ctl__write(L).
+
+log__info(_Prefix, _Message).
+log__info(Prefix, Message) :-
+    File = 'output',
+    ParentDirectory = '/Users/Shared/lptp-swipl/log',
+	% io__open('log', ParentDirectory),
+	concat_atom([ParentDirectory, '/', File, '.log'], File_log),
+	io__get_stream(File_log, append, Stream_log),
+    set_output(Stream_log),
+
+    get_time(TimeStamp),
+    stamp_date_time(TimeStamp, DateTime, 'UTC'),
+
+    date_time_value(year, DateTime, Y),
+    date_time_value(month, DateTime, M),
+    date_time_value(day, DateTime, D),
+    date_time_value(hour, DateTime, H),
+    date_time_value(minute, DateTime, Mn),
+    date_time_value(second, DateTime, S),
+
+    Sep = "=====================================",
+    concat_atom([Sep, Y,"-", M, "-", D, " ", H, "-", Mn,"-", S, Sep], Now),
+    write(Now), nl,
+    concat_atom([Prefix, ":"], MessagePrefix),
+    write(MessagePrefix), nl,
+    writeq(Message), nl,
+    write(Now), nl,
+	close(Stream_log).
+
+log__error(Message) :-
+	log__info("Error", Message).
+
+% Example:
+% 
+% | ?- read_term([variable_names(L)],T).
+% |: f(X,_Y,_,X).
+% 
+% L = ['X'=_6711,'_Y'=_6728],
+% T = f(_6711,_6728,_6745,_6711) ;
+
 %%d io__exec_file(gr::in)
 
 io__exec_file(File) :- consult(File).
 
-% sicstus.pl ends here
+io__call(Filepath, FunctorArgs) :-
+	log__info("io__call/2 [Filepath]", [Filepath]),
+ 	consult(Filepath),
+	Term =.. FunctorArgs,
+	call(Term).
 
+%%d initialization(any)
+
+% initialization(Goal).
+
+% swi.pl ends here

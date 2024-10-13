@@ -6,7 +6,7 @@
 % Usage (traditional): ?- [all].
 % Usage (GNU Prolog): sed "s///g" all.pl | lptp
 
-% set(tmp,'/tmp').
+set(tmp,'../tmp').
 
 % Simple tests
  ['../test/io/test_io.pl'].

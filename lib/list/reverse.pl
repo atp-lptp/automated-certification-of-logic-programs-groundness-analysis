@@ -1,3 +1,6 @@
+append([],L,L).
+append([X|L1],L2,[X|L3]) :- append(L1,L2,L3).
+
 n_reverse([],[]).
 n_reverse([X|L1],L3) :- n_reverse(L1,L2), append(L2,[X],L3).
 
