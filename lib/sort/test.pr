@@ -1,0 +1,115 @@
+:- initialize.
+
+:- lemma(
+    test_gr,
+    all x0: gr(?x0) => gr(?x0),
+    []
+).
+
+:- lemma(
+   axiom_2_5,
+   all [x0, x1]: gr(?x0) & gr(?x1) => gr([?x0|?x1]),
+   assume(
+       gr(?x0) & gr(?x1),
+       [],
+       gr([?x0|?x1])
+   )
+).
+
+:-  lemma(l18,
+  all [x0,x1]: ~ gr(?x0) \/ ~ gr(?x1) => ~ gr([?x0|?x1]),
+  [assume(~ gr(?x0) \/ ~ gr(?x1),
+    cases(~ gr(?x0),
+     [contra(gr([?x0|?x1]),[~ gr(?x0),gr(?x0),ff])],
+     ~ gr(?x1),
+     [contra(gr([?x0|?x1]),[~ gr(?x1),gr(?x1),ff])],
+     ~ gr([?x0|?x1])),
+    ~ gr([?x0|?x1]))]
+).
+
+:- lemma(
+    disjunction,
+    all [x0, x1]: (~ gr(?x0) \/ ~ gr(?x1)) => ~ gr([?x0|?x1]),
+    assume(~ gr(?x0) \/ ~ gr(?x1),
+     cases(~ gr(?x0),
+      contra(gr([?x0|?x1]),
+       [gr(?x0), ~gr(?x0), ff]),
+      ~ gr(?x1),
+      contra(gr([?x0|?x1]),
+       [gr(?x1), ~ gr(?x1), ff]),
+      ~ gr([?x0|?x1])),
+     ~ gr([?x0|?x1]))
+).
+
+:- lemma(l19,
+  all [x4,x5]: gr(?x5) & gr(?x4) \/ ~ gr(?x5) & gr(?x4) => gr(s(?x5)) &
+    gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4)),
+  [assume(gr(?x5) & gr(?x4) \/ ~ gr(?x5) & gr(?x4),
+    [cases(gr(?x5) & gr(?x4),
+      [gr(?x5),
+       gr(?x4),
+       assume(gr(?x5),[],
+        gr(s(?x5))),
+       gr(?x5),
+       gr(?x4),
+       assume(gr(?x4),[],
+        gr(s(?x4))),
+       gr(s(?x5)) & gr(s(?x4)),
+       gr(s(?x5)) & gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4))],
+      ~ gr(?x5) & gr(?x4),
+      [~ gr(?x5),
+       gr(?x4),
+       contra(gr(s(?x5)),
+        [~ gr(?x5),
+         gr(?x5),
+         ff]),
+       ~ gr(s(?x5)),
+       ~ gr(?x5),
+       gr(?x4),
+       assume(gr(?x4),[],
+        gr(s(?x4))),
+       ~ gr(s(?x5)) & gr(s(?x4)),
+       gr(s(?x5)) & gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4))],
+      gr(s(?x5)) & gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4))),
+     gr(s(?x5)) & gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4))],
+    gr(s(?x5)) & gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4)))]).
+
+:- lemma(l22,
+  all [x4,x5]: gr(?x5) & gr(?x4) \/ ~ gr(?x5) & gr(?x4) => gr(s(?x5)) &
+    gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4)),
+  [assume(gr(?x5) & gr(?x4) \/ ~ gr(?x5) & gr(?x4),
+    [assume(gr(?x5) & gr(?x4) \/ ~ gr(?x5) & gr(?x4),
+      [cases(gr(?x5) & gr(?x4),
+        [gr(?x5),
+         gr(?x4),
+         assume(gr(?x5),[],
+          gr(s(?x5)))],
+        ~ gr(?x5) & gr(?x4),
+        [~ gr(?x5),
+         gr(?x4),
+	  indirect(~ gr(?x5),
+          [~ gr(?x5),
+           ff]),
+         gr(s(?x5))],
+        gr(s(?x5))),
+       gr(s(?x5))],
+      gr(s(?x5))),
+     assume(gr(?x5) & gr(?x4) \/ ~ gr(?x5) & gr(?x4),
+      [cases(gr(?x5) & gr(?x4),
+        [gr(?x5),
+         gr(?x4),
+         assume(gr(?x4),[],
+          gr(s(?x4)))],
+        ~ gr(?x5) & gr(?x4),
+        [~ gr(?x5),
+         gr(?x4),
+         assume(gr(?x4),[],
+          gr(s(?x4)))],
+        gr(s(?x4))),
+       gr(s(?x4))],
+      gr(s(?x4))),
+     gr(s(?x5)) & gr(s(?x4)),
+     gr(s(?x5)) & gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4))],
+    gr(s(?x5)) & gr(s(?x4)) \/ ~ gr(s(?x5)) & gr(s(?x4)))]).
+
+:- bye.

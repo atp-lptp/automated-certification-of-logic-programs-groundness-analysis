@@ -1,0 +1,5 @@
+user	0m0.009s
+target conjecture: "./src/filex/addmul-all1.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/filex/addmul-all1.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.009s
+target conjecture: "./src/filex/addmul-all2.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/filex/addmul-all2.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+2 lemmas, 2 proved,  ratio: 100

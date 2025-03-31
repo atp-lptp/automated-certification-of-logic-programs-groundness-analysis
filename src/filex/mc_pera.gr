@@ -1,0 +1,33 @@
+
+:- assert_clauses(n(app,3),[
+ clause([n(app,3),[n([],0)],$ys,$ys],
+  [&],
+  [ys]/0),
+ clause([n(app,3),[n('[|]',2),$x,$xs],$ys,[n('[|]',2),$x,$zs]],
+  [n(app,3),$xs,$ys,$zs],
+  [x,xs,ys,zs]/0)
+]).
+
+:- assert_clauses(n(eq,2),[
+ clause([n(eq,2),$a,$a],
+  [&],
+  [a]/0)
+]).
+
+:- assert_clauses(n(p,2),[
+ clause([n(p,2),[n([],0)],[n([],0)]],
+  [&],
+  []/0),
+ clause([n(p,2),$xs,$ys],
+  [&,[n(eq,2),$xs,$ys],[n(rev,2),$ys,[n('[|]',2),$z,$zs]],[n(p,2),$zs,$ms]],
+  [xs,ys,z,zs,ms]/0)
+]).
+
+:- assert_clauses(n(rev,2),[
+ clause([n(rev,2),[n([],0)],[n([],0)]],
+  [&],
+  []/0),
+ clause([n(rev,2),[n('[|]',2),$x,$xs],$ys],
+  [&,[n(rev,2),$xs,$ts],[n(app,3),$ts,[n('[|]',2),$x,[n([],0)]],$ys]],
+  [x,xs,ys,ts]/0)
+]).

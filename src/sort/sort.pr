@@ -1,0 +1,320 @@
+:- initialize.
+:- needs_thm($(examples)/axiom_2_5/axiom_2_5).
+:- compile_gr($(lib)/sort/sort).
+:- needs_gr($(lib)/sort/sort).
+
+% __placeholder__
+
+:- lemma(split41,
+ all [x1,x2,x3,x4]: 
+  (succeeds split(?x1,?x2,?x3,?x4) => gr(?x4) & gr(?x3) & gr(?x2) & gr(?x1) \/
+    gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x4) & gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+    gr(?x4) & gr(?x3) & gr(?x2) & ~ gr(?x1) \/
+    gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1) \/
+    ~ gr(?x4) & gr(?x3) & ~ gr(?x2) & ~ gr(?x1) \/
+    ~ gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2,x3,x4]: 
+    (succeeds split(?x1,?x2,?x3,?x4) => gr(?x4) & gr(?x3) & gr(?x2) &
+      gr(?x1) \/ gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+      ~ gr(?x4) & gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+      ~ gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+      gr(?x4) & gr(?x3) & gr(?x2) & ~ gr(?x1) \/
+      gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1) \/
+      ~ gr(?x4) & gr(?x3) & ~ gr(?x2) & ~ gr(?x1) \/
+      ~ gr(?x4) & ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1))],
+  [step([x5],[],
+    [ff by gap],
+    gr([]) & gr([]) & gr([]) & gr(?x5) \/ gr([]) & ~ gr([]) & ~ gr([]) & gr(?x5) \/
+    ~ gr([]) & gr([]) & ~ gr([]) & gr(?x5) \/ ~ gr([]) & ~ gr([]) & ~ gr([]) & gr(?x5) \/
+    gr([]) & gr([]) & gr([]) & ~ gr(?x5) \/ gr([]) & ~ gr([]) & ~ gr([]) & ~ gr(?x5) \/
+    ~ gr([]) & gr([]) & ~ gr([]) & ~ gr(?x5) \/
+    ~ gr([]) & ~ gr([]) & ~ gr([]) & ~ gr(?x5)),
+   step([x6,x7,x8,x9,x10,x11,x12],
+    [gr(?x12) & gr(?x11) & gr(?x8) & gr(?x6) \/
+     gr(?x12) & ~ gr(?x11) & ~ gr(?x8) & gr(?x6) \/
+     ~ gr(?x12) & gr(?x11) & ~ gr(?x8) & gr(?x6) \/
+     ~ gr(?x12) & ~ gr(?x11) & ~ gr(?x8) & gr(?x6) \/
+     gr(?x12) & gr(?x11) & gr(?x8) & ~ gr(?x6) \/
+     gr(?x12) & ~ gr(?x11) & ~ gr(?x8) & ~ gr(?x6) \/
+     ~ gr(?x12) & gr(?x11) & ~ gr(?x8) & ~ gr(?x6) \/
+     ~ gr(?x12) & ~ gr(?x11) & ~ gr(?x8) & ~ gr(?x6),
+     succeeds ?x6 @=< ?x7,
+     ?x9 = [?x7|?x11],
+     ?x10 = ?x12,
+     succeeds split(?x6,?x8,?x11,?x12)],
+    [gr([?x7|?x11]) => gr(?x9),
+     gr(?x9) => gr([?x7|?x11]),
+     gr(?x12) => gr(?x10),
+     gr(?x10) => gr(?x12),
+     ff by gap],
+    gr(?x10) & gr(?x9) & gr([?x7|?x8]) & gr(?x6) \/
+    gr(?x10) & ~ gr(?x9) & ~ gr([?x7|?x8]) & gr(?x6) \/
+    ~ gr(?x10) & gr(?x9) & ~ gr([?x7|?x8]) & gr(?x6) \/
+    ~ gr(?x10) & ~ gr(?x9) & ~ gr([?x7|?x8]) & gr(?x6) \/
+    gr(?x10) & gr(?x9) & gr([?x7|?x8]) & ~ gr(?x6) \/
+    gr(?x10) & ~ gr(?x9) & ~ gr([?x7|?x8]) & ~ gr(?x6) \/
+    ~ gr(?x10) & gr(?x9) & ~ gr([?x7|?x8]) & ~ gr(?x6) \/
+    ~ gr(?x10) & ~ gr(?x9) & ~ gr([?x7|?x8]) & ~ gr(?x6)),
+   step([x13,x14,x15,x16,x17,x18,x19],
+    [gr(?x19) & gr(?x18) & gr(?x15) & gr(?x13) \/
+     gr(?x19) & ~ gr(?x18) & ~ gr(?x15) & gr(?x13) \/
+     ~ gr(?x19) & gr(?x18) & ~ gr(?x15) & gr(?x13) \/
+     ~ gr(?x19) & ~ gr(?x18) & ~ gr(?x15) & gr(?x13) \/
+     gr(?x19) & gr(?x18) & gr(?x15) & ~ gr(?x13) \/
+     gr(?x19) & ~ gr(?x18) & ~ gr(?x15) & ~ gr(?x13) \/
+     ~ gr(?x19) & gr(?x18) & ~ gr(?x15) & ~ gr(?x13) \/
+     ~ gr(?x19) & ~ gr(?x18) & ~ gr(?x15) & ~ gr(?x13),
+     ?x16 = ?x18,
+     ?x17 = [?x14|?x19],
+     succeeds split(?x13,?x15,?x18,?x19)],
+    [gr(?x18) => gr(?x16),
+     gr(?x16) => gr(?x18),
+     gr([?x14|?x19]) => gr(?x17),
+     gr(?x17) => gr([?x14|?x19]),
+     ff by gap],
+    gr(?x17) & gr(?x16) & gr([?x14|?x15]) & gr(?x13) \/
+    gr(?x17) & ~ gr(?x16) & ~ gr([?x14|?x15]) & gr(?x13) \/
+    ~ gr(?x17) & gr(?x16) & ~ gr([?x14|?x15]) & gr(?x13) \/
+    ~ gr(?x17) & ~ gr(?x16) & ~ gr([?x14|?x15]) & gr(?x13) \/
+    gr(?x17) & gr(?x16) & gr([?x14|?x15]) & ~ gr(?x13) \/
+    gr(?x17) & ~ gr(?x16) & ~ gr([?x14|?x15]) & ~ gr(?x13) \/
+    ~ gr(?x17) & gr(?x16) & ~ gr([?x14|?x15]) & ~ gr(?x13) \/
+    ~ gr(?x17) & ~ gr(?x16) & ~ gr([?x14|?x15]) & ~ gr(?x13))])).
+
+:- lemma(delete31,
+ all [x1,x2,x3]: 
+  (succeeds delete(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+    ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/ gr(?x3) & ~ gr(?x2) & ~ gr(?x1) \/
+    ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2,x3]: 
+    (succeeds delete(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+      ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/ gr(?x3) & ~ gr(?x2) & ~ gr(?x1) \/
+      ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1))],
+  [step([x4,x5],[],
+    [ff by gap],
+    gr(?x5) & gr([?x4|?x5]) & gr(?x4) \/
+    ~ gr(?x5) & ~ gr([?x4|?x5]) & gr(?x4) \/
+    gr(?x5) & ~ gr([?x4|?x5]) & ~ gr(?x4) \/
+    ~ gr(?x5) & ~ gr([?x4|?x5]) & ~ gr(?x4)),
+   step([x6,x7,x8,x9],
+    [gr(?x9) & gr(?x8) & gr(?x6) \/ ~ gr(?x9) & ~ gr(?x8) & gr(?x6) \/
+     gr(?x9) & ~ gr(?x8) & ~ gr(?x6) \/ ~ gr(?x9) & ~ gr(?x8) & ~ gr(?x6),
+     succeeds delete(?x6,?x8,?x9)],
+    [ff by gap],
+    gr([?x7|?x9]) & gr([?x7|?x8]) & gr(?x6) \/
+    ~ gr([?x7|?x9]) & ~ gr([?x7|?x8]) & gr(?x6) \/
+    gr([?x7|?x9]) & ~ gr([?x7|?x8]) & ~ gr(?x6) \/
+    ~ gr([?x7|?x9]) & ~ gr([?x7|?x8]) & ~ gr(?x6))])).
+
+:- lemma(quick_sort31,
+ all [x1,x2,x3]: 
+  (succeeds quick_sort(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+    ~ gr(?x3) & gr(?x2) & ~ gr(?x1) \/ ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2,x3]: 
+    (succeeds quick_sort(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+      ~ gr(?x3) & gr(?x2) & ~ gr(?x1) \/ ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/
+      ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1))],
+  [step([x4],[],
+    [ff by gap],
+    gr(?x4) & gr(?x4) & gr([]) \/ ~ gr(?x4) & gr(?x4) & ~ gr([]) \/
+    ~ gr(?x4) & ~ gr(?x4) & gr([]) \/ ~ gr(?x4) & ~ gr(?x4) & ~ gr([])),
+   step([x5,x6,x7,x8,x9,x10,x11],
+    [gr(?x11) & gr(?x7) & gr(?x9) \/ ~ gr(?x11) & gr(?x7) & ~ gr(?x9) \/
+     ~ gr(?x11) & ~ gr(?x7) & gr(?x9) \/ ~ gr(?x11) & ~ gr(?x7) & ~ gr(?x9),
+     gr(?x8) & gr([?x5|?x11]) & gr(?x10) \/
+     ~ gr(?x8) & gr([?x5|?x11]) & ~ gr(?x10) \/
+     ~ gr(?x8) & ~ gr([?x5|?x11]) & gr(?x10) \/
+     ~ gr(?x8) & ~ gr([?x5|?x11]) & ~ gr(?x10),
+     succeeds split(?x5,?x6,?x9,?x10),
+     succeeds quick_sort(?x9,?x7,?x11),
+     succeeds quick_sort(?x10,[?x5|?x11],?x8)],
+    [succeeds split(?x5,?x6,?x9,?x10) => gr(?x10) & gr(?x9) & gr(?x6) &
+      gr(?x5) \/ gr(?x10) & ~ gr(?x9) & ~ gr(?x6) & gr(?x5) \/
+      ~ gr(?x10) & gr(?x9) & ~ gr(?x6) & gr(?x5) \/
+      ~ gr(?x10) & ~ gr(?x9) & ~ gr(?x6) & gr(?x5) \/
+      gr(?x10) & gr(?x9) & gr(?x6) & ~ gr(?x5) \/
+      gr(?x10) & ~ gr(?x9) & ~ gr(?x6) & ~ gr(?x5) \/
+      ~ gr(?x10) & gr(?x9) & ~ gr(?x6) & ~ gr(?x5) \/
+      ~ gr(?x10) & ~ gr(?x9) & ~ gr(?x6) & ~ gr(?x5) by lemma(split41),
+     ff by gap],
+    gr(?x8) & gr(?x7) & gr([?x5|?x6]) \/
+    ~ gr(?x8) & gr(?x7) & ~ gr([?x5|?x6]) \/
+    ~ gr(?x8) & ~ gr(?x7) & gr([?x5|?x6]) \/
+    ~ gr(?x8) & ~ gr(?x7) & ~ gr([?x5|?x6]))])).
+
+:- lemma(permutation21,
+ all [x1,x2]: 
+  (succeeds permutation(?x1,?x2) => gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds permutation(?x1,?x2) => gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([],[],
+    [gr([]) & gr([]),
+     gr([]) & gr([]) \/ ~ gr([]) & ~ gr([])],
+    gr([]) & gr([]) \/ ~ gr([]) & ~ gr([])),
+   step([x3,x4,x5,x6],
+    [gr(?x5) & gr(?x6) \/ ~ gr(?x5) & ~ gr(?x6),
+     succeeds delete(?x4,?x3,?x6),
+     succeeds permutation(?x6,?x5)],
+    [succeeds delete(?x4,?x3,?x6) => gr(?x6) & gr(?x3) & gr(?x4) \/
+      ~ gr(?x6) & ~ gr(?x3) & gr(?x4) \/ gr(?x6) & ~ gr(?x3) & ~ gr(?x4) \/
+      ~ gr(?x6) & ~ gr(?x3) & ~ gr(?x4) by lemma(delete31),
+     ff by gap],
+    gr([?x4|?x5]) & gr(?x3) \/ ~ gr([?x4|?x5]) & ~ gr(?x3))])).
+
+:- lemma(ordered11,
+ all [x1]: (succeeds ordered(?x1) => gr(?x1) \/ ~ gr(?x1)),
+ induction([all [x1]: (succeeds ordered(?x1) => gr(?x1) \/ ~ gr(?x1))],
+  [step([],[],[gr([]) \/ ~ gr([])],gr([]) \/ ~ gr([])),
+   step([x2],[],
+    [cases(gr(?x5),
+      [assume(~ gr([?x2]),[],~ gr([?x2])),
+       assume(~ gr([?x2]) => ~ gr([?x2]),
+        [indirect(~ (gr([?x2]) \/ ~ gr([?x2])),
+          [contra(gr([?x2]),[gr([?x2]) \/ ~ gr([?x2]),ff]),
+           ~ gr([?x2]),
+           gr([?x2]) \/ ~ gr([?x2]),
+           ff])],
+        gr([?x2]) \/ ~ gr([?x2])),
+       gr([?x2]) \/ ~ gr([?x2])],
+      ~ gr(?x5),
+      [assume(~ gr([?x2]),[],~ gr([?x2])),
+       assume(~ gr([?x2]) => ~ gr([?x2]),
+        [indirect(~ (gr([?x2]) \/ ~ gr([?x2])),
+          [contra(gr([?x2]),[gr([?x2]) \/ ~ gr([?x2]),ff]),
+           ~ gr([?x2]),
+           gr([?x2]) \/ ~ gr([?x2]),
+           ff])],
+        gr([?x2]) \/ ~ gr([?x2])),
+       gr([?x2]) \/ ~ gr([?x2])],
+      gr([?x2]) \/ ~ gr([?x2])),
+     gr([?x2]) \/ ~ gr([?x2])],
+    gr([?x2]) \/ ~ gr([?x2])),
+   step([x3,x4,x5],
+    [gr([?x4|?x5]) \/ ~ gr([?x4|?x5]),
+     succeeds ?x3 @=< ?x4,
+     succeeds ordered([?x4|?x5])],
+    [cases(gr([?x4|?x5]),
+      [assume(~ gr([?x3,?x4|?x5]),[],~ gr([?x3,?x4|?x5])),
+       assume(~ gr([?x3,?x4|?x5]) => ~ gr([?x3,?x4|?x5]),
+        [indirect(~ (gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])),
+          [contra(gr([?x3,?x4|?x5]),
+            [gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5]),
+             ff]),
+           ~ gr([?x3,?x4|?x5]),
+           gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5]),
+           ff])],
+        gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])),
+       gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])],
+      ~ gr([?x4|?x5]),
+      [assume(~ gr([?x3,?x4|?x5]),[],~ gr([?x3,?x4|?x5])),
+       assume(~ gr([?x3,?x4|?x5]) => ~ gr([?x3,?x4|?x5]),
+        [indirect(~ (gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])),
+          [contra(gr([?x3,?x4|?x5]),
+            [gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5]),
+             ff]),
+           ~ gr([?x3,?x4|?x5]),
+           gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5]),
+           ff])],
+        gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])),
+       gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])],
+      gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])),
+     gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5])],
+    gr([?x3,?x4|?x5]) \/ ~ gr([?x3,?x4|?x5]))])).
+
+:- lemma(insert31,
+ all [x1,x2,x3]: 
+  (succeeds insert(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+    ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/ ~ gr(?x3) & gr(?x2) & ~ gr(?x1) \/
+    ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2,x3]: 
+    (succeeds insert(?x1,?x2,?x3) => gr(?x3) & gr(?x2) & gr(?x1) \/
+      ~ gr(?x3) & ~ gr(?x2) & gr(?x1) \/ ~ gr(?x3) & gr(?x2) & ~ gr(?x1) \/
+      ~ gr(?x3) & ~ gr(?x2) & ~ gr(?x1))],
+  [step([x4],[],
+    [ff by gap],
+    gr([?x4]) & gr([]) & gr(?x4) \/ ~ gr([?x4]) & ~ gr([]) & gr(?x4) \/
+    ~ gr([?x4]) & gr([]) & ~ gr(?x4) \/ ~ gr([?x4]) & ~ gr([]) & ~ gr(?x4)),
+   step([x5,x6,x7],
+    [succeeds ?x5 @=< ?x6],
+    [ff by gap],
+    gr([?x5,?x6|?x7]) & gr([?x6|?x7]) & gr(?x5) \/
+    ~ gr([?x5,?x6|?x7]) & ~ gr([?x6|?x7]) & gr(?x5) \/
+    ~ gr([?x5,?x6|?x7]) & gr([?x6|?x7]) & ~ gr(?x5) \/
+    ~ gr([?x5,?x6|?x7]) & ~ gr([?x6|?x7]) & ~ gr(?x5)),
+   step([x8,x9,x10,x11],
+    [gr(?x11) & gr(?x10) & gr(?x8) \/ ~ gr(?x11) & ~ gr(?x10) & gr(?x8) \/
+     ~ gr(?x11) & gr(?x10) & ~ gr(?x8) \/
+     ~ gr(?x11) & ~ gr(?x10) & ~ gr(?x8),
+     succeeds insert(?x8,?x10,?x11)],
+    [ff by gap],
+    gr([?x9|?x11]) & gr([?x9|?x10]) & gr(?x8) \/
+    ~ gr([?x9|?x11]) & ~ gr([?x9|?x10]) & gr(?x8) \/
+    ~ gr([?x9|?x11]) & gr([?x9|?x10]) & ~ gr(?x8) \/
+    ~ gr([?x9|?x11]) & ~ gr([?x9|?x10]) & ~ gr(?x8))])).
+
+:- lemma(quick_sort21,
+ all [x1,x2]: 
+  (succeeds quick_sort(?x1,?x2) => gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds quick_sort(?x1,?x2) => gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([x3,x4],
+    [succeeds quick_sort(?x3,[],?x4)],
+    [succeeds quick_sort(?x3,[],?x4) => gr(?x4) & gr([]) & gr(?x3) \/
+      ~ gr(?x4) & gr([]) & ~ gr(?x3) \/ ~ gr(?x4) & ~ gr([]) & gr(?x3) \/
+      ~ gr(?x4) & ~ gr([]) & ~ gr(?x3) by lemma(quick_sort31),
+     ff by gap],
+    gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))])).
+
+:- lemma(permutation_sort21,
+ all [x1,x2]: 
+  (succeeds permutation_sort(?x1,?x2) => gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds permutation_sort(?x1,?x2) => gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([x3,x4],
+    [succeeds permutation(?x3,?x4),
+     succeeds ordered(?x4)],
+    [succeeds permutation(?x3,?x4) => gr(?x4) & gr(?x3) \/
+      ~ gr(?x4) & ~ gr(?x3) by lemma(permutation21),
+     succeeds ordered(?x4) => gr(?x4) \/ ~ gr(?x4) by lemma(ordered11),
+     ff by gap],
+    gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))])).
+
+:- lemma(insert_sort21,
+ all [x1,x2]: 
+  (succeeds insert_sort(?x1,?x2) => gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds insert_sort(?x1,?x2) => gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([],[],
+    [gr([]) & gr([]),
+     gr([]) & gr([]) \/ ~ gr([]) & ~ gr([])],
+    gr([]) & gr([]) \/ ~ gr([]) & ~ gr([])),
+   step([x3,x4,x5,x6],
+    [gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+     succeeds insert_sort(?x4,?x6),
+     succeeds insert(?x3,?x6,?x5)],
+    [succeeds insert(?x3,?x6,?x5) => gr(?x5) & gr(?x6) & gr(?x3) \/
+      ~ gr(?x5) & ~ gr(?x6) & gr(?x3) \/ ~ gr(?x5) & gr(?x6) & ~ gr(?x3) \/
+      ~ gr(?x5) & ~ gr(?x6) & ~ gr(?x3) by lemma(insert31),
+     ff by gap],
+    gr(?x5) & gr([?x3|?x4]) \/ ~ gr(?x5) & ~ gr([?x3|?x4]))])).
+
+:- bye.

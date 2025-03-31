@@ -1,0 +1,13 @@
+user	0m0.008s
+target conjecture: "./src/graph/transitiveclosure-all1.fof" apply prover command: "time eprover --auto --cpu-limit=60 -s ./src/graph/transitiveclosure-all1.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/graph/transitiveclosure-all2.fof" apply prover command: "time eprover --auto --cpu-limit=60 -s ./src/graph/transitiveclosure-all2.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.074s
+target conjecture: "./src/graph/transitiveclosure-all3.fof" apply prover command: "time eprover --auto --cpu-limit=60 -s ./src/graph/transitiveclosure-all3.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.075s
+target conjecture: "./src/graph/transitiveclosure-all4.fof" apply prover command: "time eprover --auto --cpu-limit=60 -s ./src/graph/transitiveclosure-all4.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.010s
+target conjecture: "./src/graph/transitiveclosure-all5.fof" apply prover command: "time eprover --auto --cpu-limit=60 -s ./src/graph/transitiveclosure-all5.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/graph/transitiveclosure-all6.fof" apply prover command: "time eprover --auto --cpu-limit=60 -s ./src/graph/transitiveclosure-all6.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+6 lemmas, 6 proved,  ratio: 100

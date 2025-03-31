@@ -15,7 +15,7 @@
 
 %%d io__lptp_home(gr::out)
 
-io__lptp_home('/Users/Shared/lptp-swipl').
+io__lptp_home('/Users/Shared/lptp-dn').
 
 %%d io__path_sep(gr::out)
 
@@ -63,10 +63,10 @@ ctl__write([X|L]) :-
 	write(X),
 	ctl__write(L).
 
-log__info(_Prefix, _Message).
+% log__info(_Prefix, _Message).
 log__info(Prefix, Message) :-
     File = 'output',
-    ParentDirectory = '/Users/Shared/lptp-swipl/log',
+    ParentDirectory = '/Users/Shared/lptp-dn/log',
 	% io__open('log', ParentDirectory),
 	concat_atom([ParentDirectory, '/', File, '.log'], File_log),
 	io__get_stream(File_log, append, Stream_log),
@@ -89,6 +89,16 @@ log__info(Prefix, Message) :-
     write(MessagePrefix), nl,
     writeq(Message), nl,
     write(Now), nl,
+	close(Stream_log).
+
+log__debug(Message) :-
+    File = 'debug',
+    ParentDirectory = '/Users/Shared/lptp-dn/log',
+	% io__open('log', ParentDirectory),
+	concat_atom([ParentDirectory, '/', File, '.log'], File_log),
+	io__get_stream(File_log, append, Stream_log),
+    set_output(Stream_log),
+    write(Message),
 	close(Stream_log).
 
 log__error(Message) :-

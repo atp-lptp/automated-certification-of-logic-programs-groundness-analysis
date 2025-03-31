@@ -1,0 +1,28 @@
+fof(id1,axiom,! [Xx6,Xx7] : ~ (nil = cons(Xx6,Xx7))).
+fof(id2,axiom,! [Xx8,Xx9] : ! [Xx10,Xx11] : (cons(Xx8,Xx9) = cons(Xx10,Xx11) => Xx9 = Xx11)).
+fof(id3,axiom,! [Xx12,Xx13] : ! [Xx14,Xx15] : (cons(Xx12,Xx13) = cons(Xx14,Xx15) => Xx12 = Xx14)).
+fof(id4,axiom,gr(nil)).
+fof(id5,axiom,! [Xx16,Xx17] : ((gr(Xx16) & gr(Xx17)) <=> gr(cons(Xx16,Xx17)))).
+fof(id6,axiom,! [Xx18,Xx19,Xx20] : ~ ((app_succeeds(Xx18,Xx19,Xx20) & app_fails(Xx18,Xx19,Xx20)))).
+fof(id7,axiom,! [Xx18,Xx19,Xx20] : (app_terminates(Xx18,Xx19,Xx20) => (app_succeeds(Xx18,Xx19,Xx20) | app_fails(Xx18,Xx19,Xx20)))).
+fof(id8,axiom,! [Xx21,Xx22] : ~ ((rev_succeeds(Xx21,Xx22) & rev_fails(Xx21,Xx22)))).
+fof(id9,axiom,! [Xx21,Xx22] : (rev_terminates(Xx21,Xx22) => (rev_succeeds(Xx21,Xx22) | rev_fails(Xx21,Xx22)))).
+fof(id10,axiom,! [Xx23,Xx24] : ~ ((eq_succeeds(Xx23,Xx24) & eq_fails(Xx23,Xx24)))).
+fof(id11,axiom,! [Xx23,Xx24] : (eq_terminates(Xx23,Xx24) => (eq_succeeds(Xx23,Xx24) | eq_fails(Xx23,Xx24)))).
+fof(id12,axiom,! [Xx25,Xx26] : ~ ((p_succeeds(Xx25,Xx26) & p_fails(Xx25,Xx26)))).
+fof(id13,axiom,! [Xx25,Xx26] : (p_terminates(Xx25,Xx26) => (p_succeeds(Xx25,Xx26) | p_fails(Xx25,Xx26)))).
+fof(id14,axiom,! [Xx1,Xx2,Xx3] : (app_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx1 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & app_succeeds(Xx5,Xx2,Xx6))) | (Xx1 = nil & Xx3 = Xx2)))).
+fof(id15,axiom,! [Xx1,Xx2,Xx3] : (app_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : (~ (Xx1 = cons(Xx4,Xx5)) | (~ (Xx3 = cons(Xx4,Xx6)) | app_fails(Xx5,Xx2,Xx6))) & (~ (Xx1 = nil) | ~ (Xx3 = Xx2))))).
+fof(id16,axiom,! [Xx1,Xx2,Xx3] : (app_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ($true & (~ (Xx1 = cons(Xx4,Xx5)) | ($true & (~ (Xx3 = cons(Xx4,Xx6)) | app_terminates(Xx5,Xx2,Xx6))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id17,axiom,! [Xx1,Xx2] : (rev_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = cons(Xx3,Xx4) & (rev_succeeds(Xx4,Xx5) & app_succeeds(Xx5,cons(Xx3,nil),Xx2))) | (Xx1 = nil & Xx2 = nil)))).
+fof(id18,axiom,! [Xx1,Xx2] : (rev_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (~ (Xx1 = cons(Xx3,Xx4)) | (rev_fails(Xx4,Xx5) | app_fails(Xx5,cons(Xx3,nil),Xx2))) & (~ (Xx1 = nil) | ~ (Xx2 = nil))))).
+fof(id19,axiom,! [Xx1,Xx2] : (rev_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = cons(Xx3,Xx4)) | (rev_terminates(Xx4,Xx5) & (rev_fails(Xx4,Xx5) | app_terminates(Xx5,cons(Xx3,nil),Xx2))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id20,axiom,! [Xx1,Xx2] : (eq_succeeds(Xx1,Xx2) <=> Xx2 = Xx1)).
+fof(id21,axiom,! [Xx1,Xx2] : (eq_fails(Xx1,Xx2) <=> ~ (Xx2 = Xx1))).
+fof(id22,axiom,! [Xx1,Xx2] : (eq_terminates(Xx1,Xx2) <=> $true)).
+fof(id23,axiom,! [Xx1,Xx2] : (p_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (eq_succeeds(Xx1,Xx2) & (rev_succeeds(Xx2,cons(Xx3,Xx4)) & p_succeeds(Xx4,Xx5))) | (Xx1 = nil & Xx2 = nil)))).
+fof(id24,axiom,! [Xx1,Xx2] : (p_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (eq_fails(Xx1,Xx2) | (rev_fails(Xx2,cons(Xx3,Xx4)) | p_fails(Xx4,Xx5))) & (~ (Xx1 = nil) | ~ (Xx2 = nil))))).
+fof(id25,axiom,! [Xx1,Xx2] : (p_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (eq_terminates(Xx1,Xx2) & (eq_fails(Xx1,Xx2) | (rev_terminates(Xx2,cons(Xx3,Xx4)) & (rev_fails(Xx2,cons(Xx3,Xx4)) | p_terminates(Xx4,Xx5))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof('lemma-app31',axiom,! [Xx1,Xx2,Xx3] : (app_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).
+fof(induction,axiom,(! [Xx1,Xx2] : ((? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = cons(Xx3,Xx4) & ((rev_succeeds(Xx4,Xx5) & ((gr(Xx5) & gr(Xx4)) | (~ (gr(Xx5)) & ~ (gr(Xx4))))) & app_succeeds(Xx5,cons(Xx3,nil),Xx2))) | (Xx1 = nil & Xx2 = nil)) => ((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & ~ (gr(Xx1))))) => ! [Xx1,Xx2] : (rev_succeeds(Xx1,Xx2) => ((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & ~ (gr(Xx1))))))).
+fof('lemma-rev21',conjecture,! [Xx1,Xx2] : (rev_succeeds(Xx1,Xx2) => ((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).

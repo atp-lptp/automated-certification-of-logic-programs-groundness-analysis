@@ -1,1 +1,1 @@
-/Users/shal/repositories/defending-thesis/tooling/logic-program-theorem-prover_swipl/src/cga-lptp/cGA_LPTP
+./cGA_LPTP

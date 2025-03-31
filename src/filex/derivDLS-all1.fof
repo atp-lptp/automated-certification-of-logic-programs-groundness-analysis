@@ -1,0 +1,38 @@
+fof(id1,axiom,~ ('1' = '0')).
+fof(id2,axiom,! [Xx15,Xx16] : ~ ('1' = add(Xx15,Xx16))).
+fof(id3,axiom,! [Xx17,Xx18] : ~ ('1' = mul(Xx17,Xx18))).
+fof(id4,axiom,~ ('1' = t)).
+fof(id5,axiom,! [Xx19] : ~ ('1' = d(Xx19))).
+fof(id6,axiom,! [Xx20,Xx21] : ~ ('0' = add(Xx20,Xx21))).
+fof(id7,axiom,! [Xx22,Xx23] : ~ ('0' = mul(Xx22,Xx23))).
+fof(id8,axiom,~ ('0' = t)).
+fof(id9,axiom,! [Xx24] : ~ ('0' = d(Xx24))).
+fof(id10,axiom,! [Xx25,Xx26] : ! [Xx27,Xx28] : (add(Xx25,Xx26) = add(Xx27,Xx28) => Xx26 = Xx28)).
+fof(id11,axiom,! [Xx29,Xx30] : ! [Xx31,Xx32] : (add(Xx29,Xx30) = add(Xx31,Xx32) => Xx29 = Xx31)).
+fof(id12,axiom,! [Xx33,Xx34] : ! [Xx35,Xx36] : ~ (add(Xx33,Xx34) = mul(Xx35,Xx36))).
+fof(id13,axiom,! [Xx37,Xx38] : ~ (t = add(Xx37,Xx38))).
+fof(id14,axiom,! [Xx39,Xx40] : ! [Xx41] : ~ (add(Xx39,Xx40) = d(Xx41))).
+fof(id15,axiom,! [Xx42,Xx43] : ! [Xx44,Xx45] : (mul(Xx42,Xx43) = mul(Xx44,Xx45) => Xx43 = Xx45)).
+fof(id16,axiom,! [Xx46,Xx47] : ! [Xx48,Xx49] : (mul(Xx46,Xx47) = mul(Xx48,Xx49) => Xx46 = Xx48)).
+fof(id17,axiom,! [Xx50,Xx51] : ~ (t = mul(Xx50,Xx51))).
+fof(id18,axiom,! [Xx52,Xx53] : ! [Xx54] : ~ (mul(Xx52,Xx53) = d(Xx54))).
+fof(id19,axiom,! [Xx55] : ~ (t = d(Xx55))).
+fof(id20,axiom,! [Xx56] : ! [Xx57] : (d(Xx56) = d(Xx57) => Xx56 = Xx57)).
+fof(id21,axiom,gr('1')).
+fof(id22,axiom,gr('0')).
+fof(id23,axiom,! [Xx58,Xx59] : ((gr(Xx58) & gr(Xx59)) <=> gr(add(Xx58,Xx59)))).
+fof(id24,axiom,! [Xx60,Xx61] : ((gr(Xx60) & gr(Xx61)) <=> gr(mul(Xx60,Xx61)))).
+fof(id25,axiom,gr(t)).
+fof(id26,axiom,! [Xx62] : (gr(Xx62) <=> gr(d(Xx62)))).
+fof(id27,axiom,! [Xx63,Xx64,Xx65] : ~ ((deriv_succeeds(Xx63,Xx64,Xx65) & deriv_fails(Xx63,Xx64,Xx65)))).
+fof(id28,axiom,! [Xx63,Xx64,Xx65] : (deriv_terminates(Xx63,Xx64,Xx65) => (deriv_succeeds(Xx63,Xx64,Xx65) | deriv_fails(Xx63,Xx64,Xx65)))).
+fof(id29,axiom,! [Xx66] : ~ ((atom_succeeds(Xx66) & atom_fails(Xx66)))).
+fof(id30,axiom,! [Xx66] : (atom_terminates(Xx66) => (atom_succeeds(Xx66) | atom_fails(Xx66)))).
+fof(id31,axiom,! [Xx1,Xx2,Xx3] : (deriv_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : (Xx1 = d(d(Xx4)) & (Xx2 = t & (deriv_succeeds(d(Xx4),t,Xx5) & deriv_succeeds(d(Xx5),t,Xx3)))) | (? [Xx6] : ? [Xx7] : ? [Xx8] : ? [Xx9] : (Xx1 = d(mul(Xx6,Xx7)) & (Xx2 = t & (Xx3 = add(mul(Xx6,Xx8),mul(Xx7,Xx9)) & (deriv_succeeds(d(Xx6),t,Xx9) & deriv_succeeds(d(Xx7),t,Xx8))))) | (? [Xx10] : ? [Xx11] : ? [Xx12] : ? [Xx13] : (Xx1 = d(add(Xx10,Xx11)) & (Xx2 = t & (Xx3 = add(Xx12,Xx13) & (deriv_succeeds(d(Xx10),t,Xx12) & deriv_succeeds(d(Xx11),t,Xx13))))) | (? [Xx14] : (Xx1 = d(Xx14) & (Xx2 = t & (Xx3 = '0' & atom_succeeds(Xx14)))) | (Xx1 = d(t) & (Xx2 = t & Xx3 = '1')))))))).
+fof(id32,axiom,! [Xx1,Xx2,Xx3] : (deriv_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : (~ (Xx1 = d(d(Xx4))) | (~ (Xx2 = t) | (deriv_fails(d(Xx4),t,Xx5) | deriv_fails(d(Xx5),t,Xx3)))) & (! [Xx6] : ! [Xx7] : ! [Xx8] : ! [Xx9] : (~ (Xx1 = d(mul(Xx6,Xx7))) | (~ (Xx2 = t) | (~ (Xx3 = add(mul(Xx6,Xx8),mul(Xx7,Xx9))) | (deriv_fails(d(Xx6),t,Xx9) | deriv_fails(d(Xx7),t,Xx8))))) & (! [Xx10] : ! [Xx11] : ! [Xx12] : ! [Xx13] : (~ (Xx1 = d(add(Xx10,Xx11))) | (~ (Xx2 = t) | (~ (Xx3 = add(Xx12,Xx13)) | (deriv_fails(d(Xx10),t,Xx12) | deriv_fails(d(Xx11),t,Xx13))))) & (! [Xx14] : (~ (Xx1 = d(Xx14)) | (~ (Xx2 = t) | (~ (Xx3 = '0') | atom_fails(Xx14)))) & (~ (Xx1 = d(t)) | (~ (Xx2 = t) | ~ (Xx3 = '1'))))))))).
+fof(id33,axiom,! [Xx1,Xx2,Xx3] : (deriv_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = d(d(Xx4))) | ($true & (~ (Xx2 = t) | (deriv_terminates(d(Xx4),t,Xx5) & (deriv_fails(d(Xx4),t,Xx5) | deriv_terminates(d(Xx5),t,Xx3))))))) & (! [Xx6] : ! [Xx7] : ! [Xx8] : ! [Xx9] : ($true & (~ (Xx1 = d(mul(Xx6,Xx7))) | ($true & (~ (Xx2 = t) | ($true & (~ (Xx3 = add(mul(Xx6,Xx8),mul(Xx7,Xx9))) | (deriv_terminates(d(Xx6),t,Xx9) & (deriv_fails(d(Xx6),t,Xx9) | deriv_terminates(d(Xx7),t,Xx8))))))))) & (! [Xx10] : ! [Xx11] : ! [Xx12] : ! [Xx13] : ($true & (~ (Xx1 = d(add(Xx10,Xx11))) | ($true & (~ (Xx2 = t) | ($true & (~ (Xx3 = add(Xx12,Xx13)) | (deriv_terminates(d(Xx10),t,Xx12) & (deriv_fails(d(Xx10),t,Xx12) | deriv_terminates(d(Xx11),t,Xx13))))))))) & (! [Xx14] : ($true & (~ (Xx1 = d(Xx14)) | ($true & (~ (Xx2 = t) | ($true & (~ (Xx3 = '0') | atom_terminates(Xx14))))))) & ($true & (~ (Xx1 = d(t)) | ($true & (~ (Xx2 = t) | $true)))))))))).
+fof(id34,axiom,! [Xx67] : ~ (atom_succeeds(Xx67))).
+fof(id35,axiom,! [Xx68] : atom_fails(Xx68)).
+fof(id36,axiom,! [Xx69] : atom_terminates(Xx69)).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3] : ((? [Xx4] : ? [Xx5] : (Xx1 = d(d(Xx4)) & (Xx2 = t & ((deriv_succeeds(d(Xx4),t,Xx5) & ((((gr(Xx5) & gr(t)) & gr(d(Xx4))) | ((gr(Xx5) & gr(t)) & ~ (gr(d(Xx4))))) | ((~ (gr(Xx5)) & gr(t)) & ~ (gr(d(Xx4)))))) & (deriv_succeeds(d(Xx5),t,Xx3) & ((((gr(Xx3) & gr(t)) & gr(d(Xx5))) | ((gr(Xx3) & gr(t)) & ~ (gr(d(Xx5))))) | ((~ (gr(Xx3)) & gr(t)) & ~ (gr(d(Xx5))))))))) | (? [Xx6] : ? [Xx7] : ? [Xx8] : ? [Xx9] : (Xx1 = d(mul(Xx6,Xx7)) & (Xx2 = t & (Xx3 = add(mul(Xx6,Xx8),mul(Xx7,Xx9)) & ((deriv_succeeds(d(Xx6),t,Xx9) & ((((gr(Xx9) & gr(t)) & gr(d(Xx6))) | ((gr(Xx9) & gr(t)) & ~ (gr(d(Xx6))))) | ((~ (gr(Xx9)) & gr(t)) & ~ (gr(d(Xx6)))))) & (deriv_succeeds(d(Xx7),t,Xx8) & ((((gr(Xx8) & gr(t)) & gr(d(Xx7))) | ((gr(Xx8) & gr(t)) & ~ (gr(d(Xx7))))) | ((~ (gr(Xx8)) & gr(t)) & ~ (gr(d(Xx7)))))))))) | (? [Xx10] : ? [Xx11] : ? [Xx12] : ? [Xx13] : (Xx1 = d(add(Xx10,Xx11)) & (Xx2 = t & (Xx3 = add(Xx12,Xx13) & ((deriv_succeeds(d(Xx10),t,Xx12) & ((((gr(Xx12) & gr(t)) & gr(d(Xx10))) | ((gr(Xx12) & gr(t)) & ~ (gr(d(Xx10))))) | ((~ (gr(Xx12)) & gr(t)) & ~ (gr(d(Xx10)))))) & (deriv_succeeds(d(Xx11),t,Xx13) & ((((gr(Xx13) & gr(t)) & gr(d(Xx11))) | ((gr(Xx13) & gr(t)) & ~ (gr(d(Xx11))))) | ((~ (gr(Xx13)) & gr(t)) & ~ (gr(d(Xx11)))))))))) | (? [Xx14] : (Xx1 = d(Xx14) & (Xx2 = t & (Xx3 = '0' & atom_succeeds(Xx14)))) | (Xx1 = d(t) & (Xx2 = t & Xx3 = '1')))))) => ((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((gr(Xx3) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3] : (deriv_succeeds(Xx1,Xx2,Xx3) => ((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((gr(Xx3) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1))))))).
+fof('lemma-deriv31',conjecture,! [Xx1,Xx2,Xx3] : (deriv_succeeds(Xx1,Xx2,Xx3) => ((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((gr(Xx3) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))))).

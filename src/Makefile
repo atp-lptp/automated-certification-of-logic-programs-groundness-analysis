@@ -16,6 +16,7 @@ SOURCES =	op.pl \
 		ind.pl \
 		eq.pl \
 		mgu.pl \
+		tac.pl \
 		ai.pl \
 		ctl.pl \
 		prt.pl \

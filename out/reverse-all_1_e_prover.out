@@ -1,0 +1,9 @@
+user	0m0.449s
+target conjecture: "./src/list/reverse-all1.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/reverse-all1.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.026s
+target conjecture: "./src/list/reverse-all2.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/reverse-all2.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/reverse-all3.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/reverse-all3.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.012s
+target conjecture: "./src/list/reverse-all4.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/reverse-all4.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+4 lemmas, 4 proved,  ratio: 100

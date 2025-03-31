@@ -6,6 +6,10 @@
     groundness_invariant/4,
     prove_groundness_prop/2,
 
+    prove_groundness_prop_alt/2,
+    prove_groundness_prop_dn/2,
+	proof/3,
+
     invariant_from_facts_and_hypothesis/4,
 
     matching_dnf/1,
@@ -31,7 +35,13 @@
 
     sccs_having_mutually_recursive_predicates/3
 ]).
+:- debug.
+:- use_module(library(dialect/sicstus4)).
+:- use_module('./groundness_analysis_dn').
 :- use_module('../prover/prover').
+:- use_module('../prover/prover_alt').
+:- use_module('../prover/prover_dslplm').
+:- use_module('../prover/dn_prover').
 
 :- op(100, fy,  ?).
 :- op(150, xfy, :).
@@ -47,6 +57,8 @@
 :- op(700, xfy, lte).		% less than or equal (nat)
 :- op(900, fy,  succeeds).
 :- op(900, fy,  fails).
+%:- op(800,fy,all).		% universal quantifier
+%:- op(800,fy,ex).		% existential quantifier
 :- op(960, yfx, <=>).
 :- op(980, xfy, by).
 
@@ -75,7 +87,7 @@ groundness_analysis(FileName, RelsGroundness) :-
     rias_groundness(RelsInterArgsBool,RelsGroundness),
     %write_list(RelsGroundness),
     true.
-    
+
 rias_groundness([],[]).
 rias_groundness([P/N-(Vars-BoolF-_X-_Y)|Rias],[P/N-Vars-BoolF|RGs]) :-
     %trace,
@@ -146,8 +158,15 @@ infer_groundness_prop_with_cti(FileName,PIs) :-
 
     reverse(Clauses0,_Clauses).
 
+prove_groundness_prop_alt(FileName, Lemmas) :-
+    bb_put(prover, huth),
+    prove_groundness_prop(FileName, Lemmas).
+
+prove_groundness_prop_dn(FileName, Lemmas) :-
+    bb_put(prover, levy),
+    groundness_analysis_dn:groundness_analysis_dn_lptp(FileName, Lemmas).
+
 prove_groundness_prop(FileName,Lemmas) :-
-    debug,
     groundness_analysis_common(FileName, Clauses0, Sccs, RelsInterArgsBool0),
 
     simplify(RelsInterArgsBool0,RelsInterArgsBool),
@@ -190,9 +209,10 @@ prove_groundness_prop(FileName,Lemmas) :-
 simplify([],[]).
 simplify([P/N-(Args-Cs-_-_)|Riabs],[P/N-Args-Cs|Rs]) :- simplify(Riabs,Rs).
 
+%== START
 write_lemmas(Stream,[]) :- nl(Stream).
 write_lemmas(Stream,[L|Ls]) :- nl(Stream),write_lemma(Stream,L),write_lemmas(Stream,Ls).
- 
+
   write_lemma(Stream, L) :-
     getenv('FORMAT_PROOF', _),
     with_output_to(string(Lemma), prt__write(L)),
@@ -200,10 +220,11 @@ write_lemmas(Stream,[L|Ls]) :- nl(Stream),write_lemma(Stream,L),write_lemmas(Str
 
   write_lemma(Stream, L) :-
     write(Stream, (:-)),write(Stream, ' '),write(Stream, L),writeln(Stream, '.').
+%== END
 
 %%%%%%%%%%%%%%%
 
-% Génération de l'invariant de clôture pour P/N 
+% Génération de l'invariant de clôture pour P/N
 % sous forme de DNF de gr(Term) et ~gr(Term),
 % syntaxe LPTP
 %
@@ -222,15 +243,15 @@ model_formula([S|Solns],P,Vars,L) :-
   H =.. [P|Vars],
   sols_vars_dnf([S|Solns],Vars,DNF),
   gen_formula(DNF,H,Vars,L).
-      
+
   gen_formula(tt,H,Vars,all Vars : (succeeds H)).
   gen_formula(gr(Var),H,Vars,all Vars : (succeeds H => gr(Var))).
   gen_formula(Cs & C,H,Vars,all Vars : (succeeds H => Cs & C)).
   gen_formula(Ds \/ C,H,Vars,all Vars : (succeeds H => Ds \/ C)).
-    
+
 sols_vars_dnf([Sol|Solns],Vars,Cond) :-
   sols_vars_dnf_aux(Solns,Sol,Vars,Cond).
-    
+
   sols_vars_dnf_aux([],Sol,Vars,Cond) :-
     sol_vars_cond(Sol,Vars,Cond).
   sols_vars_dnf_aux([S1|Ss],Sol,Vars,Cond2 \/ Cond1) :-
@@ -242,7 +263,7 @@ sols_vars_dnf([Sol|Solns],Vars,Cond) :-
       sol_vars_cond_aux(TFs,TF,Vars,Cs).
 
       sol_vars_cond_aux([],TF,[X],C) :- sol_vars_cond1(TF,X,C).
-      sol_vars_cond_aux([TF1|TFs],TF,[X|Xs],Cs & C) :- 
+      sol_vars_cond_aux([TF1|TFs],TF,[X|Xs],Cs & C) :-
         sol_vars_cond1(TF,X,C),
         sol_vars_cond_aux(TFs,TF1,Xs,Cs).
 
@@ -250,7 +271,8 @@ sols_vars_dnf([Sol|Solns],Vars,Cond) :-
         sol_vars_cond1(0,X,~ gr(X)).
 
 %%%%%%%%%%%%
-% build_lemmas(+PIs,+Clauses,+Rias,-Ls) 
+%= START
+% build_lemmas(+PIs,+Clauses,+Rias,-Ls)
 build_lemmas([],_,_,[]).
 build_lemmas([P/N|PIs],Clauses,Rias,[L|Ls]) :-
   build_lemma(P,N,Clauses,Rias,L),
@@ -264,10 +286,11 @@ build_lemmas([P/N|PIs],Clauses,Rias,Facts,[L|Ls]) :-
   (     Invariant = (fails _)
   ->    build_lemmas(PIs,Clauses,Rias,Facts,Ls)
   ;     build_lemmas(PIs,Clauses,Rias,[Lemma|Facts],Ls)   ).
+%= END
 
 % construction du lemme de clôture pour P/N en syntaxe LPTP
-% généré à partir de l'invariant de clôture ci-dessus. 
-% La preuve du lemme démarre effectivement par une induction au format LPTP. 
+% généré à partir de l'invariant de clôture ci-dessus.
+% La preuve du lemme démarre effectivement par une induction au format LPTP.
 % En revanche, les preuves des cas de base et des cas inductifs
 % ne sont pas présentes et remplacées par des ff by gap.
 %
@@ -278,12 +301,12 @@ build_lemma(P,N,Clauses,Rias,Llptp) :-
   %trace,
   build_lemma_aux(Invariant,P,N,Clauses,Llptp).
 
-% build_lemma(+P,+N,+Facts,-LptpLemma)
+% build_lemma(+P,+N,+Facts,-Lemma,-LptpLemma)
 build_lemma(P,N,Clauses,Rias,Facts,Lemma,Llptp) :-
   groundness_invariant(P,N,Rias,Invariant),
   %trace,
   build_lemma_aux(Invariant,P,N,Clauses,Facts,Lemma,Llptp).
-  
+
   build_lemma_aux(Invariant,P,N,_Clauses,Llptp) :-
     Invariant=(all _: (fails _)), !,
     atom_concat(P,N,PN),gensym(PN,Lemma_Label),
@@ -331,7 +354,7 @@ build_outer_induction(P,N,Clauses,Invariant,PartialProof) :-
   build_steps(L,Invariant,Steps).
 
   get_clauses(Clauses,P,N,L) :- get_clauses(Clauses,P,N,[],L).
-  
+
     get_clauses([],_P,_N,L1,L2) :- reverse(L1,L2).
     get_clauses([Cl|Cls],P,N,L1,L2) :-
       Cl = (H :- B), functor(H,P,N), !, round_list(B,Bs), get_clauses(Cls,P,N,[H-Bs|L1],L2).
@@ -339,11 +362,11 @@ build_outer_induction(P,N,Clauses,Invariant,PartialProof) :-
       Cl = H, functor(H,P,N), !, get_clauses(Cls,P,N,[H-[]|L1],L2).
     get_clauses([_Cl|Cls],P,N,L1,L2) :-
       get_clauses(Cls,P,N,L1,L2).
-    
+
   round_list((A,As),[A|Bs]) :- !, round_list(As,Bs).
   round_list(true,[]) :- !.
   round_list(A,[A]).
-    
+
   build_steps([],_,[]).
   build_steps([Cl|Cls],Invariant,[Step|Steps]) :-
     copy_term(Invariant,Invariantc),
@@ -382,7 +405,7 @@ build_outer_induction(P,N,Clauses,Invariant,PartialProof) :-
         build_step_aux(Bs,P,N,Inv,Hyps,SUs).
 
 lptp_syntax(L,Llptp) :-
-  term_variables(L,Vars), 
+  term_variables(L,Vars),
   lptp_vars(Vars),
   remove_qm(L,Llptp).
 
@@ -392,13 +415,13 @@ lptp_syntax(L,Facts,Llptp) :-
   lptp_vars(Vars),
   remove_qm(LCopy,Facts,Llptp).
 
-lptp_vars(Vars) :- 
-  reset_gensym(x), 
+lptp_vars(Vars) :-
+  reset_gensym(x),
   lptp_vars_aux(Vars).
 
   lptp_vars_aux([]).
-  lptp_vars_aux([?X|Xs]) :- 
-    gensym(x,X), 
+  lptp_vars_aux([?X|Xs]) :-
+    gensym(x,X),
     lptp_vars_aux(Xs).
 
 /* Removing question mark */
@@ -423,10 +446,10 @@ remove_qm(lemma(Name,all Vars1:F,induction([all Vars1:F],Steps1)),Facts,
   remove_qm_vars(Vars1Copy,Vars2),
   copy_term(Steps1,Steps1Copy),
   remove_qm_steps(Steps1Copy,Facts,Steps2).
-  
+
   remove_qm_vars([],[]).
   remove_qm_vars([?X|Xs],[X|Ys]) :- remove_qm_vars(Xs,Ys).
-  
+
   remove_qm_steps([],[]).
   remove_qm_steps([step(Vars,Hs,Deriv,Conc)|Ss],[step(VarsNoQM,Hs,Deriv,Conc)|SNQMs]) :-
     remove_qm_vars(Vars,VarsNoQM),
@@ -443,17 +466,96 @@ remove_qm(lemma(Name,all Vars1:F,induction([all Vars1:F],Steps1)),Facts,
     log__info('DNF', DNF),
     log__info('Form', DNF => Conc),
     log__info('Proofs', Proofs),
+    log__info('VarsNoQM', VarsNoQM),
 
-    (   DNF = []
-    ->  once(derive_groundness_property(Conc, VarsNoQM, DerivationCases))
-    ;   once(derive_groundness_property( DNF  => Conc, VarsNoQM, DerivationCases))
-    ;   DerivationCases = Deriv ),
+    (   bb_get(prover, Pr)
+    ->  log__info(prover, [Pr])
+    ;   log__info(no_prover, []) ),
+
+    (   bb_get(prover, alt)
+    -> ( once((   DNF = []
+            -> (
+                log__info(proving_base_case, [Conc]),
+                once(prover_alt:proof([], Conc, DerivationCases))
+            )
+            ; (
+                log__info(proving_induction_step, []),
+                log__info(to_show, [DNF => Conc]),
+                once(prover_alt:proof(
+                    [],
+                    DNF => Conc,
+                    DerivationCases
+                ))
+            )
+        ))
+        ->  true
+        ;   DerivationCases = [ff by gap],
+            (   DNF = []
+            ->  log__info(cannot_derive_base_case, [])
+            ;   log__info(cannot_derive_induction_step, []) )
+    )
+    ;  bb_get(prover, levy)
+    -> (
+        DNF = []
+        -> (
+            log__info(proving_base_case, [Conc]),
+            dn_prover:expand_gr(Conc, ExpandedConc),
+            log__info(expanded_conclusion, [ExpandedConc]),
+            once(prover_dslplm:prove([], ExpandedConc, DerivationCases))
+        )
+        ; (
+            log__info(proving_induction_step, []),
+            log__info(to_show, [DNF => Conc]),
+            dn_prover:expand_gr(DNF => Conc, ExpandedForm),
+            once(prover_dslplm:prove(
+                [],
+                ExpandedForm,
+                DerivationCases
+            ))
+        )
+    )
+    ;
+        Deriv = (ff by gap),
+%        DerivationCases = Deriv
+        (   DNF = []
+        ->  once(derive_groundness_property(Conc, VarsNoQM, DerivationCases))
+        ;   once(derive_groundness_property( DNF  => Conc, VarsNoQM, DerivationCases))
+        ;   DerivationCases = Deriv )
+    ),
+
+    % writeq(Proofs), nl,
+    % writeq(DerivationCases), nl,
 
     (   Proofs = []
     ->  Derivation = DerivationCases
     ;   append(Proofs, DerivationCases, Derivation) ),
 
     remove_qm_steps(Ss,Facts,SNQMs).
+
+%        tranform_dnf(Form, TConj) :-
+%            tranform_conjunction(Form, TConj).
+%        tranform_dnf(Form, TDisj) :-
+%            (
+%                tranform_conjunction(Form, TDisj)
+%            ;
+%                Form = Left \/ Right,
+%                tranform_dnf(Left, TLeft),
+%                tranform_dnf(Right, TRight),
+%                TDisj = TLeft \/ TRight
+%            ).
+%
+%            tranform_conjunction(~ gr([]), (~ gr([]))).
+%            tranform_conjunction(gr([]), gr([])).
+%            tranform_conjunction(~ gr([?A|?B]), (~ gr(?A)) \/ (~ gr(?B))).
+%            tranform_conjunction(gr([?A|?B]), gr([?A]) & gr([?B])).
+%            tranform_conjunction(~ gr([?A]), (~ gr(?A))).
+%            tranform_conjunction(gr([?A]), gr([?A])).
+%            tranform_conjunction(~ gr(A), (~ gr(A))).
+%            tranform_conjunction(gr(B), gr(B)).
+%            tranform_conjunction(Form, TLeft & TRight) :-
+%                Form = Left & Right,
+%                tranform_conjunction(Left, TLeft),
+%                tranform_conjunction(Right, TRight).
 
     invariant_from_facts_and_hypothesis([], _Facts, [], []).
     invariant_from_facts_and_hypothesis([SU], Facts, Proofs, Conjunction) :-
@@ -502,8 +604,8 @@ remove_qm(lemma(Name,all Vars1:F,induction([all Vars1:F],Steps1)),Facts,
                     matching_dnf(Right)
                 ).
 
-                matching_conjunction(~ gr(_)).
-                matching_conjunction(gr(_)).
+                matching_conjunction(~ gr(_A)).
+                matching_conjunction(gr(_B)).
                 matching_conjunction(Form) :-
                     Form = Left & Right,
                     matching_conjunction(Left),
@@ -545,7 +647,7 @@ lemma(revers21,
   induction([all[x1,x2]:(succeeds revers(?x1,?x2)=>gr(?x2)&gr(?x1)\/ ~gr(?x2)& ~gr(?x1))],
     [
       step(
-        [], 
+        [],
         [],
         ff by gap,
         gr([])&gr([])\/ ~gr([])& ~gr([])),
@@ -561,10 +663,10 @@ false.
 
 
 ?- build_lemma(appen,3,L),numbervars(L,0,_),write(L),fail.
-    
+
 lemma(appen33,
   all[x1,x2,x3]:
-    (succeeds appen(?x1,?x2,?x3) => 
+    (succeeds appen(?x1,?x2,?x3) =>
      gr(?x3)&gr(?x2)&gr(?x1)\/ ~gr(?x3)& ~gr(?x2)&gr(?x1)\/ ~gr(?x3)&gr(?x2)& ~gr(?x1)\/ ~gr(?x3)& ~gr(?x2)& ~gr(?x1)),
   induction(
     [all[x1,x2,x3]:
@@ -576,13 +678,13 @@ lemma(appen33,
       [],
       ff by gap,
       gr(?x4)&gr(?x4)&gr([])\/ ~gr(?x4)& ~gr(?x4)&gr([])\/ ~gr(?x4)&gr(?x4)& ~gr([])\/ ~gr(?x4)& ~gr(?x4)& ~gr([])),
-    
+
      step(
       [x5,x6,x7,x8],
       [gr(?x8)&gr(?x7)&gr(?x6)\/ ~gr(?x8)& ~gr(?x7)&gr(?x6)\/ ~gr(?x8)&gr(?x7)& ~gr(?x6)\/ ~gr(?x8)& ~gr(?x7)& ~gr(?x6),
        succeeds appen(?x6,?x7,?x8)],
       ff by gap,
-      gr([?x5|?x8])&gr(?x7)&gr([?x5|?x6])\/ ~gr([?x5|?x8])& ~gr(?x7)&gr([?x5|?x6])\/ 
+      gr([?x5|?x8])&gr(?x7)&gr([?x5|?x6])\/ ~gr([?x5|?x8])& ~gr(?x7)&gr([?x5|?x6])\/
       ~gr([?x5|?x8])&gr(?x7)& ~gr([?x5|?x6])\/ ~gr([?x5|?x8])& ~gr(?x7)& ~gr([?x5|?x6]))
     ]
   )
@@ -590,15 +692,15 @@ lemma(appen33,
 false.
 
 */
-  
- 
+
+
 /*
 :- initialize.
-:- compile_gr(F).    
+:- compile_gr(F).
 :- needs_gr(F).
-...    
+...
 :- bye.
-    
+
 */
- 
-  
+
+

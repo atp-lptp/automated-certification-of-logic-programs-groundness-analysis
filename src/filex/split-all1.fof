@@ -1,0 +1,12 @@
+fof(id1,axiom,! [Xx7,Xx8] : ~ (nil = cons(Xx7,Xx8))).
+fof(id2,axiom,! [Xx9,Xx10] : ! [Xx11,Xx12] : (cons(Xx9,Xx10) = cons(Xx11,Xx12) => Xx10 = Xx12)).
+fof(id3,axiom,! [Xx13,Xx14] : ! [Xx15,Xx16] : (cons(Xx13,Xx14) = cons(Xx15,Xx16) => Xx13 = Xx15)).
+fof(id4,axiom,gr(nil)).
+fof(id5,axiom,! [Xx17,Xx18] : ((gr(Xx17) & gr(Xx18)) <=> gr(cons(Xx17,Xx18)))).
+fof(id6,axiom,! [Xx19,Xx20,Xx21] : ~ ((split_succeeds(Xx19,Xx20,Xx21) & split_fails(Xx19,Xx20,Xx21)))).
+fof(id7,axiom,! [Xx19,Xx20,Xx21] : (split_terminates(Xx19,Xx20,Xx21) => (split_succeeds(Xx19,Xx20,Xx21) | split_fails(Xx19,Xx20,Xx21)))).
+fof(id8,axiom,! [Xx1,Xx2,Xx3] : (split_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx1 = cons(Xx4,Xx5) & (Xx2 = cons(Xx4,Xx6) & split_succeeds(Xx5,Xx3,Xx6))) | (Xx1 = nil & (Xx2 = nil & Xx3 = nil))))).
+fof(id9,axiom,! [Xx1,Xx2,Xx3] : (split_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : (~ (Xx1 = cons(Xx4,Xx5)) | (~ (Xx2 = cons(Xx4,Xx6)) | split_fails(Xx5,Xx3,Xx6))) & (~ (Xx1 = nil) | (~ (Xx2 = nil) | ~ (Xx3 = nil)))))).
+fof(id10,axiom,! [Xx1,Xx2,Xx3] : (split_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ($true & (~ (Xx1 = cons(Xx4,Xx5)) | ($true & (~ (Xx2 = cons(Xx4,Xx6)) | split_terminates(Xx5,Xx3,Xx6))))) & ($true & (~ (Xx1 = nil) | ($true & (~ (Xx2 = nil) | $true))))))).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3] : ((? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx1 = cons(Xx4,Xx5) & (Xx2 = cons(Xx4,Xx6) & (split_succeeds(Xx5,Xx3,Xx6) & (((((gr(Xx6) & gr(Xx3)) & gr(Xx5)) | ((gr(Xx6) & ~ (gr(Xx3))) & ~ (gr(Xx5)))) | ((~ (gr(Xx6)) & gr(Xx3)) & ~ (gr(Xx5)))) | ((~ (gr(Xx6)) & ~ (gr(Xx3))) & ~ (gr(Xx5))))))) | (Xx1 = nil & (Xx2 = nil & Xx3 = nil))) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3] : (split_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))))).
+fof('lemma-split31',conjecture,! [Xx1,Xx2,Xx3] : (split_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).

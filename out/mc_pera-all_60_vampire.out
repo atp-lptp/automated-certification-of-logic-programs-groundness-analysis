@@ -1,0 +1,9 @@
+user	0m1.121s
+target conjecture: "./src/filex/mc_pera-all1.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/filex/mc_pera-all1.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.190s
+target conjecture: "./src/filex/mc_pera-all2.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/filex/mc_pera-all2.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/filex/mc_pera-all3.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/filex/mc_pera-all3.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/filex/mc_pera-all4.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/filex/mc_pera-all4.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+4 lemmas, 4 proved,  ratio: 100

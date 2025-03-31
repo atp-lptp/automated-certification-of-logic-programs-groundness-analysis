@@ -1,0 +1,21 @@
+
+:- assert_clauses(n(ht,3),[
+ clause([n(ht,3),[n([],0)],[n([],0)],[n([],0)]],
+  [&],
+  []/0),
+ clause([n(ht,3),[n('[|]',2),[n('[|]',2),$x,[n([],0)]],$xss],[n('[|]',2),$x,$ys],$zss],
+  [n(ht,3),$xss,$ys,$zss],
+  [x,xss,ys,zss]/0),
+ clause([n(ht,3),[n('[|]',2),[n('[|]',2),$x,[n('[|]',2),$x1,$xs]],$xss],[n('[|]',2),$x,$ys],[n('[|]',2),[n('[|]',2),$x1,$xs],$zss]],
+  [n(ht,3),$xss,$ys,$zss],
+  [x,x1,xs,xss,ys,zss]/0)
+]).
+
+:- assert_clauses(n(trans,2),[
+ clause([n(trans,2),[n([],0)],[n([],0)]],
+  [&],
+  []/0),
+ clause([n(trans,2),[n('[|]',2),$xs,$xss],[n('[|]',2),$ys,$yss]],
+  [&,[n(ht,3),[n('[|]',2),$xs,$xss],$ys,$xss1],[n(trans,2),$xss1,$yss]],
+  [xs,xss,ys,yss,xss1]/0)
+]).

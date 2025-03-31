@@ -1,0 +1,10 @@
+fof(id1,axiom,! [Xx6,Xx7] : ! [Xx8,Xx9] : (cons(Xx6,Xx7) = cons(Xx8,Xx9) => Xx7 = Xx9)).
+fof(id2,axiom,! [Xx10,Xx11] : ! [Xx12,Xx13] : (cons(Xx10,Xx11) = cons(Xx12,Xx13) => Xx10 = Xx12)).
+fof(id3,axiom,! [Xx14,Xx15] : ((gr(Xx14) & gr(Xx15)) <=> gr(cons(Xx14,Xx15)))).
+fof(id4,axiom,! [Xx16,Xx17] : ~ ((member_succeeds(Xx16,Xx17) & member_fails(Xx16,Xx17)))).
+fof(id5,axiom,! [Xx16,Xx17] : (member_terminates(Xx16,Xx17) => (member_succeeds(Xx16,Xx17) | member_fails(Xx16,Xx17)))).
+fof(id6,axiom,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : (Xx2 = cons(Xx3,Xx4) & member_succeeds(Xx1,Xx4)) | ? [Xx5] : Xx2 = cons(Xx1,Xx5)))).
+fof(id7,axiom,! [Xx1,Xx2] : (member_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : (~ (Xx2 = cons(Xx3,Xx4)) | member_fails(Xx1,Xx4)) & ! [Xx5] : ~ (Xx2 = cons(Xx1,Xx5))))).
+fof(id8,axiom,! [Xx1,Xx2] : (member_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ($true & (~ (Xx2 = cons(Xx3,Xx4)) | member_terminates(Xx1,Xx4))) & ! [Xx5] : $true))).
+fof(induction,axiom,(! [Xx1,Xx2] : ((? [Xx3] : ? [Xx4] : (Xx2 = cons(Xx3,Xx4) & (member_succeeds(Xx1,Xx4) & (((gr(Xx4) & gr(Xx1)) | (~ (gr(Xx4)) & gr(Xx1))) | (~ (gr(Xx4)) & ~ (gr(Xx1)))))) | ? [Xx5] : Xx2 = cons(Xx1,Xx5)) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1))))) => ! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1))))))).
+fof('lemma-member21',conjecture,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).

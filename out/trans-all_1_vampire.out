@@ -1,0 +1,5 @@
+user	0m1.095s
+target conjecture: "./src/filex/trans-all1.fof" apply prover command: "time vampire --proof off --time_limit 1s ./src/filex/trans-all1.fof >> $(pwd)/out/tmp_output_vampire" status code: "1", successful application (yes: 1, no: 0): 0
+user	0m0.023s
+target conjecture: "./src/filex/trans-all2.fof" apply prover command: "time vampire --proof off --time_limit 1s ./src/filex/trans-all2.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+2 lemmas, 1 proved,  ratio: 50

@@ -1,0 +1,153 @@
+:- initialize.
+
+
+:- lemma(p1,
+all [x0,x1]: (~ gr(?x0) => gr(?x1)) => gr(?x0) \/ gr(?x1),
+
+[
+  assume(
+     ~ gr(?x0) => gr(?x1),
+     [
+        ~ gr(?x0) \/ ~ ~ gr(?x0),
+         cases(~ gr(?x0),
+           [
+	    contra(
+	     ~ (gr(?x0) \/ gr(?x1)),
+              [
+                 assume(
+                  ~ gr(?x0),
+                  [gr(?x1)],
+                  gr(?x1)
+                 ),
+                 gr(?x1),
+                 gr(?x0) \/ gr(?x1)
+              ])],
+           ~ ~ gr(?x0),
+           [
+	      indirect(
+	       ~ gr(?x0),
+	       [gr(?x0), ~ gr(?x0), ff])
+           ], gr(?x0) \/ gr(?x1)),
+      gr(?x0) \/ gr(?x1)
+    ],
+    gr(?x0) \/ gr(?x1)
+ )]
+).
+
+:- lemma(p2,
+   all [x0, x1]: (gr(?x0) => gr(?x1)) => ~ gr(?x0) \/ gr(?x1),
+   [assume(
+    gr(?x0) => gr(?x1),
+    [
+     cases(
+      ~gr(?x0),
+      assume(
+       ~ gr(?x0),
+       [~gr(?x0) \/ gr(?x1)],
+       ~gr(?x0) \/ gr(?x1)
+      ),
+      gr(?x0),
+      assume(gr(?x1), [~ gr(?x0) \/ gr(?x1)], ~gr(?x0) \/ gr(?x1)),
+      ~gr(?x0) \/ gr(?x1)
+     )],
+    ~ gr(?x0) \/ gr(?x1)
+   )]
+).
+
+
+:- lemma(p3,
+   all [x0, x1]: (~ (gr(?x0) & gr(?x1))) => ~ gr(?x0) \/ ~ gr(?x1),
+   [
+    assume(
+       ~ (gr(?x0) & gr(?x1)),
+      indirect(
+       ~ (~ gr(?x0) \/ ~ gr(?x1)),
+       [indirect(~ gr(?x0), [~ gr(?x0) \/ ~ gr(?x1), ff]),
+        indirect(~ gr(?x1), [~ gr(?x0) \/ ~ gr(?x1), ff]),
+	gr(?x0) & gr(?x1), ff
+       ]),
+     ~ gr(?x0) \/ ~ gr(?x1))
+   ]
+).
+
+:- lemma(
+    p4,
+    all [x0, x1]: ~ (gr(?x0) \/ gr(?x1)) => ~ gr(?x0),
+    [
+     assume(
+      ~ (gr(?x0) \/ gr(?x1)),
+      contra(
+	gr(?x0),
+       [gr(?x0) \/ gr(?x1),ff]),
+      ~gr(?x0)
+     )
+    ]
+).
+
+:- lemma(
+    p5,
+    all [x0, x1]: ~ (gr(?x0) \/ gr(?x1)) => ~ gr(?x1),
+    [
+     assume(
+      ~ (gr(?x0) \/ gr(?x1)),
+      contra(
+	gr(?x1),
+       [gr(?x0) \/ gr(?x1),ff]),
+      ~gr(?x1)
+     )
+    ]
+).
+
+:- lemma(
+    p6,
+    all [x0, x1]: ~ (gr(?x0) => gr(?x1)) => gr(?x0),
+    [
+     assume(
+      ~ (gr(?x0) => gr(?x1)),
+      [
+      ~ gr(?x0) \/ ~ ~ gr(?x0),
+      cases(
+       ~ gr(?x0),
+       [
+       assume(
+        gr(?x0),
+        [ff],
+       	gr(?x1)
+       ),
+       gr(?x0) => gr(?x1),ff],
+       ~ ~ gr(?x0),
+       [
+	indirect(
+	 ~ gr(?x0),
+	 [~ ~ gr(?x0)]
+	),
+	gr(?x0)
+       ],
+       gr(?x0))],
+      gr(?x0))
+    ]
+).
+
+:- lemma(
+    p7,
+    all [x0, x1]: ~ (gr(?x0) => gr(?x1)) => ~ gr(?x1),
+    [
+     assume(
+      ~ (gr(?x0) => gr(?x1)),
+       contra(
+	gr(?x1),
+	[assume(
+	  gr(?x0),
+	  [],
+	  gr(?x0) => gr(?x1)
+	 ),
+	 gr(?x0) => gr(?x1),
+	 ~ (gr(?x0) => gr(?x1)),
+	 ff]
+      ),
+      ~ gr(?x1))
+    ]
+).
+
+
+:- bye.

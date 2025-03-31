@@ -1,0 +1,17 @@
+fof(id1,axiom,! [Xx6] : ~ ('0' = s(Xx6))).
+fof(id2,axiom,! [Xx7] : ! [Xx8] : (s(Xx7) = s(Xx8) => Xx7 = Xx8)).
+fof(id3,axiom,gr('0')).
+fof(id4,axiom,! [Xx9] : (gr(Xx9) <=> gr(s(Xx9)))).
+fof(id5,axiom,! [Xx10,Xx11] : ~ ((fib2_succeeds(Xx10,Xx11) & fib2_fails(Xx10,Xx11)))).
+fof(id6,axiom,! [Xx10,Xx11] : (fib2_terminates(Xx10,Xx11) => (fib2_succeeds(Xx10,Xx11) | fib2_fails(Xx10,Xx11)))).
+fof(id7,axiom,! [Xx12,Xx13,Xx14] : ~ ((add_succeeds(Xx12,Xx13,Xx14) & add_fails(Xx12,Xx13,Xx14)))).
+fof(id8,axiom,! [Xx12,Xx13,Xx14] : (add_terminates(Xx12,Xx13,Xx14) => (add_succeeds(Xx12,Xx13,Xx14) | add_fails(Xx12,Xx13,Xx14)))).
+fof(id9,axiom,! [Xx1,Xx2] : (fib2_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = s(s(Xx3)) & (fib2_succeeds(s(Xx3),Xx4) & (fib2_succeeds(Xx3,Xx5) & add_succeeds(Xx4,Xx5,Xx2)))) | ((Xx1 = s('0') & Xx2 = s('0')) | (Xx1 = '0' & Xx2 = s('0')))))).
+fof(id10,axiom,! [Xx1,Xx2] : (fib2_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (~ (Xx1 = s(s(Xx3))) | (fib2_fails(s(Xx3),Xx4) | (fib2_fails(Xx3,Xx5) | add_fails(Xx4,Xx5,Xx2)))) & ((~ (Xx1 = s('0')) | ~ (Xx2 = s('0'))) & (~ (Xx1 = '0') | ~ (Xx2 = s('0'))))))).
+fof(id11,axiom,! [Xx1,Xx2] : (fib2_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = s(s(Xx3))) | (fib2_terminates(s(Xx3),Xx4) & (fib2_fails(s(Xx3),Xx4) | (fib2_terminates(Xx3,Xx5) & (fib2_fails(Xx3,Xx5) | add_terminates(Xx4,Xx5,Xx2))))))) & (($true & (~ (Xx1 = s('0')) | $true)) & ($true & (~ (Xx1 = '0') | $true)))))).
+fof(id12,axiom,! [Xx1,Xx2,Xx3] : (add_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : (Xx1 = s(Xx4) & (Xx3 = s(Xx5) & add_succeeds(Xx4,Xx2,Xx5))) | (Xx1 = '0' & Xx3 = Xx2)))).
+fof(id13,axiom,! [Xx1,Xx2,Xx3] : (add_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : (~ (Xx1 = s(Xx4)) | (~ (Xx3 = s(Xx5)) | add_fails(Xx4,Xx2,Xx5))) & (~ (Xx1 = '0') | ~ (Xx3 = Xx2))))).
+fof(id14,axiom,! [Xx1,Xx2,Xx3] : (add_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = s(Xx4)) | ($true & (~ (Xx3 = s(Xx5)) | add_terminates(Xx4,Xx2,Xx5))))) & ($true & (~ (Xx1 = '0') | $true))))).
+fof('lemma-add31',axiom,! [Xx1,Xx2,Xx3] : (add_succeeds(Xx1,Xx2,Xx3) => (((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))))).
+fof(induction,axiom,(! [Xx1,Xx2] : ((? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = s(s(Xx3)) & ((fib2_succeeds(s(Xx3),Xx4) & (gr(Xx4) & gr(s(Xx3)))) & ((fib2_succeeds(Xx3,Xx5) & (gr(Xx5) & gr(Xx3))) & add_succeeds(Xx4,Xx5,Xx2)))) | ((Xx1 = s('0') & Xx2 = s('0')) | (Xx1 = '0' & Xx2 = s('0')))) => (gr(Xx2) & gr(Xx1))) => ! [Xx1,Xx2] : (fib2_succeeds(Xx1,Xx2) => (gr(Xx2) & gr(Xx1))))).
+fof('lemma-fib221',conjecture,! [Xx1,Xx2] : (fib2_succeeds(Xx1,Xx2) => (gr(Xx2) & gr(Xx1)))).

@@ -1,0 +1,21 @@
+fof(id1,axiom,! [Xx9] : ~ ('0' = s(Xx9))).
+fof(id2,axiom,! [Xx10] : ! [Xx11] : (s(Xx10) = s(Xx11) => Xx10 = Xx11)).
+fof(id3,axiom,gr('0')).
+fof(id4,axiom,! [Xx12] : (gr(Xx12) <=> gr(s(Xx12)))).
+fof(id5,axiom,! [Xx13,Xx14] : ~ ((eq_succeeds(Xx13,Xx14) & eq_fails(Xx13,Xx14)))).
+fof(id6,axiom,! [Xx13,Xx14] : (eq_terminates(Xx13,Xx14) => (eq_succeeds(Xx13,Xx14) | eq_fails(Xx13,Xx14)))).
+fof(id7,axiom,! [Xx15,Xx16] : ~ ((p_succeeds(Xx15,Xx16) & p_fails(Xx15,Xx16)))).
+fof(id8,axiom,! [Xx15,Xx16] : (p_terminates(Xx15,Xx16) => (p_succeeds(Xx15,Xx16) | p_fails(Xx15,Xx16)))).
+fof(id9,axiom,! [Xx17,Xx18,Xx19] : ~ ((average_succeeds(Xx17,Xx18,Xx19) & average_fails(Xx17,Xx18,Xx19)))).
+fof(id10,axiom,! [Xx17,Xx18,Xx19] : (average_terminates(Xx17,Xx18,Xx19) => (average_succeeds(Xx17,Xx18,Xx19) | average_fails(Xx17,Xx18,Xx19)))).
+fof(id11,axiom,! [Xx1,Xx2] : (eq_succeeds(Xx1,Xx2) <=> Xx2 = Xx1)).
+fof(id12,axiom,! [Xx1,Xx2] : (eq_fails(Xx1,Xx2) <=> ~ (Xx2 = Xx1))).
+fof(id13,axiom,! [Xx1,Xx2] : (eq_terminates(Xx1,Xx2) <=> $true)).
+fof(id14,axiom,! [Xx1,Xx2] : (p_succeeds(Xx1,Xx2) <=> (Xx1 = s(Xx2) | (Xx1 = '0' & Xx2 = '0')))).
+fof(id15,axiom,! [Xx1,Xx2] : (p_fails(Xx1,Xx2) <=> (~ (Xx1 = s(Xx2)) & (~ (Xx1 = '0') | ~ (Xx2 = '0'))))).
+fof(id16,axiom,! [Xx1,Xx2] : (p_terminates(Xx1,Xx2) <=> ($true & ($true & (~ (Xx1 = '0') | $true))))).
+fof(id17,axiom,! [Xx1,Xx2,Xx3] : (average_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : ? [Xx7] : (p_succeeds(Xx2,Xx4) & (p_succeeds(Xx4,Xx5) & (p_succeeds(Xx5,Xx6) & (average_succeeds(s(Xx1),Xx6,Xx7) & p_succeeds(Xx3,Xx7))))) | (? [Xx8] : (p_succeeds(Xx1,Xx8) & average_succeeds(Xx8,s(Xx2),Xx3)) | ((Xx1 = '0' & (Xx2 = s(s('0')) & eq_succeeds(Xx3,s('0')))) | ((Xx1 = '0' & (Xx2 = s('0') & eq_succeeds(Xx3,'0'))) | (Xx1 = '0' & (Xx2 = '0' & eq_succeeds(Xx3,'0'))))))))).
+fof(id18,axiom,! [Xx1,Xx2,Xx3] : (average_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ! [Xx7] : (p_fails(Xx2,Xx4) | (p_fails(Xx4,Xx5) | (p_fails(Xx5,Xx6) | (average_fails(s(Xx1),Xx6,Xx7) | p_fails(Xx3,Xx7))))) & (! [Xx8] : (p_fails(Xx1,Xx8) | average_fails(Xx8,s(Xx2),Xx3)) & ((~ (Xx1 = '0') | (~ (Xx2 = s(s('0'))) | eq_fails(Xx3,s('0')))) & ((~ (Xx1 = '0') | (~ (Xx2 = s('0')) | eq_fails(Xx3,'0'))) & (~ (Xx1 = '0') | (~ (Xx2 = '0') | eq_fails(Xx3,'0'))))))))).
+fof(id19,axiom,! [Xx1,Xx2,Xx3] : (average_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ! [Xx7] : (p_terminates(Xx2,Xx4) & (p_fails(Xx2,Xx4) | (p_terminates(Xx4,Xx5) & (p_fails(Xx4,Xx5) | (p_terminates(Xx5,Xx6) & (p_fails(Xx5,Xx6) | (average_terminates(s(Xx1),Xx6,Xx7) & (average_fails(s(Xx1),Xx6,Xx7) | p_terminates(Xx3,Xx7))))))))) & (! [Xx8] : (p_terminates(Xx1,Xx8) & (p_fails(Xx1,Xx8) | average_terminates(Xx8,s(Xx2),Xx3))) & (($true & (~ (Xx1 = '0') | ($true & (~ (Xx2 = s(s('0'))) | eq_terminates(Xx3,s('0')))))) & (($true & (~ (Xx1 = '0') | ($true & (~ (Xx2 = s('0')) | eq_terminates(Xx3,'0'))))) & ($true & (~ (Xx1 = '0') | ($true & (~ (Xx2 = '0') | eq_terminates(Xx3,'0'))))))))))).
+fof(induction,axiom,(! [Xx1,Xx2] : ((Xx1 = s(Xx2) | (Xx1 = '0' & Xx2 = '0')) => ((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & ~ (gr(Xx1))))) => ! [Xx1,Xx2] : (p_succeeds(Xx1,Xx2) => ((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & ~ (gr(Xx1))))))).
+fof('lemma-p21',conjecture,! [Xx1,Xx2] : (p_succeeds(Xx1,Xx2) => ((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).

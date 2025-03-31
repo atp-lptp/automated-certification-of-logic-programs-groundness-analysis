@@ -1,0 +1,15 @@
+user	0m0.010s
+target conjecture: "./src/list/permutation-all1.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/permutation-all1.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.033s
+target conjecture: "./src/list/permutation-all2.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/permutation-all2.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.011s
+target conjecture: "./src/list/permutation-all3.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/permutation-all3.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/permutation-all4.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/permutation-all4.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.116s
+target conjecture: "./src/list/permutation-all5.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/permutation-all5.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/permutation-all6.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/permutation-all6.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.033s
+target conjecture: "./src/list/permutation-all7.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/list/permutation-all7.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+7 lemmas, 7 proved,  ratio: 100

@@ -1,0 +1,54 @@
+fof(id1,axiom,~ ('0' = nil)).
+fof(id2,axiom,! [Xx6] : ~ ('0' = s(Xx6))).
+fof(id3,axiom,! [Xx7,Xx8] : ~ ('0' = cons(Xx7,Xx8))).
+fof(id4,axiom,! [Xx9] : ~ (nil = s(Xx9))).
+fof(id5,axiom,! [Xx10,Xx11] : ~ (nil = cons(Xx10,Xx11))).
+fof(id6,axiom,! [Xx12] : ! [Xx13] : (s(Xx12) = s(Xx13) => Xx12 = Xx13)).
+fof(id7,axiom,! [Xx14] : ! [Xx15,Xx16] : ~ (s(Xx14) = cons(Xx15,Xx16))).
+fof(id8,axiom,! [Xx17,Xx18] : ! [Xx19,Xx20] : (cons(Xx17,Xx18) = cons(Xx19,Xx20) => Xx18 = Xx20)).
+fof(id9,axiom,! [Xx21,Xx22] : ! [Xx23,Xx24] : (cons(Xx21,Xx22) = cons(Xx23,Xx24) => Xx21 = Xx23)).
+fof(id10,axiom,gr('0')).
+fof(id11,axiom,gr(nil)).
+fof(id12,axiom,! [Xx25] : (gr(Xx25) <=> gr(s(Xx25)))).
+fof(id13,axiom,! [Xx26,Xx27] : ((gr(Xx26) & gr(Xx27)) <=> gr(cons(Xx26,Xx27)))).
+fof(id14,axiom,! [Xx28,Xx29,Xx30] : ~ ((member2_succeeds(Xx28,Xx29,Xx30) & member2_fails(Xx28,Xx29,Xx30)))).
+fof(id15,axiom,! [Xx28,Xx29,Xx30] : (member2_terminates(Xx28,Xx29,Xx30) => (member2_succeeds(Xx28,Xx29,Xx30) | member2_fails(Xx28,Xx29,Xx30)))).
+fof(id16,axiom,! [Xx31,Xx32,Xx33] : ~ ((occ_succeeds(Xx31,Xx32,Xx33) & occ_fails(Xx31,Xx32,Xx33)))).
+fof(id17,axiom,! [Xx31,Xx32,Xx33] : (occ_terminates(Xx31,Xx32,Xx33) => (occ_succeeds(Xx31,Xx32,Xx33) | occ_fails(Xx31,Xx32,Xx33)))).
+fof(id18,axiom,! [Xx34,Xx35] : ~ ((not_same_occ_succeeds(Xx34,Xx35) & not_same_occ_fails(Xx34,Xx35)))).
+fof(id19,axiom,! [Xx34,Xx35] : (not_same_occ_terminates(Xx34,Xx35) => (not_same_occ_succeeds(Xx34,Xx35) | not_same_occ_fails(Xx34,Xx35)))).
+fof(id20,axiom,! [Xx36,Xx37] : ~ ((same_occ_succeeds(Xx36,Xx37) & same_occ_fails(Xx36,Xx37)))).
+fof(id21,axiom,! [Xx36,Xx37] : (same_occ_terminates(Xx36,Xx37) => (same_occ_succeeds(Xx36,Xx37) | same_occ_fails(Xx36,Xx37)))).
+fof(id22,axiom,! [Xx38,Xx39] : ~ ((permutation_succeeds(Xx38,Xx39) & permutation_fails(Xx38,Xx39)))).
+fof(id23,axiom,! [Xx38,Xx39] : (permutation_terminates(Xx38,Xx39) => (permutation_succeeds(Xx38,Xx39) | permutation_fails(Xx38,Xx39)))).
+fof(id24,axiom,! [Xx40,Xx41,Xx42] : ~ ((delete_succeeds(Xx40,Xx41,Xx42) & delete_fails(Xx40,Xx41,Xx42)))).
+fof(id25,axiom,! [Xx40,Xx41,Xx42] : (delete_terminates(Xx40,Xx41,Xx42) => (delete_succeeds(Xx40,Xx41,Xx42) | delete_fails(Xx40,Xx41,Xx42)))).
+fof(id26,axiom,! [Xx43,Xx44] : ~ ((member_succeeds(Xx43,Xx44) & member_fails(Xx43,Xx44)))).
+fof(id27,axiom,! [Xx43,Xx44] : (member_terminates(Xx43,Xx44) => (member_succeeds(Xx43,Xx44) | member_fails(Xx43,Xx44)))).
+fof(id28,axiom,! [Xx1,Xx2,Xx3] : (member2_succeeds(Xx1,Xx2,Xx3) <=> (member_succeeds(Xx1,Xx3) | member_succeeds(Xx1,Xx2)))).
+fof(id29,axiom,! [Xx1,Xx2,Xx3] : (member2_fails(Xx1,Xx2,Xx3) <=> (member_fails(Xx1,Xx3) & member_fails(Xx1,Xx2)))).
+fof(id30,axiom,! [Xx1,Xx2,Xx3] : (member2_terminates(Xx1,Xx2,Xx3) <=> (member_terminates(Xx1,Xx3) & member_terminates(Xx1,Xx2)))).
+fof(id31,axiom,! [Xx1,Xx2,Xx3] : (occ_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : (Xx2 = cons(Xx4,Xx5) & (~ (Xx1 = Xx4) & occ_succeeds(Xx1,Xx5,Xx3))) | (? [Xx6] : ? [Xx7] : (Xx2 = cons(Xx1,Xx6) & (Xx3 = s(Xx7) & occ_succeeds(Xx1,Xx6,Xx7))) | (Xx2 = nil & Xx3 = '0'))))).
+fof(id32,axiom,! [Xx1,Xx2,Xx3] : (occ_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : (~ (Xx2 = cons(Xx4,Xx5)) | (Xx1 = Xx4 | occ_fails(Xx1,Xx5,Xx3))) & (! [Xx6] : ! [Xx7] : (~ (Xx2 = cons(Xx1,Xx6)) | (~ (Xx3 = s(Xx7)) | occ_fails(Xx1,Xx6,Xx7))) & (~ (Xx2 = nil) | ~ (Xx3 = '0')))))).
+fof(id33,axiom,! [Xx1,Xx2,Xx3] : (occ_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ($true & (~ (Xx2 = cons(Xx4,Xx5)) | (($true & (gr(Xx1) & gr(Xx4))) & (Xx1 = Xx4 | occ_terminates(Xx1,Xx5,Xx3))))) & (! [Xx6] : ! [Xx7] : ($true & (~ (Xx2 = cons(Xx1,Xx6)) | ($true & (~ (Xx3 = s(Xx7)) | occ_terminates(Xx1,Xx6,Xx7))))) & ($true & (~ (Xx2 = nil) | $true)))))).
+fof(id34,axiom,! [Xx1,Xx2] : (not_same_occ_succeeds(Xx1,Xx2) <=> ? [Xx3] : ? [Xx4] : ? [Xx5] : (member2_succeeds(Xx3,Xx1,Xx2) & (occ_succeeds(Xx3,Xx1,Xx4) & (occ_succeeds(Xx3,Xx2,Xx5) & ~ (Xx4 = Xx5)))))).
+fof(id35,axiom,! [Xx1,Xx2] : (not_same_occ_fails(Xx1,Xx2) <=> ! [Xx3] : ! [Xx4] : ! [Xx5] : (member2_fails(Xx3,Xx1,Xx2) | (occ_fails(Xx3,Xx1,Xx4) | (occ_fails(Xx3,Xx2,Xx5) | Xx4 = Xx5))))).
+fof(id36,axiom,! [Xx1,Xx2] : (not_same_occ_terminates(Xx1,Xx2) <=> ! [Xx3] : ! [Xx4] : ! [Xx5] : (member2_terminates(Xx3,Xx1,Xx2) & (member2_fails(Xx3,Xx1,Xx2) | (occ_terminates(Xx3,Xx1,Xx4) & (occ_fails(Xx3,Xx1,Xx4) | (occ_terminates(Xx3,Xx2,Xx5) & (occ_fails(Xx3,Xx2,Xx5) | ($true & (gr(Xx4) & gr(Xx5))))))))))).
+fof(id37,axiom,! [Xx1,Xx2] : (same_occ_succeeds(Xx1,Xx2) <=> not_same_occ_fails(Xx1,Xx2))).
+fof(id38,axiom,! [Xx1,Xx2] : (same_occ_fails(Xx1,Xx2) <=> not_same_occ_succeeds(Xx1,Xx2))).
+fof(id39,axiom,! [Xx1,Xx2] : (same_occ_terminates(Xx1,Xx2) <=> (not_same_occ_terminates(Xx1,Xx2) & (gr(Xx1) & gr(Xx2))))).
+fof(id40,axiom,! [Xx1,Xx2] : (permutation_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx2 = cons(Xx3,Xx4) & (delete_succeeds(Xx3,Xx1,Xx5) & permutation_succeeds(Xx5,Xx4))) | (Xx1 = nil & Xx2 = nil)))).
+fof(id41,axiom,! [Xx1,Xx2] : (permutation_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (~ (Xx2 = cons(Xx3,Xx4)) | (delete_fails(Xx3,Xx1,Xx5) | permutation_fails(Xx5,Xx4))) & (~ (Xx1 = nil) | ~ (Xx2 = nil))))).
+fof(id42,axiom,! [Xx1,Xx2] : (permutation_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : ($true & (~ (Xx2 = cons(Xx3,Xx4)) | (delete_terminates(Xx3,Xx1,Xx5) & (delete_fails(Xx3,Xx1,Xx5) | permutation_terminates(Xx5,Xx4))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id43,axiom,! [Xx1,Xx2,Xx3] : (delete_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx2 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & delete_succeeds(Xx1,Xx5,Xx6))) | Xx2 = cons(Xx1,Xx3)))).
+fof(id44,axiom,! [Xx1,Xx2,Xx3] : (delete_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : (~ (Xx2 = cons(Xx4,Xx5)) | (~ (Xx3 = cons(Xx4,Xx6)) | delete_fails(Xx1,Xx5,Xx6))) & ~ (Xx2 = cons(Xx1,Xx3))))).
+fof(id45,axiom,! [Xx1,Xx2,Xx3] : (delete_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ($true & (~ (Xx2 = cons(Xx4,Xx5)) | ($true & (~ (Xx3 = cons(Xx4,Xx6)) | delete_terminates(Xx1,Xx5,Xx6))))) & $true))).
+fof(id46,axiom,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : (Xx2 = cons(Xx3,Xx4) & member_succeeds(Xx1,Xx4)) | ? [Xx5] : Xx2 = cons(Xx1,Xx5)))).
+fof(id47,axiom,! [Xx1,Xx2] : (member_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : (~ (Xx2 = cons(Xx3,Xx4)) | member_fails(Xx1,Xx4)) & ! [Xx5] : ~ (Xx2 = cons(Xx1,Xx5))))).
+fof(id48,axiom,! [Xx1,Xx2] : (member_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ($true & (~ (Xx2 = cons(Xx3,Xx4)) | member_terminates(Xx1,Xx4))) & ! [Xx5] : $true))).
+fof('lemma-member21',axiom,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof('lemma-occ31',axiom,! [Xx1,Xx2,Xx3] : (occ_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((gr(Xx3) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & gr(Xx2)) & ~ (gr(Xx1)))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).
+fof('lemma-member231',axiom,! [Xx1,Xx2,Xx3] : (member2_succeeds(Xx1,Xx2,Xx3) => ((((((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & gr(Xx2)) & gr(Xx1))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((gr(Xx3) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).
+fof('lemma-not_same_occ21',axiom,! [Xx1,Xx2] : (not_same_occ_succeeds(Xx1,Xx2) => ((((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (gr(Xx2) & ~ (gr(Xx1)))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3] : ((? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx2 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & (delete_succeeds(Xx1,Xx5,Xx6) & (((((gr(Xx6) & gr(Xx5)) & gr(Xx1)) | ((~ (gr(Xx6)) & ~ (gr(Xx5))) & gr(Xx1))) | ((gr(Xx6) & ~ (gr(Xx5))) & ~ (gr(Xx1)))) | ((~ (gr(Xx6)) & ~ (gr(Xx5))) & ~ (gr(Xx1))))))) | Xx2 = cons(Xx1,Xx3)) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3] : (delete_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))))).
+fof('lemma-delete31',conjecture,! [Xx1,Xx2,Xx3] : (delete_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).

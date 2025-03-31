@@ -1,0 +1,9 @@
+user	0m0.415s
+target conjecture: "./src/filex/mc_pera-all1.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/filex/mc_pera-all1.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.012s
+target conjecture: "./src/filex/mc_pera-all2.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/filex/mc_pera-all2.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.005s
+target conjecture: "./src/filex/mc_pera-all3.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/filex/mc_pera-all3.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.007s
+target conjecture: "./src/filex/mc_pera-all4.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/filex/mc_pera-all4.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+4 lemmas, 4 proved,  ratio: 100

@@ -1,0 +1,13 @@
+user	0m0.021s
+target conjecture: "./src/nat/int-all1.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/nat/int-all1.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/nat/int-all2.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/nat/int-all2.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/nat/int-all3.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/nat/int-all3.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.010s
+target conjecture: "./src/nat/int-all4.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/nat/int-all4.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/nat/int-all5.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/nat/int-all5.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/nat/int-all6.fof" apply prover command: "time vampire --proof off --time_limit 60s ./src/nat/int-all6.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+6 lemmas, 6 proved,  ratio: 100

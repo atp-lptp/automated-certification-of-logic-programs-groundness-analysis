@@ -1,0 +1,43 @@
+fof(id1,axiom,~ ('0' = nil)).
+fof(id2,axiom,! [Xx4] : ~ ('0' = s(Xx4))).
+fof(id3,axiom,! [Xx5,Xx6] : ~ ('0' = cons(Xx5,Xx6))).
+fof(id4,axiom,! [Xx7] : ~ (nil = s(Xx7))).
+fof(id5,axiom,! [Xx8,Xx9] : ~ (nil = cons(Xx8,Xx9))).
+fof(id6,axiom,! [Xx10] : ! [Xx11] : (s(Xx10) = s(Xx11) => Xx10 = Xx11)).
+fof(id7,axiom,! [Xx12] : ! [Xx13,Xx14] : ~ (s(Xx12) = cons(Xx13,Xx14))).
+fof(id8,axiom,! [Xx15,Xx16] : ! [Xx17,Xx18] : (cons(Xx15,Xx16) = cons(Xx17,Xx18) => Xx16 = Xx18)).
+fof(id9,axiom,! [Xx19,Xx20] : ! [Xx21,Xx22] : (cons(Xx19,Xx20) = cons(Xx21,Xx22) => Xx19 = Xx21)).
+fof(id10,axiom,gr('0')).
+fof(id11,axiom,gr(nil)).
+fof(id12,axiom,! [Xx23] : (gr(Xx23) <=> gr(s(Xx23)))).
+fof(id13,axiom,! [Xx24,Xx25] : ((gr(Xx24) & gr(Xx25)) <=> gr(cons(Xx24,Xx25)))).
+fof(id14,axiom,! [Xx26,Xx27,Xx28] : ~ ((delete_succeeds(Xx26,Xx27,Xx28) & delete_fails(Xx26,Xx27,Xx28)))).
+fof(id15,axiom,! [Xx26,Xx27,Xx28] : (delete_terminates(Xx26,Xx27,Xx28) => (delete_succeeds(Xx26,Xx27,Xx28) | delete_fails(Xx26,Xx27,Xx28)))).
+fof(id16,axiom,! [Xx29,Xx30] : ~ ((length_succeeds(Xx29,Xx30) & length_fails(Xx29,Xx30)))).
+fof(id17,axiom,! [Xx29,Xx30] : (length_terminates(Xx29,Xx30) => (length_succeeds(Xx29,Xx30) | length_fails(Xx29,Xx30)))).
+fof(id18,axiom,! [Xx31,Xx32,Xx33] : ~ ((append_succeeds(Xx31,Xx32,Xx33) & append_fails(Xx31,Xx32,Xx33)))).
+fof(id19,axiom,! [Xx31,Xx32,Xx33] : (append_terminates(Xx31,Xx32,Xx33) => (append_succeeds(Xx31,Xx32,Xx33) | append_fails(Xx31,Xx32,Xx33)))).
+fof(id20,axiom,! [Xx34,Xx35] : ~ ((member_succeeds(Xx34,Xx35) & member_fails(Xx34,Xx35)))).
+fof(id21,axiom,! [Xx34,Xx35] : (member_terminates(Xx34,Xx35) => (member_succeeds(Xx34,Xx35) | member_fails(Xx34,Xx35)))).
+fof(id22,axiom,! [Xx36] : ~ ((list_succeeds(Xx36) & list_fails(Xx36)))).
+fof(id23,axiom,! [Xx36] : (list_terminates(Xx36) => (list_succeeds(Xx36) | list_fails(Xx36)))).
+fof(id24,axiom,! [Xx1,Xx2,Xx3] : (delete_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx2 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & delete_succeeds(Xx1,Xx5,Xx6))) | Xx2 = cons(Xx1,Xx3)))).
+fof(id25,axiom,! [Xx1,Xx2,Xx3] : (delete_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : (~ (Xx2 = cons(Xx4,Xx5)) | (~ (Xx3 = cons(Xx4,Xx6)) | delete_fails(Xx1,Xx5,Xx6))) & ~ (Xx2 = cons(Xx1,Xx3))))).
+fof(id26,axiom,! [Xx1,Xx2,Xx3] : (delete_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ($true & (~ (Xx2 = cons(Xx4,Xx5)) | ($true & (~ (Xx3 = cons(Xx4,Xx6)) | delete_terminates(Xx1,Xx5,Xx6))))) & $true))).
+fof(id27,axiom,! [Xx1,Xx2] : (length_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = cons(Xx3,Xx4) & (Xx2 = s(Xx5) & length_succeeds(Xx4,Xx5))) | (Xx1 = nil & Xx2 = '0')))).
+fof(id28,axiom,! [Xx1,Xx2] : (length_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (~ (Xx1 = cons(Xx3,Xx4)) | (~ (Xx2 = s(Xx5)) | length_fails(Xx4,Xx5))) & (~ (Xx1 = nil) | ~ (Xx2 = '0'))))).
+fof(id29,axiom,! [Xx1,Xx2] : (length_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = cons(Xx3,Xx4)) | ($true & (~ (Xx2 = s(Xx5)) | length_terminates(Xx4,Xx5))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id30,axiom,! [Xx1,Xx2,Xx3] : (append_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx1 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & append_succeeds(Xx5,Xx2,Xx6))) | (Xx1 = nil & Xx3 = Xx2)))).
+fof(id31,axiom,! [Xx1,Xx2,Xx3] : (append_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : (~ (Xx1 = cons(Xx4,Xx5)) | (~ (Xx3 = cons(Xx4,Xx6)) | append_fails(Xx5,Xx2,Xx6))) & (~ (Xx1 = nil) | ~ (Xx3 = Xx2))))).
+fof(id32,axiom,! [Xx1,Xx2,Xx3] : (append_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ($true & (~ (Xx1 = cons(Xx4,Xx5)) | ($true & (~ (Xx3 = cons(Xx4,Xx6)) | append_terminates(Xx5,Xx2,Xx6))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id33,axiom,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : (Xx2 = cons(Xx3,Xx4) & member_succeeds(Xx1,Xx4)) | ? [Xx5] : Xx2 = cons(Xx1,Xx5)))).
+fof(id34,axiom,! [Xx1,Xx2] : (member_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : (~ (Xx2 = cons(Xx3,Xx4)) | member_fails(Xx1,Xx4)) & ! [Xx5] : ~ (Xx2 = cons(Xx1,Xx5))))).
+fof(id35,axiom,! [Xx1,Xx2] : (member_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ($true & (~ (Xx2 = cons(Xx3,Xx4)) | member_terminates(Xx1,Xx4))) & ! [Xx5] : $true))).
+fof(id36,axiom,! [Xx1] : (list_succeeds(Xx1) <=> (? [Xx2] : ? [Xx3] : (Xx1 = cons(Xx2,Xx3) & list_succeeds(Xx3)) | Xx1 = nil))).
+fof(id37,axiom,! [Xx1] : (list_fails(Xx1) <=> (! [Xx2] : ! [Xx3] : (~ (Xx1 = cons(Xx2,Xx3)) | list_fails(Xx3)) & ~ (Xx1 = nil)))).
+fof(id38,axiom,! [Xx1] : (list_terminates(Xx1) <=> (! [Xx2] : ! [Xx3] : ($true & (~ (Xx1 = cons(Xx2,Xx3)) | list_terminates(Xx3))) & $true))).
+fof('lemma-member21',axiom,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof('lemma-list11',axiom,! [Xx1] : (list_succeeds(Xx1) => (gr(Xx1) | ~ (gr(Xx1))))).
+fof('lemma-length21',axiom,! [Xx1,Xx2] : (length_succeeds(Xx1,Xx2) => ((gr(Xx2) & gr(Xx1)) | (gr(Xx2) & ~ (gr(Xx1)))))).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3] : ((? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx2 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & (delete_succeeds(Xx1,Xx5,Xx6) & (((((gr(Xx6) & gr(Xx5)) & gr(Xx1)) | ((~ (gr(Xx6)) & ~ (gr(Xx5))) & gr(Xx1))) | ((gr(Xx6) & ~ (gr(Xx5))) & ~ (gr(Xx1)))) | ((~ (gr(Xx6)) & ~ (gr(Xx5))) & ~ (gr(Xx1))))))) | Xx2 = cons(Xx1,Xx3)) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3] : (delete_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))))).
+fof('lemma-delete31',conjecture,! [Xx1,Xx2,Xx3] : (delete_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((gr(Xx3) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).

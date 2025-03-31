@@ -1,0 +1,19 @@
+user	0m9.898s
+target conjecture: "./src/sort/sort-all1.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all1.fof >> $(pwd)/out/tmp_output_e_prover" status code: "7", successful application (yes: 1, no: 0): 0
+user	0m9.897s
+target conjecture: "./src/sort/sort-all2.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all2.fof >> $(pwd)/out/tmp_output_e_prover" status code: "7", successful application (yes: 1, no: 0): 0
+user	0m9.885s
+target conjecture: "./src/sort/sort-all3.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all3.fof >> $(pwd)/out/tmp_output_e_prover" status code: "7", successful application (yes: 1, no: 0): 0
+user	0m0.277s
+target conjecture: "./src/sort/sort-all4.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all4.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.009s
+target conjecture: "./src/sort/sort-all5.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all5.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m9.841s
+target conjecture: "./src/sort/sort-all6.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all6.fof >> $(pwd)/out/tmp_output_e_prover" status code: "7", successful application (yes: 1, no: 0): 0
+user	0m0.036s
+target conjecture: "./src/sort/sort-all7.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all7.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.032s
+target conjecture: "./src/sort/sort-all8.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all8.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.267s
+target conjecture: "./src/sort/sort-all9.fof" apply prover command: "time eprover --auto --cpu-limit=10 -s ./src/sort/sort-all9.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+9 lemmas, 5 proved,  ratio: 55.55555555555556

@@ -60,7 +60,7 @@
 
 ;;; Code:
 
-(defvar prolog-program-name "/Users/Shared/logic-program-theorem-prover-swipl/bin/lptp"
+(defvar prolog-program-name "/Users/Shared/lptp-dn/bin/lptp"
   "Program name for invoking an inferior Prolog process.")
 
 (defvar prolog-start-file nil 

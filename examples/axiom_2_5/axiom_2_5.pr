@@ -39,6 +39,16 @@ all [x1,x2]: ~ gr([?x1|?x2]) <=> ~ gr(?x1) \/ ~ gr(?x2),
  ~ gr([?x1|?x2]) <=> ~ gr(?x1) \/ ~ gr(?x2)]
 ).
 
+:- lemma(axiom_2_5_de_morgan_imply,
+all [x1,x2]: ~ gr([?x1|?x2]) => ~ gr(?x1) \/ ~ gr(?x2),
+assume(~ gr([?x1|?x2]),
+ [
+~ gr([?x1|?x2]) <=> ~ gr(?x1) \/ ~ gr(?x2) by lemma(axiom_2_5_de_morgan),
+~ gr([?x1|?x2]) => ~ gr(?x1) \/ ~ gr(?x2),
+  ~ gr(?x1) \/ ~ gr(?x2)],
+ ~ gr(?x1) \/ ~ gr(?x2))
+).
+
 :- lemma(axiom_2_5_single_element_list,
 all [x1]: gr([?x1]) <=> gr(?x1),
 [assume(gr([?x1]),[],gr(?x1)),

@@ -1,0 +1,9 @@
+
+:- assert_clauses(n(member,2),[
+ clause([n(member,2),$x,[n('[|]',2),$x,$0]],
+  [&],
+  [x,0]/1),
+ clause([n(member,2),$x,[n('[|]',2),$0,$l]],
+  [n(member,2),$x,$l],
+  [x,0,l]/1)
+]).

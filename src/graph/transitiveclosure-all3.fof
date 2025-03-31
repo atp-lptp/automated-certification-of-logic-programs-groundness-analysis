@@ -1,0 +1,44 @@
+fof(id1,axiom,! [Xx6,Xx7] : ! [Xx8,Xx9] : (e(Xx6,Xx7) = e(Xx8,Xx9) => Xx7 = Xx9)).
+fof(id2,axiom,! [Xx10,Xx11] : ! [Xx12,Xx13] : (e(Xx10,Xx11) = e(Xx12,Xx13) => Xx10 = Xx12)).
+fof(id3,axiom,! [Xx14,Xx15] : ~ (nil = e(Xx14,Xx15))).
+fof(id4,axiom,! [Xx16,Xx17] : ! [Xx18,Xx19] : ~ (e(Xx16,Xx17) = cons(Xx18,Xx19))).
+fof(id5,axiom,! [Xx20,Xx21] : ~ (nil = cons(Xx20,Xx21))).
+fof(id6,axiom,! [Xx22,Xx23] : ! [Xx24,Xx25] : (cons(Xx22,Xx23) = cons(Xx24,Xx25) => Xx23 = Xx25)).
+fof(id7,axiom,! [Xx26,Xx27] : ! [Xx28,Xx29] : (cons(Xx26,Xx27) = cons(Xx28,Xx29) => Xx26 = Xx28)).
+fof(id8,axiom,! [Xx30,Xx31] : ((gr(Xx30) & gr(Xx31)) <=> gr(e(Xx30,Xx31)))).
+fof(id9,axiom,gr(nil)).
+fof(id10,axiom,! [Xx32,Xx33] : ((gr(Xx32) & gr(Xx33)) <=> gr(cons(Xx32,Xx33)))).
+fof(id11,axiom,! [Xx34,Xx35] : ~ ((not_disjoint_succeeds(Xx34,Xx35) & not_disjoint_fails(Xx34,Xx35)))).
+fof(id12,axiom,! [Xx34,Xx35] : (not_disjoint_terminates(Xx34,Xx35) => (not_disjoint_succeeds(Xx34,Xx35) | not_disjoint_fails(Xx34,Xx35)))).
+fof(id13,axiom,! [Xx36,Xx37] : ~ ((disjoint_succeeds(Xx36,Xx37) & disjoint_fails(Xx36,Xx37)))).
+fof(id14,axiom,! [Xx36,Xx37] : (disjoint_terminates(Xx36,Xx37) => (disjoint_succeeds(Xx36,Xx37) | disjoint_fails(Xx36,Xx37)))).
+fof(id15,axiom,! [Xx38] : ~ ((cycle_free_succeeds(Xx38) & cycle_free_fails(Xx38)))).
+fof(id16,axiom,! [Xx38] : (cycle_free_terminates(Xx38) => (cycle_free_succeeds(Xx38) | cycle_free_fails(Xx38)))).
+fof(id17,axiom,! [Xx39,Xx40,Xx41,Xx42] : ~ ((path_succeeds(Xx39,Xx40,Xx41,Xx42) & path_fails(Xx39,Xx40,Xx41,Xx42)))).
+fof(id18,axiom,! [Xx39,Xx40,Xx41,Xx42] : (path_terminates(Xx39,Xx40,Xx41,Xx42) => (path_succeeds(Xx39,Xx40,Xx41,Xx42) | path_fails(Xx39,Xx40,Xx41,Xx42)))).
+fof(id19,axiom,! [Xx43,Xx44,Xx45,Xx46] : ~ ((tc_succeeds(Xx43,Xx44,Xx45,Xx46) & tc_fails(Xx43,Xx44,Xx45,Xx46)))).
+fof(id20,axiom,! [Xx43,Xx44,Xx45,Xx46] : (tc_terminates(Xx43,Xx44,Xx45,Xx46) => (tc_succeeds(Xx43,Xx44,Xx45,Xx46) | tc_fails(Xx43,Xx44,Xx45,Xx46)))).
+fof(id21,axiom,! [Xx47,Xx48] : ~ ((member_succeeds(Xx47,Xx48) & member_fails(Xx47,Xx48)))).
+fof(id22,axiom,! [Xx47,Xx48] : (member_terminates(Xx47,Xx48) => (member_succeeds(Xx47,Xx48) | member_fails(Xx47,Xx48)))).
+fof(id23,axiom,! [Xx1,Xx2] : (not_disjoint_succeeds(Xx1,Xx2) <=> ? [Xx3] : (member_succeeds(Xx3,Xx1) & member_succeeds(Xx3,Xx2)))).
+fof(id24,axiom,! [Xx1,Xx2] : (not_disjoint_fails(Xx1,Xx2) <=> ! [Xx3] : (member_fails(Xx3,Xx1) | member_fails(Xx3,Xx2)))).
+fof(id25,axiom,! [Xx1,Xx2] : (not_disjoint_terminates(Xx1,Xx2) <=> ! [Xx3] : (member_terminates(Xx3,Xx1) & (member_fails(Xx3,Xx1) | member_terminates(Xx3,Xx2))))).
+fof(id26,axiom,! [Xx1,Xx2] : (disjoint_succeeds(Xx1,Xx2) <=> not_disjoint_fails(Xx1,Xx2))).
+fof(id27,axiom,! [Xx1,Xx2] : (disjoint_fails(Xx1,Xx2) <=> not_disjoint_succeeds(Xx1,Xx2))).
+fof(id28,axiom,! [Xx1,Xx2] : (disjoint_terminates(Xx1,Xx2) <=> (not_disjoint_terminates(Xx1,Xx2) & (gr(Xx1) & gr(Xx2))))).
+fof(id29,axiom,! [Xx1] : (cycle_free_succeeds(Xx1) <=> (? [Xx2] : ? [Xx3] : (Xx1 = cons(Xx2,Xx3) & (member_fails(Xx2,Xx3) & cycle_free_succeeds(Xx3))) | Xx1 = nil))).
+fof(id30,axiom,! [Xx1] : (cycle_free_fails(Xx1) <=> (! [Xx2] : ! [Xx3] : (~ (Xx1 = cons(Xx2,Xx3)) | (member_succeeds(Xx2,Xx3) | cycle_free_fails(Xx3))) & ~ (Xx1 = nil)))).
+fof(id31,axiom,! [Xx1] : (cycle_free_terminates(Xx1) <=> (! [Xx2] : ! [Xx3] : ($true & (~ (Xx1 = cons(Xx2,Xx3)) | ((member_terminates(Xx2,Xx3) & (gr(Xx2) & gr(Xx3))) & (member_succeeds(Xx2,Xx3) | cycle_free_terminates(Xx3))))) & $true))).
+fof(id32,axiom,! [Xx1,Xx2,Xx3,Xx4] : (path_succeeds(Xx1,Xx2,Xx3,Xx4) <=> (? [Xx5] : ? [Xx6] : (Xx2 = cons(Xx5,Xx6) & (member_succeeds(e(Xx1,Xx5),Xx4) & path_succeeds(Xx5,Xx6,Xx3,Xx4))) | (Xx2 = nil & member_succeeds(e(Xx1,Xx3),Xx4))))).
+fof(id33,axiom,! [Xx1,Xx2,Xx3,Xx4] : (path_fails(Xx1,Xx2,Xx3,Xx4) <=> (! [Xx5] : ! [Xx6] : (~ (Xx2 = cons(Xx5,Xx6)) | (member_fails(e(Xx1,Xx5),Xx4) | path_fails(Xx5,Xx6,Xx3,Xx4))) & (~ (Xx2 = nil) | member_fails(e(Xx1,Xx3),Xx4))))).
+fof(id34,axiom,! [Xx1,Xx2,Xx3,Xx4] : (path_terminates(Xx1,Xx2,Xx3,Xx4) <=> (! [Xx5] : ! [Xx6] : ($true & (~ (Xx2 = cons(Xx5,Xx6)) | (member_terminates(e(Xx1,Xx5),Xx4) & (member_fails(e(Xx1,Xx5),Xx4) | path_terminates(Xx5,Xx6,Xx3,Xx4))))) & ($true & (~ (Xx2 = nil) | member_terminates(e(Xx1,Xx3),Xx4)))))).
+fof(id35,axiom,! [Xx1,Xx2,Xx3,Xx4] : (tc_succeeds(Xx1,Xx2,Xx3,Xx4) <=> (? [Xx5] : (member_succeeds(e(Xx1,Xx5),Xx3) & (member_fails(Xx5,Xx4) & tc_succeeds(Xx5,Xx2,Xx3,cons(Xx5,Xx4)))) | member_succeeds(e(Xx1,Xx2),Xx3)))).
+fof(id36,axiom,! [Xx1,Xx2,Xx3,Xx4] : (tc_fails(Xx1,Xx2,Xx3,Xx4) <=> (! [Xx5] : (member_fails(e(Xx1,Xx5),Xx3) | (member_succeeds(Xx5,Xx4) | tc_fails(Xx5,Xx2,Xx3,cons(Xx5,Xx4)))) & member_fails(e(Xx1,Xx2),Xx3)))).
+fof(id37,axiom,! [Xx1,Xx2,Xx3,Xx4] : (tc_terminates(Xx1,Xx2,Xx3,Xx4) <=> (! [Xx5] : (member_terminates(e(Xx1,Xx5),Xx3) & (member_fails(e(Xx1,Xx5),Xx3) | ((member_terminates(Xx5,Xx4) & (gr(Xx5) & gr(Xx4))) & (member_succeeds(Xx5,Xx4) | tc_terminates(Xx5,Xx2,Xx3,cons(Xx5,Xx4)))))) & member_terminates(e(Xx1,Xx2),Xx3)))).
+fof(id38,axiom,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : (Xx2 = cons(Xx3,Xx4) & member_succeeds(Xx1,Xx4)) | ? [Xx5] : Xx2 = cons(Xx1,Xx5)))).
+fof(id39,axiom,! [Xx1,Xx2] : (member_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : (~ (Xx2 = cons(Xx3,Xx4)) | member_fails(Xx1,Xx4)) & ! [Xx5] : ~ (Xx2 = cons(Xx1,Xx5))))).
+fof(id40,axiom,! [Xx1,Xx2] : (member_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ($true & (~ (Xx2 = cons(Xx3,Xx4)) | member_terminates(Xx1,Xx4))) & ! [Xx5] : $true))).
+fof('lemma-member21',axiom,! [Xx1,Xx2] : (member_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof('lemma-not_disjoint21',axiom,! [Xx1,Xx2] : (not_disjoint_succeeds(Xx1,Xx2) => ((((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (gr(Xx2) & ~ (gr(Xx1)))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3,Xx4] : ((? [Xx5] : (member_succeeds(e(Xx1,Xx5),Xx3) & (member_fails(Xx5,Xx4) & (tc_succeeds(Xx5,Xx2,Xx3,cons(Xx5,Xx4)) & ((((((((((((gr(cons(Xx5,Xx4)) & gr(Xx3)) & gr(Xx2)) & gr(Xx5)) | (((gr(cons(Xx5,Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx5))) | (((gr(cons(Xx5,Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx5))) | (((gr(cons(Xx5,Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx5)))) | (((gr(cons(Xx5,Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx5)))) | (((~ (gr(cons(Xx5,Xx4))) & gr(Xx3)) & gr(Xx2)) & gr(Xx5))) | (((~ (gr(cons(Xx5,Xx4))) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx5))) | (((~ (gr(cons(Xx5,Xx4))) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx5))) | (((~ (gr(cons(Xx5,Xx4))) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx5)))) | (((~ (gr(cons(Xx5,Xx4))) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx5))))))) | member_succeeds(e(Xx1,Xx2),Xx3)) => ((((((((((((gr(Xx4) & gr(Xx3)) & gr(Xx2)) & gr(Xx1)) | (((gr(Xx4) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((gr(Xx4) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((gr(Xx4) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((gr(Xx4) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & gr(Xx3)) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3,Xx4] : (tc_succeeds(Xx1,Xx2,Xx3,Xx4) => ((((((((((((gr(Xx4) & gr(Xx3)) & gr(Xx2)) & gr(Xx1)) | (((gr(Xx4) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((gr(Xx4) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((gr(Xx4) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((gr(Xx4) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & gr(Xx3)) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1))))))).
+fof('lemma-tc41',conjecture,! [Xx1,Xx2,Xx3,Xx4] : (tc_succeeds(Xx1,Xx2,Xx3,Xx4) => ((((((((((((gr(Xx4) & gr(Xx3)) & gr(Xx2)) & gr(Xx1)) | (((gr(Xx4) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((gr(Xx4) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((gr(Xx4) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((gr(Xx4) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & gr(Xx3)) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).

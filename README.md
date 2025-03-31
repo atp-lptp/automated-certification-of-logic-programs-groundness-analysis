@@ -1,39 +1,53 @@
-# Vers une automatisation de la certification des propriétés de clôture pour Prolog
+# Short paper : Automated Certification of Logic Programs Groundness Analysis
 
-## Pré-requis:
+## Requirements
 
 - SWI-Prolog [^1]
 - GNU Bash [^2]
 - GNU Make [^3]
+- Vampire [^4]
+- E Theorem Prover [^5]
 
 ## Configuration
 
-Mettre à jour le chemin vers la racine de LPTP dans le fichier `./src/system.pl` 
-en modifiant l'argument passé au prédicat `io__lptp_home/1`. Par exemple :
+Update the path to LPTP root directory in file `./src/system.pl` 
+by revising the argument passed to `io__lptp_home/1` predicate. 
+For example :
 
-```
+```shell
 % [...]
 % git clone https://github.com/atp-lptp/lptp /Users/local/lptp
 io__lptp_home('/Users/local/lptp'),
 % [...]
 ```
 
-Voir également [doc/README.md](./doc/README.md) original du projet LPTP en anglais.
+Export the variable `LPTP_ROOT_DIR` with same path as value
+by modifying `./bin/lptp` file. 
+For example :
 
-## Exécution
-
+```shell
+export LPTP_ROOT_DIR='/Users/local/lptp'
 ```
-# Construire le binaire de LPTP à partir de la configuration précédente
-make lptp-swi
 
-# Lancer le benchmark
+See also [doc/README.md](./doc/README.md).
+
+## Execution
+
+Build LPTP binary from previous configuration
+
+```shell
+make lptp-swi
+```
+
+Run the groundness properties certification benchmark
+
+```shell
 make run-benchmark 
 ```
-
-Entrer les commandes ci-avant dans le terminal depuis la racine de LPTP afin
-- d'obtenir des relations inter-arguments par interprétation abstraite,
-- de dériver des propriétés de clôture et
-- de certifier les dérivations avec LPTP les programmes suivants.
+Enter the commands above in the terminal from the root of LPTP
+- to generate inter-argument relations by abstract interpretation,
+- to derive groundness properties and
+- to certify derivations with LPTP for the following programs.
 
 ```
 examples/filex/elem.pl
@@ -73,6 +87,12 @@ lib/sort/mergesort.pl
 lib/sort/sort.pl
  ```
 
+List certification results obtained with Vampire [^4] and E Theorem Prover [^5]
+
+```shell
+make results-for-each-program
+```
+
 ## License
 
 See [License](./COPYING)
@@ -87,3 +107,5 @@ Etienne Payet -- etienne.payet@univ-reunion.fr
 [^1]: https://www.swi-prolog.org/Download.html
 [^2]: https://www.gnu.org/software/bash/
 [^3]: https://www.gnu.org/software/make/#download
+[^4]: https://vprover.github.io/
+[^5]: https://wwwlehre.dhbw-stuttgart.de/~sschulz/E/E.html 

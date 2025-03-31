@@ -2,8 +2,10 @@
 set -Eeuo pipefail
 
 function lptp_swi() {
-  cd /Users/Shared/logic-program-theorem-prover-swipl || exit
-  /opt/homebrew/bin/swipl --quiet -s /Users/Shared/logic-program-theorem-prover-swipl/src/lptp.qlf
+  export LPTP_ROOT_DIR=/Users/Shared/lptp-dn
+
+  cd "${LPTP_ROOT_DIR}" || exit
+  /opt/homebrew/bin/swipl --quiet -s "${LPTP_ROOT_DIR}"/src/lptp.qlf
 }
 lptp_swi
 

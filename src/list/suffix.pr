@@ -1,0 +1,1214 @@
+:- initialize.
+:- needs_thm($(examples)/axiom_2_5/axiom_2_5).
+:- needs_gr($(lib)/list/suffix).
+
+% __placeholder__
+
+:- lemma(suffix21,
+ all [x1,x2]: 
+  (succeeds suffix(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds suffix(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([x3],[],
+    [cases(gr(?x3),
+      [gr(?x3) & gr(?x3),
+       gr(?x3) & gr(?x3) \/ ~ gr(?x3) & gr(?x3),
+       gr(?x3) & gr(?x3) \/ ~ gr(?x3) & gr(?x3) \/ ~ gr(?x3) & ~ gr(?x3)],
+      ~ gr(?x3),
+      [~ gr(?x3) & ~ gr(?x3),
+       gr(?x3) & gr(?x3) \/ ~ gr(?x3) & gr(?x3) \/ ~ gr(?x3) & ~ gr(?x3)],
+      gr(?x3) & gr(?x3) \/ ~ gr(?x3) & gr(?x3) \/ ~ gr(?x3) & ~ gr(?x3))],
+    gr(?x3) & gr(?x3) \/ ~ gr(?x3) & gr(?x3) \/ ~ gr(?x3) & ~ gr(?x3)),
+   step([x4,x5,x6],
+    [gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+     succeeds suffix(?x4,?x6)],
+    [cases(gr(?x4),
+      cases(gr(?x5),
+       cases(gr(?x6),
+        [gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+         gr(?x5) & gr(?x6),
+         gr([?x5|?x6]) => gr(?x5) & gr(?x6),
+         assume(~ (gr(?x5) & gr(?x6)),
+          contra(gr([?x5|?x6]),
+           [gr(?x5) & gr(?x6),
+            ff]),
+          ~ gr([?x5|?x6])),
+         <=>(gr([?x5|?x6]),gr(?x5) & gr(?x6)) by lemma(axiom_2_5),
+         gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        ~ gr(?x6),
+        [~ gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+         ~ gr(?x5) \/ ~ gr(?x6),
+         <=>(~ gr([?x5|?x6]),~ gr(?x5) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4) =>
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4)),
+       ~ gr(?x5),
+       cases(gr(?x6),
+        [gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+         ~ gr(?x5) \/ ~ gr(?x6),
+         <=>(~ gr([?x5|?x6]),~ gr(?x5) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        ~ gr(?x6),
+        [~ gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+         ~ gr(?x5) \/ ~ gr(?x6),
+         <=>(~ gr([?x5|?x6]),~ gr(?x5) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4) =>
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4)),
+       gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4) =>
+        gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+        ~ gr([?x5|?x6]) & ~ gr(?x4)),
+      ~ gr(?x4),
+      cases(gr(?x5),
+       cases(gr(?x6),
+        [contra(gr(?x6) & gr(?x4),[]),
+         ~ (gr(?x6) & gr(?x4)),
+         contra(~ gr(?x6) & gr(?x4),[]),
+         ~ (~ gr(?x6) & gr(?x4)),
+         contra(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4),
+          cases(
+           [case(~ gr(?x6) & gr(?x4),
+             [~ gr(?x6) & gr(?x4),
+              ~ (~ gr(?x6) & gr(?x4)),
+              ff]),
+            case(gr(?x6) & gr(?x4),
+             [gr(?x6) & gr(?x4),
+              ~ (gr(?x6) & gr(?x4)),
+              ff])],
+           ff)),
+         ~ (gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4)),
+         contra(~ gr(?x6),[]),
+         ~ ~ gr(?x6),
+         contra(~ gr(?x6) & ~ gr(?x4),
+          [gr(?x6),
+           ~ gr(?x6),
+           ff]),
+         ~ (~ gr(?x6) & ~ gr(?x4)),
+         contra(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),
+          cases(
+           [case(~ gr(?x6) & ~ gr(?x4),
+             [~ gr(?x6) & ~ gr(?x4),
+              ~ (~ gr(?x6) & ~ gr(?x4)),
+              ff]),
+            case(~ gr(?x6) & gr(?x4),
+             [~ gr(?x6) & gr(?x4),
+              ~ (~ gr(?x6) & gr(?x4)),
+              ff]),
+            case(gr(?x6) & gr(?x4),
+             [gr(?x6) & gr(?x4),
+              ~ (gr(?x6) & gr(?x4)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4)),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        ~ gr(?x6),
+        [~ gr(?x6) & ~ gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+         ~ gr(?x5) \/ ~ gr(?x6),
+         <=>(~ gr([?x5|?x6]),~ gr(?x5) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4) =>
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4)),
+       ~ gr(?x5),
+       cases(gr(?x6),
+        [contra(gr(?x6) & gr(?x4),[]),
+         ~ (gr(?x6) & gr(?x4)),
+         contra(~ gr(?x6) & gr(?x4),[]),
+         ~ (~ gr(?x6) & gr(?x4)),
+         contra(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4),
+          cases(
+           [case(~ gr(?x6) & gr(?x4),
+             [~ gr(?x6) & gr(?x4),
+              ~ (~ gr(?x6) & gr(?x4)),
+              ff]),
+            case(gr(?x6) & gr(?x4),
+             [gr(?x6) & gr(?x4),
+              ~ (gr(?x6) & gr(?x4)),
+              ff])],
+           ff)),
+         ~ (gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4)),
+         contra(~ gr(?x6),[]),
+         ~ ~ gr(?x6),
+         contra(~ gr(?x6) & ~ gr(?x4),
+          [gr(?x6),
+           ~ gr(?x6),
+           ff]),
+         ~ (~ gr(?x6) & ~ gr(?x4)),
+         contra(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),
+          cases(
+           [case(~ gr(?x6) & ~ gr(?x4),
+             [~ gr(?x6) & ~ gr(?x4),
+              ~ (~ gr(?x6) & ~ gr(?x4)),
+              ff]),
+            case(~ gr(?x6) & gr(?x4),
+             [~ gr(?x6) & gr(?x4),
+              ~ (~ gr(?x6) & gr(?x4)),
+              ff]),
+            case(gr(?x6) & gr(?x4),
+             [gr(?x6) & gr(?x4),
+              ~ (gr(?x6) & gr(?x4)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4)),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        ~ gr(?x6),
+        [~ gr(?x6) & ~ gr(?x4),
+         gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4),
+         ~ gr(?x5) \/ ~ gr(?x6),
+         <=>(~ gr([?x5|?x6]),~ gr(?x5) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4),
+         assume(gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/
+          ~ gr(?x6) & ~ gr(?x4),[],
+          gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+          ~ gr([?x5|?x6]) & ~ gr(?x4))],
+        gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4) =>
+         gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+         ~ gr([?x5|?x6]) & ~ gr(?x4)),
+       gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4) =>
+        gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+        ~ gr([?x5|?x6]) & ~ gr(?x4)),
+      gr(?x6) & gr(?x4) \/ ~ gr(?x6) & gr(?x4) \/ ~ gr(?x6) & ~ gr(?x4) => 
+       gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+       ~ gr([?x5|?x6]) & ~ gr(?x4))],
+    gr([?x5|?x6]) & gr(?x4) \/ ~ gr([?x5|?x6]) & gr(?x4) \/
+    ~ gr([?x5|?x6]) & ~ gr(?x4))])).
+
+:- lemma(prefix21,
+ all [x1,x2]: 
+  (succeeds prefix(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds prefix(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([x3],[],
+    [cases(gr(?x3),
+      [gr(?x3) & gr([]),
+       gr(?x3) & gr([]) \/ ~ gr(?x3) & gr([]),
+       gr(?x3) & gr([]) \/ ~ gr(?x3) & gr([]) \/ ~ gr(?x3) & ~ gr([])],
+      ~ gr(?x3),
+      [~ gr(?x3) & gr([]),
+       gr(?x3) & gr([]) \/ ~ gr(?x3) & gr([]),
+       gr(?x3) & gr([]) \/ ~ gr(?x3) & gr([]) \/ ~ gr(?x3) & ~ gr([])],
+      gr(?x3) & gr([]) \/ ~ gr(?x3) & gr([]) \/ ~ gr(?x3) & ~ gr([]))],
+    gr(?x3) & gr([]) \/ ~ gr(?x3) & gr([]) \/ ~ gr(?x3) & ~ gr([])),
+   step([x4,x5,x6],
+    [gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5),
+     succeeds prefix(?x5,?x6)],
+    [cases(gr(?x4),
+      cases(gr(?x5),
+       cases(gr(?x6),
+        [gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5),
+         gr(?x4) & gr(?x6),
+         gr([?x4|?x6]) => gr(?x4) & gr(?x6),
+         assume(~ (gr(?x4) & gr(?x6)),
+          contra(gr([?x4|?x6]),
+           [gr(?x4) & gr(?x6),
+            ff]),
+          ~ gr([?x4|?x6])),
+         <=>(gr([?x4|?x6]),gr(?x4) & gr(?x6)) by lemma(axiom_2_5),
+         gr(?x4) & gr(?x5),
+         gr([?x4|?x5]) => gr(?x4) & gr(?x5),
+         assume(~ (gr(?x4) & gr(?x5)),
+          contra(gr([?x4|?x5]),
+           [gr(?x4) & gr(?x5),
+            ff]),
+          ~ gr([?x4|?x5])),
+         <=>(gr([?x4|?x5]),gr(?x4) & gr(?x5)) by lemma(axiom_2_5),
+         gr([?x4|?x6]) & gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        ~ gr(?x6),
+        [~ gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5),
+         ~ gr(?x4) \/ ~ gr(?x6),
+         <=>(~ gr([?x4|?x6]),~ gr(?x4) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         gr(?x4) & gr(?x5),
+         gr([?x4|?x5]) => gr(?x4) & gr(?x5),
+         assume(~ (gr(?x4) & gr(?x5)),
+          contra(gr([?x4|?x5]),
+           [gr(?x4) & gr(?x5),
+            ff]),
+          ~ gr([?x4|?x5])),
+         <=>(gr([?x4|?x5]),gr(?x4) & gr(?x5)) by lemma(axiom_2_5),
+         ~ gr([?x4|?x6]) & gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5) =>
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5])),
+       ~ gr(?x5),
+       cases(gr(?x6),
+        [contra(gr(?x6) & gr(?x5),[]),
+         ~ (gr(?x6) & gr(?x5)),
+         contra(~ gr(?x6) & gr(?x5),[]),
+         ~ (~ gr(?x6) & gr(?x5)),
+         contra(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5),
+          cases(
+           [case(~ gr(?x6) & gr(?x5),
+             [~ gr(?x6) & gr(?x5),
+              ~ (~ gr(?x6) & gr(?x5)),
+              ff]),
+            case(gr(?x6) & gr(?x5),
+             [gr(?x6) & gr(?x5),
+              ~ (gr(?x6) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ (gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5)),
+         contra(~ gr(?x6),[]),
+         ~ ~ gr(?x6),
+         contra(~ gr(?x6) & ~ gr(?x5),
+          [gr(?x6),
+           ~ gr(?x6),
+           ff]),
+         ~ (~ gr(?x6) & ~ gr(?x5)),
+         contra(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),
+          cases(
+           [case(~ gr(?x6) & ~ gr(?x5),
+             [~ gr(?x6) & ~ gr(?x5),
+              ~ (~ gr(?x6) & ~ gr(?x5)),
+              ff]),
+            case(~ gr(?x6) & gr(?x5),
+             [~ gr(?x6) & gr(?x5),
+              ~ (~ gr(?x6) & gr(?x5)),
+              ff]),
+            case(gr(?x6) & gr(?x5),
+             [gr(?x6) & gr(?x5),
+              ~ (gr(?x6) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5)),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        ~ gr(?x6),
+        [~ gr(?x6) & ~ gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5),
+         ~ gr(?x4) \/ ~ gr(?x6),
+         <=>(~ gr([?x4|?x6]),~ gr(?x4) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr(?x4) \/ ~ gr(?x5),
+         <=>(~ gr([?x4|?x5]),~ gr(?x4) \/ ~ gr(?x5)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5) =>
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5])),
+       gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5) =>
+        gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+        ~ gr([?x4|?x6]) & ~ gr([?x4|?x5])),
+      ~ gr(?x4),
+      cases(gr(?x5),
+       cases(gr(?x6),
+        [gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5),
+         ~ gr(?x4) \/ ~ gr(?x6),
+         <=>(~ gr([?x4|?x6]),~ gr(?x4) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr(?x4) \/ ~ gr(?x5),
+         <=>(~ gr([?x4|?x5]),~ gr(?x4) \/ ~ gr(?x5)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        ~ gr(?x6),
+        [~ gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5),
+         ~ gr(?x4) \/ ~ gr(?x6),
+         <=>(~ gr([?x4|?x6]),~ gr(?x4) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr(?x4) \/ ~ gr(?x5),
+         <=>(~ gr([?x4|?x5]),~ gr(?x4) \/ ~ gr(?x5)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5) =>
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5])),
+       ~ gr(?x5),
+       cases(gr(?x6),
+        [contra(gr(?x6) & gr(?x5),[]),
+         ~ (gr(?x6) & gr(?x5)),
+         contra(~ gr(?x6) & gr(?x5),[]),
+         ~ (~ gr(?x6) & gr(?x5)),
+         contra(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5),
+          cases(
+           [case(~ gr(?x6) & gr(?x5),
+             [~ gr(?x6) & gr(?x5),
+              ~ (~ gr(?x6) & gr(?x5)),
+              ff]),
+            case(gr(?x6) & gr(?x5),
+             [gr(?x6) & gr(?x5),
+              ~ (gr(?x6) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ (gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5)),
+         contra(~ gr(?x6),[]),
+         ~ ~ gr(?x6),
+         contra(~ gr(?x6) & ~ gr(?x5),
+          [gr(?x6),
+           ~ gr(?x6),
+           ff]),
+         ~ (~ gr(?x6) & ~ gr(?x5)),
+         contra(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),
+          cases(
+           [case(~ gr(?x6) & ~ gr(?x5),
+             [~ gr(?x6) & ~ gr(?x5),
+              ~ (~ gr(?x6) & ~ gr(?x5)),
+              ff]),
+            case(~ gr(?x6) & gr(?x5),
+             [~ gr(?x6) & gr(?x5),
+              ~ (~ gr(?x6) & gr(?x5)),
+              ff]),
+            case(gr(?x6) & gr(?x5),
+             [gr(?x6) & gr(?x5),
+              ~ (gr(?x6) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5)),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        ~ gr(?x6),
+        [~ gr(?x6) & ~ gr(?x5),
+         gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5),
+         ~ gr(?x4) \/ ~ gr(?x6),
+         <=>(~ gr([?x4|?x6]),~ gr(?x4) \/ ~ gr(?x6)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr(?x4) \/ ~ gr(?x5),
+         <=>(~ gr([?x4|?x5]),~ gr(?x4) \/ ~ gr(?x5)) by 
+          lemma(axiom_2_5_de_morgan),
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]),
+         assume(gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/
+          ~ gr(?x6) & ~ gr(?x5),[],
+          gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+          ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+        gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5) =>
+         gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+         ~ gr([?x4|?x6]) & ~ gr([?x4|?x5])),
+       gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5) =>
+        gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+        ~ gr([?x4|?x6]) & ~ gr([?x4|?x5])),
+      gr(?x6) & gr(?x5) \/ ~ gr(?x6) & gr(?x5) \/ ~ gr(?x6) & ~ gr(?x5) => 
+       gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+       ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))],
+    gr([?x4|?x6]) & gr([?x4|?x5]) \/ ~ gr([?x4|?x6]) & gr([?x4|?x5]) \/
+    ~ gr([?x4|?x6]) & ~ gr([?x4|?x5]))])).
+
+:- lemma(sublist221,
+ all [x1,x2]: 
+  (succeeds sublist2(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds sublist2(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([x3,x4,x5],
+    [succeeds suffix(?x5,?x4),
+     succeeds prefix(?x3,?x5)],
+    [succeeds suffix(?x5,?x4) => gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+      ~ gr(?x4) & ~ gr(?x5) by lemma(suffix21),
+     succeeds prefix(?x3,?x5) => gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/
+      ~ gr(?x5) & ~ gr(?x3) by lemma(prefix21),
+     cases(gr(?x3),
+      cases(gr(?x4),
+       cases(gr(?x5),
+        [gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [contra(gr(?x4) & gr(?x5),[]),
+         ~ (gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4) & gr(?x5),[]),
+         ~ (~ gr(?x4) & gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+          cases(
+           [case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4),[]),
+         ~ ~ gr(?x4),
+         contra(~ gr(?x4) & ~ gr(?x5),
+          [gr(?x4),
+           ~ gr(?x4),
+           ff]),
+         ~ (~ gr(?x4) & ~ gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+          ~ gr(?x4) & ~ gr(?x5),
+          cases(
+           [case(~ gr(?x4) & ~ gr(?x5),
+             [~ gr(?x4) & ~ gr(?x5),
+              ~ (~ gr(?x4) & ~ gr(?x5)),
+              ff]),
+            case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),
+          [gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5),
+           ~ 
+           (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+            ~ gr(?x4) & ~ gr(?x5)),
+           ff]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       ~ gr(?x4),
+       cases(gr(?x5),
+        [~ gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [~ gr(?x4) & ~ gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+       (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+        gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+      ~ gr(?x3),
+      cases(gr(?x4),
+       cases(gr(?x5),
+        [contra(gr(?x5) & gr(?x3),[]),
+         ~ (gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5) & gr(?x3),[]),
+         ~ (~ gr(?x5) & gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+          cases(
+           [case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5),[]),
+         ~ ~ gr(?x5),
+         contra(~ gr(?x5) & ~ gr(?x3),
+          [gr(?x5),
+           ~ gr(?x5),
+           ff]),
+         ~ (~ gr(?x5) & ~ gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/
+          ~ gr(?x5) & ~ gr(?x3),
+          cases(
+           [case(~ gr(?x5) & ~ gr(?x3),
+             [~ gr(?x5) & ~ gr(?x3),
+              ~ (~ gr(?x5) & ~ gr(?x3)),
+              ff]),
+            case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [contra(gr(?x4) & gr(?x5),[]),
+         ~ (gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4) & gr(?x5),[]),
+         ~ (~ gr(?x4) & gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+          cases(
+           [case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4),[]),
+         ~ ~ gr(?x4),
+         contra(~ gr(?x4) & ~ gr(?x5),
+          [gr(?x4),
+           ~ gr(?x4),
+           ff]),
+         ~ (~ gr(?x4) & ~ gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+          ~ gr(?x4) & ~ gr(?x5),
+          cases(
+           [case(~ gr(?x4) & ~ gr(?x5),
+             [~ gr(?x4) & ~ gr(?x5),
+              ~ (~ gr(?x4) & ~ gr(?x5)),
+              ff]),
+            case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),
+          [gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5),
+           ~ 
+           (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+            ~ gr(?x4) & ~ gr(?x5)),
+           ff]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       ~ gr(?x4),
+       cases(gr(?x5),
+        [contra(gr(?x5) & gr(?x3),[]),
+         ~ (gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5) & gr(?x3),[]),
+         ~ (~ gr(?x5) & gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+          cases(
+           [case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5),[]),
+         ~ ~ gr(?x5),
+         contra(~ gr(?x5) & ~ gr(?x3),
+          [gr(?x5),
+           ~ gr(?x5),
+           ff]),
+         ~ (~ gr(?x5) & ~ gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/
+          ~ gr(?x5) & ~ gr(?x3),
+          cases(
+           [case(~ gr(?x5) & ~ gr(?x3),
+             [~ gr(?x5) & ~ gr(?x3),
+              ~ (~ gr(?x5) & ~ gr(?x3)),
+              ff]),
+            case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [~ gr(?x4) & ~ gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         ~ gr(?x5) & ~ gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         ~ gr(?x4) & ~ gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+       (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+        gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+      (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+      (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+       gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+    gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))])).
+
+:- lemma(sublist121,
+ all [x1,x2]: 
+  (succeeds sublist1(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+    ~ gr(?x2) & ~ gr(?x1)),
+ induction(
+  [all [x1,x2]: 
+    (succeeds sublist1(?x1,?x2) => gr(?x2) & gr(?x1) \/ ~ gr(?x2) & gr(?x1) \/
+      ~ gr(?x2) & ~ gr(?x1))],
+  [step([x3,x4,x5],
+    [succeeds prefix(?x5,?x4),
+     succeeds suffix(?x3,?x5)],
+    [succeeds prefix(?x5,?x4) => gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+      ~ gr(?x4) & ~ gr(?x5) by lemma(prefix21),
+     succeeds suffix(?x3,?x5) => gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/
+      ~ gr(?x5) & ~ gr(?x3) by lemma(suffix21),
+     cases(gr(?x3),
+      cases(gr(?x4),
+       cases(gr(?x5),
+        [gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [contra(gr(?x4) & gr(?x5),[]),
+         ~ (gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4) & gr(?x5),[]),
+         ~ (~ gr(?x4) & gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+          cases(
+           [case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4),[]),
+         ~ ~ gr(?x4),
+         contra(~ gr(?x4) & ~ gr(?x5),
+          [gr(?x4),
+           ~ gr(?x4),
+           ff]),
+         ~ (~ gr(?x4) & ~ gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+          ~ gr(?x4) & ~ gr(?x5),
+          cases(
+           [case(~ gr(?x4) & ~ gr(?x5),
+             [~ gr(?x4) & ~ gr(?x5),
+              ~ (~ gr(?x4) & ~ gr(?x5)),
+              ff]),
+            case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),
+          [gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5),
+           ~ 
+           (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+            ~ gr(?x4) & ~ gr(?x5)),
+           ff]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       ~ gr(?x4),
+       cases(gr(?x5),
+        [~ gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [~ gr(?x4) & ~ gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+       (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+        gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+      ~ gr(?x3),
+      cases(gr(?x4),
+       cases(gr(?x5),
+        [contra(gr(?x5) & gr(?x3),[]),
+         ~ (gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5) & gr(?x3),[]),
+         ~ (~ gr(?x5) & gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+          cases(
+           [case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5),[]),
+         ~ ~ gr(?x5),
+         contra(~ gr(?x5) & ~ gr(?x3),
+          [gr(?x5),
+           ~ gr(?x5),
+           ff]),
+         ~ (~ gr(?x5) & ~ gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/
+          ~ gr(?x5) & ~ gr(?x3),
+          cases(
+           [case(~ gr(?x5) & ~ gr(?x3),
+             [~ gr(?x5) & ~ gr(?x3),
+              ~ (~ gr(?x5) & ~ gr(?x3)),
+              ff]),
+            case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [contra(gr(?x4) & gr(?x5),[]),
+         ~ (gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4) & gr(?x5),[]),
+         ~ (~ gr(?x4) & gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5),
+          cases(
+           [case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5)),
+         contra(~ gr(?x4),[]),
+         ~ ~ gr(?x4),
+         contra(~ gr(?x4) & ~ gr(?x5),
+          [gr(?x4),
+           ~ gr(?x4),
+           ff]),
+         ~ (~ gr(?x4) & ~ gr(?x5)),
+         contra(gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+          ~ gr(?x4) & ~ gr(?x5),
+          cases(
+           [case(~ gr(?x4) & ~ gr(?x5),
+             [~ gr(?x4) & ~ gr(?x5),
+              ~ (~ gr(?x4) & ~ gr(?x5)),
+              ff]),
+            case(~ gr(?x4) & gr(?x5),
+             [~ gr(?x4) & gr(?x5),
+              ~ (~ gr(?x4) & gr(?x5)),
+              ff]),
+            case(gr(?x4) & gr(?x5),
+             [gr(?x4) & gr(?x5),
+              ~ (gr(?x4) & gr(?x5)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),
+          [gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5),
+           ~ 
+           (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/
+            ~ gr(?x4) & ~ gr(?x5)),
+           ff]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       ~ gr(?x4),
+       cases(gr(?x5),
+        [contra(gr(?x5) & gr(?x3),[]),
+         ~ (gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5) & gr(?x3),[]),
+         ~ (~ gr(?x5) & gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3),
+          cases(
+           [case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3)),
+         contra(~ gr(?x5),[]),
+         ~ ~ gr(?x5),
+         contra(~ gr(?x5) & ~ gr(?x3),
+          [gr(?x5),
+           ~ gr(?x5),
+           ff]),
+         ~ (~ gr(?x5) & ~ gr(?x3)),
+         contra(gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/
+          ~ gr(?x5) & ~ gr(?x3),
+          cases(
+           [case(~ gr(?x5) & ~ gr(?x3),
+             [~ gr(?x5) & ~ gr(?x3),
+              ~ (~ gr(?x5) & ~ gr(?x3)),
+              ff]),
+            case(~ gr(?x5) & gr(?x3),
+             [~ gr(?x5) & gr(?x3),
+              ~ (~ gr(?x5) & gr(?x3)),
+              ff]),
+            case(gr(?x5) & gr(?x3),
+             [gr(?x5) & gr(?x3),
+              ~ (gr(?x5) & gr(?x3)),
+              ff])],
+           ff)),
+         ~ 
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         contra(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[]),
+         ~ 
+         ((gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3))),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        ~ gr(?x5),
+        [~ gr(?x4) & ~ gr(?x5),
+         gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5),
+         ~ gr(?x5) & ~ gr(?x3),
+         gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3),
+         (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+         (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)),
+         ~ gr(?x4) & ~ gr(?x3),
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3),
+         assume(
+          (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & 
+           ~ gr(?x5)) &
+          (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & 
+           ~ gr(?x3)),[],
+          gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+        (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+        (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+         gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+       (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+       (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+        gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3)),
+      (gr(?x4) & gr(?x5) \/ ~ gr(?x4) & gr(?x5) \/ ~ gr(?x4) & ~ gr(?x5)) &
+      (gr(?x5) & gr(?x3) \/ ~ gr(?x5) & gr(?x3) \/ ~ gr(?x5) & ~ gr(?x3)) =>
+       gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))],
+    gr(?x4) & gr(?x3) \/ ~ gr(?x4) & gr(?x3) \/ ~ gr(?x4) & ~ gr(?x3))])).
+
+:- bye.

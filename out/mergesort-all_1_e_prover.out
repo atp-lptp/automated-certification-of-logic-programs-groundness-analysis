@@ -1,0 +1,9 @@
+user	0m0.035s
+target conjecture: "./src/sort/mergesort-all1.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/sort/mergesort-all1.fof >> $(pwd)/out/tmp_output_e_prover" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.992s
+target conjecture: "./src/sort/mergesort-all2.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/sort/mergesort-all2.fof >> $(pwd)/out/tmp_output_e_prover" status code: "7", successful application (yes: 1, no: 0): 0
+user	0m0.992s
+target conjecture: "./src/sort/mergesort-all3.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/sort/mergesort-all3.fof >> $(pwd)/out/tmp_output_e_prover" status code: "7", successful application (yes: 1, no: 0): 0
+user	0m0.991s
+target conjecture: "./src/sort/mergesort-all4.fof" apply prover command: "time eprover --auto --cpu-limit=1 -s ./src/sort/mergesort-all4.fof >> $(pwd)/out/tmp_output_e_prover" status code: "7", successful application (yes: 1, no: 0): 0
+4 lemmas, 1 proved,  ratio: 25

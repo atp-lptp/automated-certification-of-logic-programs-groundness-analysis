@@ -3,7 +3,8 @@
     prove/4,
     prove_groundness_property/4,
     prove_with_premises/5,
-    is_compound_form_except_list_question_mark/1
+    is_compound_form_except_list_question_mark/1,
+    gen_cases_gr/4
 ]).
 
 % The next line is used for proving termination using cTI:

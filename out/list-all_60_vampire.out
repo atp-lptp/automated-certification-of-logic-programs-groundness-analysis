@@ -1,0 +1,11 @@
+user	0m0.006s
+target conjecture: "./src/list/list-all1.fof" apply prover command: "time vampire --proof off ./src/list/list-all1.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/list-all2.fof" apply prover command: "time vampire --proof off ./src/list/list-all2.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/list-all3.fof" apply prover command: "time vampire --proof off ./src/list/list-all3.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m1.770s
+target conjecture: "./src/list/list-all4.fof" apply prover command: "time vampire --proof off ./src/list/list-all4.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m2.823s
+target conjecture: "./src/list/list-all5.fof" apply prover command: "time vampire --proof off ./src/list/list-all5.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+5 lemmas, 5 proved,  ratio: 100

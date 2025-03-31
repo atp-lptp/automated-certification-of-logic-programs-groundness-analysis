@@ -1,0 +1,30 @@
+fof(id1,axiom,! [Xx6,Xx7] : ~ (nil = cons(Xx6,Xx7))).
+fof(id2,axiom,! [Xx8,Xx9] : ! [Xx10,Xx11] : (cons(Xx8,Xx9) = cons(Xx10,Xx11) => Xx9 = Xx11)).
+fof(id3,axiom,! [Xx12,Xx13] : ! [Xx14,Xx15] : (cons(Xx12,Xx13) = cons(Xx14,Xx15) => Xx12 = Xx14)).
+fof(id4,axiom,gr(nil)).
+fof(id5,axiom,! [Xx16,Xx17] : ((gr(Xx16) & gr(Xx17)) <=> gr(cons(Xx16,Xx17)))).
+fof(id6,axiom,! [Xx18,Xx19] : ~ ((sublist2_succeeds(Xx18,Xx19) & sublist2_fails(Xx18,Xx19)))).
+fof(id7,axiom,! [Xx18,Xx19] : (sublist2_terminates(Xx18,Xx19) => (sublist2_succeeds(Xx18,Xx19) | sublist2_fails(Xx18,Xx19)))).
+fof(id8,axiom,! [Xx20,Xx21] : ~ ((sublist1_succeeds(Xx20,Xx21) & sublist1_fails(Xx20,Xx21)))).
+fof(id9,axiom,! [Xx20,Xx21] : (sublist1_terminates(Xx20,Xx21) => (sublist1_succeeds(Xx20,Xx21) | sublist1_fails(Xx20,Xx21)))).
+fof(id10,axiom,! [Xx22,Xx23] : ~ ((suffix_succeeds(Xx22,Xx23) & suffix_fails(Xx22,Xx23)))).
+fof(id11,axiom,! [Xx22,Xx23] : (suffix_terminates(Xx22,Xx23) => (suffix_succeeds(Xx22,Xx23) | suffix_fails(Xx22,Xx23)))).
+fof(id12,axiom,! [Xx24,Xx25] : ~ ((prefix_succeeds(Xx24,Xx25) & prefix_fails(Xx24,Xx25)))).
+fof(id13,axiom,! [Xx24,Xx25] : (prefix_terminates(Xx24,Xx25) => (prefix_succeeds(Xx24,Xx25) | prefix_fails(Xx24,Xx25)))).
+fof(id14,axiom,! [Xx1,Xx2] : (sublist2_succeeds(Xx1,Xx2) <=> ? [Xx3] : (suffix_succeeds(Xx3,Xx2) & prefix_succeeds(Xx1,Xx3)))).
+fof(id15,axiom,! [Xx1,Xx2] : (sublist2_fails(Xx1,Xx2) <=> ! [Xx3] : (suffix_fails(Xx3,Xx2) | prefix_fails(Xx1,Xx3)))).
+fof(id16,axiom,! [Xx1,Xx2] : (sublist2_terminates(Xx1,Xx2) <=> ! [Xx3] : (suffix_terminates(Xx3,Xx2) & (suffix_fails(Xx3,Xx2) | prefix_terminates(Xx1,Xx3))))).
+fof(id17,axiom,! [Xx1,Xx2] : (sublist1_succeeds(Xx1,Xx2) <=> ? [Xx3] : (prefix_succeeds(Xx3,Xx2) & suffix_succeeds(Xx1,Xx3)))).
+fof(id18,axiom,! [Xx1,Xx2] : (sublist1_fails(Xx1,Xx2) <=> ! [Xx3] : (prefix_fails(Xx3,Xx2) | suffix_fails(Xx1,Xx3)))).
+fof(id19,axiom,! [Xx1,Xx2] : (sublist1_terminates(Xx1,Xx2) <=> ! [Xx3] : (prefix_terminates(Xx3,Xx2) & (prefix_fails(Xx3,Xx2) | suffix_terminates(Xx1,Xx3))))).
+fof(id20,axiom,! [Xx1,Xx2] : (suffix_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : (Xx2 = cons(Xx3,Xx4) & suffix_succeeds(Xx1,Xx4)) | Xx2 = Xx1))).
+fof(id21,axiom,! [Xx1,Xx2] : (suffix_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : (~ (Xx2 = cons(Xx3,Xx4)) | suffix_fails(Xx1,Xx4)) & ~ (Xx2 = Xx1)))).
+fof(id22,axiom,! [Xx1,Xx2] : (suffix_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ($true & (~ (Xx2 = cons(Xx3,Xx4)) | suffix_terminates(Xx1,Xx4))) & $true))).
+fof(id23,axiom,! [Xx1,Xx2] : (prefix_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = cons(Xx3,Xx4) & (Xx2 = cons(Xx3,Xx5) & prefix_succeeds(Xx4,Xx5))) | Xx1 = nil))).
+fof(id24,axiom,! [Xx1,Xx2] : (prefix_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (~ (Xx1 = cons(Xx3,Xx4)) | (~ (Xx2 = cons(Xx3,Xx5)) | prefix_fails(Xx4,Xx5))) & ~ (Xx1 = nil)))).
+fof(id25,axiom,! [Xx1,Xx2] : (prefix_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = cons(Xx3,Xx4)) | ($true & (~ (Xx2 = cons(Xx3,Xx5)) | prefix_terminates(Xx4,Xx5))))) & $true))).
+fof('lemma-suffix21',axiom,! [Xx1,Xx2] : (suffix_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof('lemma-prefix21',axiom,! [Xx1,Xx2] : (prefix_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof('lemma-sublist221',axiom,! [Xx1,Xx2] : (sublist2_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof(induction,axiom,(! [Xx1,Xx2] : (? [Xx3] : (prefix_succeeds(Xx3,Xx2) & suffix_succeeds(Xx1,Xx3)) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1))))) => ! [Xx1,Xx2] : (sublist1_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1))))))).
+fof('lemma-sublist121',conjecture,! [Xx1,Xx2] : (sublist1_succeeds(Xx1,Xx2) => (((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & gr(Xx1))) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).

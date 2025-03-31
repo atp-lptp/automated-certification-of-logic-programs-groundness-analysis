@@ -1,0 +1,9 @@
+user	0m0.007s
+target conjecture: "./src/sort/mergesort-all1.fof" apply prover command: "time vampire --proof off --time_limit 1s ./src/sort/mergesort-all1.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.075s
+target conjecture: "./src/sort/mergesort-all2.fof" apply prover command: "time vampire --proof off --time_limit 1s ./src/sort/mergesort-all2.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.995s
+target conjecture: "./src/sort/mergesort-all3.fof" apply prover command: "time vampire --proof off --time_limit 1s ./src/sort/mergesort-all3.fof >> $(pwd)/out/tmp_output_vampire" status code: "1", successful application (yes: 1, no: 0): 0
+user	0m0.866s
+target conjecture: "./src/sort/mergesort-all4.fof" apply prover command: "time vampire --proof off --time_limit 1s ./src/sort/mergesort-all4.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+4 lemmas, 3 proved,  ratio: 75

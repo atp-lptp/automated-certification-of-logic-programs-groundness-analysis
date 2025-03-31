@@ -28,6 +28,7 @@
 
 preamble(Stream) :-
     write(Stream, ':- initialize.'),nl(Stream),
+%    true.
     write(Stream, ':- needs_thm($(examples)/axiom_2_5/axiom_2_5).'), nl(Stream).
 
 add_compile_gr_directive(Stream, DirAlias, FileBasename) :-
@@ -41,12 +42,22 @@ add_compile_gr_directive(Stream, DirAlias, FileBasename) :-
     ;   true    ).
 
 add_needs_gr_directive(Stream, DirAlias, FileBasename) :-
+    % add_compiles_gr_directive(Stream, DirAlias, FileBasename),
+
     write(Stream, ':- needs_gr('),
     write(Stream, DirAlias),
     write(Stream, '/'),
     write(Stream, FileBasename),
     write(Stream, ').'),
     nl(Stream).
+
+    add_compiles_gr_directive(Stream, DirAlias, FileBasename) :-
+        write(Stream, ':- compile_gr('),
+        write(Stream, DirAlias),
+        write(Stream, '/'),
+        write(Stream, FileBasename),
+        write(Stream, ').'),
+        nl(Stream).
 
 main(Argv) :-
     Argv = [FileName|_],
@@ -61,6 +72,10 @@ main(Argv) :-
     ->  Args = [FileName, _PIs]
     ;   Mode = 'prove_groundness_prop',
         Args = [FileName, Ls]
+    ;   Mode = 'prove_groundness_prop_alt',
+        Args = [FileName, Ls]
+    ;   Mode = 'prove_groundness_prop_dn',
+        Args = [FileName, Ls]
     ;   Mode = 'check_with_lptp_swi_prolog'
     ;   write('unknown mode'),
         fail
@@ -73,7 +88,9 @@ main(Argv) :-
         ->
             Term =.. [Mode|Args],
             statistics(cputime, Start),
-            call(Term), !,
+            (   call(Term)
+            ->  true
+            ;   writeln(failed_procedure(Mode)) ), !,
             statistics(cputime, End),
             ElapsedTime is (End - Start) * 1000,
 
@@ -110,6 +127,7 @@ main(Argv) :-
         preamble(Stream),
         add_compile_gr_directive(Stream, DirAlias, FileBasename),
         add_needs_gr_directive(Stream, DirAlias, FileBasename),
+        % responsible for formatting proof when FORMAT_PROOF is exported to a non-empty value
         write_lemmas(Stream, Ls),
         write(Stream,':- bye.'), nl(Stream),
         close(Stream),
@@ -129,6 +147,8 @@ main(Argv) :-
                 atom_concat(LptpBin,' <<< \'catch_with_backtrace(check(',CheckCmdPrefix),
                 atom_concat(CheckCmdPrefix,FileToCheck,Cmd0),
                 atom_concat(Cmd0,'),Error,print_message(error, Error)),halt.\'',Cmd),
+%                write(checking_proof),
+%                writeln(Cmd),
                 shell(Cmd)
             ;   LptpBin = '~/Desktop/lptp/bin/lptp',
                 atom_concat(LptpBin,' <<< \'check(',CheckCmdPrefix),

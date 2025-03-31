@@ -1,0 +1,29 @@
+fof(id1,axiom,! [Xx6,Xx7] : ~ (nil = cons(Xx6,Xx7))).
+fof(id2,axiom,! [Xx8,Xx9] : ! [Xx10,Xx11] : (cons(Xx8,Xx9) = cons(Xx10,Xx11) => Xx9 = Xx11)).
+fof(id3,axiom,! [Xx12,Xx13] : ! [Xx14,Xx15] : (cons(Xx12,Xx13) = cons(Xx14,Xx15) => Xx12 = Xx14)).
+fof(id4,axiom,gr(nil)).
+fof(id5,axiom,! [Xx16,Xx17] : ((gr(Xx16) & gr(Xx17)) <=> gr(cons(Xx16,Xx17)))).
+fof(id6,axiom,! [Xx18,Xx19] : ~ ((rev_succeeds(Xx18,Xx19) & rev_fails(Xx18,Xx19)))).
+fof(id7,axiom,! [Xx18,Xx19] : (rev_terminates(Xx18,Xx19) => (rev_succeeds(Xx18,Xx19) | rev_fails(Xx18,Xx19)))).
+fof(id8,axiom,! [Xx20,Xx21,Xx22] : ~ ((app_succeeds(Xx20,Xx21,Xx22) & app_fails(Xx20,Xx21,Xx22)))).
+fof(id9,axiom,! [Xx20,Xx21,Xx22] : (app_terminates(Xx20,Xx21,Xx22) => (app_succeeds(Xx20,Xx21,Xx22) | app_fails(Xx20,Xx21,Xx22)))).
+fof(id10,axiom,! [Xx23,Xx24,Xx25,Xx26] : ~ ((app3bis_succeeds(Xx23,Xx24,Xx25,Xx26) & app3bis_fails(Xx23,Xx24,Xx25,Xx26)))).
+fof(id11,axiom,! [Xx23,Xx24,Xx25,Xx26] : (app3bis_terminates(Xx23,Xx24,Xx25,Xx26) => (app3bis_succeeds(Xx23,Xx24,Xx25,Xx26) | app3bis_fails(Xx23,Xx24,Xx25,Xx26)))).
+fof(id12,axiom,! [Xx27,Xx28,Xx29,Xx30] : ~ ((app3_succeeds(Xx27,Xx28,Xx29,Xx30) & app3_fails(Xx27,Xx28,Xx29,Xx30)))).
+fof(id13,axiom,! [Xx27,Xx28,Xx29,Xx30] : (app3_terminates(Xx27,Xx28,Xx29,Xx30) => (app3_succeeds(Xx27,Xx28,Xx29,Xx30) | app3_fails(Xx27,Xx28,Xx29,Xx30)))).
+fof(id14,axiom,! [Xx1,Xx2] : (rev_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = cons(Xx3,Xx4) & (rev_succeeds(Xx4,Xx5) & app_succeeds(Xx5,cons(Xx3,nil),Xx2))) | (Xx1 = nil & Xx2 = nil)))).
+fof(id15,axiom,! [Xx1,Xx2] : (rev_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (~ (Xx1 = cons(Xx3,Xx4)) | (rev_fails(Xx4,Xx5) | app_fails(Xx5,cons(Xx3,nil),Xx2))) & (~ (Xx1 = nil) | ~ (Xx2 = nil))))).
+fof(id16,axiom,! [Xx1,Xx2] : (rev_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = cons(Xx3,Xx4)) | (rev_terminates(Xx4,Xx5) & (rev_fails(Xx4,Xx5) | app_terminates(Xx5,cons(Xx3,nil),Xx2))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id17,axiom,! [Xx1,Xx2,Xx3] : (app_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx1 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & app_succeeds(Xx5,Xx2,Xx6))) | (Xx1 = nil & Xx3 = Xx2)))).
+fof(id18,axiom,! [Xx1,Xx2,Xx3] : (app_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : (~ (Xx1 = cons(Xx4,Xx5)) | (~ (Xx3 = cons(Xx4,Xx6)) | app_fails(Xx5,Xx2,Xx6))) & (~ (Xx1 = nil) | ~ (Xx3 = Xx2))))).
+fof(id19,axiom,! [Xx1,Xx2,Xx3] : (app_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ($true & (~ (Xx1 = cons(Xx4,Xx5)) | ($true & (~ (Xx3 = cons(Xx4,Xx6)) | app_terminates(Xx5,Xx2,Xx6))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id20,axiom,! [Xx1,Xx2,Xx3,Xx4] : (app3bis_succeeds(Xx1,Xx2,Xx3,Xx4) <=> ? [Xx5] : (app_succeeds(Xx5,Xx3,Xx4) & app_succeeds(Xx1,Xx2,Xx5)))).
+fof(id21,axiom,! [Xx1,Xx2,Xx3,Xx4] : (app3bis_fails(Xx1,Xx2,Xx3,Xx4) <=> ! [Xx5] : (app_fails(Xx5,Xx3,Xx4) | app_fails(Xx1,Xx2,Xx5)))).
+fof(id22,axiom,! [Xx1,Xx2,Xx3,Xx4] : (app3bis_terminates(Xx1,Xx2,Xx3,Xx4) <=> ! [Xx5] : (app_terminates(Xx5,Xx3,Xx4) & (app_fails(Xx5,Xx3,Xx4) | app_terminates(Xx1,Xx2,Xx5))))).
+fof(id23,axiom,! [Xx1,Xx2,Xx3,Xx4] : (app3_succeeds(Xx1,Xx2,Xx3,Xx4) <=> ? [Xx5] : (app_succeeds(Xx1,Xx2,Xx5) & app_succeeds(Xx5,Xx3,Xx4)))).
+fof(id24,axiom,! [Xx1,Xx2,Xx3,Xx4] : (app3_fails(Xx1,Xx2,Xx3,Xx4) <=> ! [Xx5] : (app_fails(Xx1,Xx2,Xx5) | app_fails(Xx5,Xx3,Xx4)))).
+fof(id25,axiom,! [Xx1,Xx2,Xx3,Xx4] : (app3_terminates(Xx1,Xx2,Xx3,Xx4) <=> ! [Xx5] : (app_terminates(Xx1,Xx2,Xx5) & (app_fails(Xx1,Xx2,Xx5) | app_terminates(Xx5,Xx3,Xx4))))).
+fof('lemma-app31',axiom,! [Xx1,Xx2,Xx3] : (app_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).
+fof('lemma-rev21',axiom,! [Xx1,Xx2] : (rev_succeeds(Xx1,Xx2) => ((gr(Xx2) & gr(Xx1)) | (~ (gr(Xx2)) & ~ (gr(Xx1)))))).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3,Xx4] : (? [Xx5] : (app_succeeds(Xx5,Xx3,Xx4) & app_succeeds(Xx1,Xx2,Xx5)) => ((((((((((gr(Xx4) & gr(Xx3)) & gr(Xx2)) & gr(Xx1)) | (((~ (gr(Xx4)) & gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3,Xx4] : (app3bis_succeeds(Xx1,Xx2,Xx3,Xx4) => ((((((((((gr(Xx4) & gr(Xx3)) & gr(Xx2)) & gr(Xx1)) | (((~ (gr(Xx4)) & gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1))))))).
+fof('lemma-app3bis41',conjecture,! [Xx1,Xx2,Xx3,Xx4] : (app3bis_succeeds(Xx1,Xx2,Xx3,Xx4) => ((((((((((gr(Xx4) & gr(Xx3)) & gr(Xx2)) & gr(Xx1)) | (((~ (gr(Xx4)) & gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & gr(Xx2)) & ~ (gr(Xx1)))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & gr(Xx1))) | (((~ (gr(Xx4)) & ~ (gr(Xx3))) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).

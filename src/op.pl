@@ -16,6 +16,7 @@
 
 	initialize/0,
 
+	log__debug/1,
 	log__info/2,
 	log__error/1,
 
@@ -41,7 +42,11 @@
 	infer_groundness_prop_with_cti/2,
 	invariant_from_facts_and_hypothesis/4,
     is_compound_form_except_list_question_mark/1,
+
 	prove_groundness_prop/2,
+	prove_groundness_prop_alt/2,
+	prove_groundness_prop_dn/2,
+
 	matching_dnf/1,
 	model_formula/4,
     remove_qm_steps/3,

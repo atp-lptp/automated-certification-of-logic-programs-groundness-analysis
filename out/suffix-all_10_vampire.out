@@ -1,0 +1,9 @@
+user	0m0.006s
+target conjecture: "./src/list/suffix-all1.fof" apply prover command: "time vampire --proof off --time_limit 10s ./src/list/suffix-all1.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/suffix-all2.fof" apply prover command: "time vampire --proof off --time_limit 10s ./src/list/suffix-all2.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/suffix-all3.fof" apply prover command: "time vampire --proof off --time_limit 10s ./src/list/suffix-all3.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+user	0m0.006s
+target conjecture: "./src/list/suffix-all4.fof" apply prover command: "time vampire --proof off --time_limit 10s ./src/list/suffix-all4.fof >> $(pwd)/out/tmp_output_vampire" status code: "0", successful application (yes: 1, no: 0): 1
+4 lemmas, 4 proved,  ratio: 100

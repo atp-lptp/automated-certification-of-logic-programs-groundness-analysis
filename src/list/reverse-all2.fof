@@ -1,0 +1,28 @@
+fof(id1,axiom,! [Xx7,Xx8] : ~ (nil = cons(Xx7,Xx8))).
+fof(id2,axiom,! [Xx9,Xx10] : ! [Xx11,Xx12] : (cons(Xx9,Xx10) = cons(Xx11,Xx12) => Xx10 = Xx12)).
+fof(id3,axiom,! [Xx13,Xx14] : ! [Xx15,Xx16] : (cons(Xx13,Xx14) = cons(Xx15,Xx16) => Xx13 = Xx15)).
+fof(id4,axiom,gr(nil)).
+fof(id5,axiom,! [Xx17,Xx18] : ((gr(Xx17) & gr(Xx18)) <=> gr(cons(Xx17,Xx18)))).
+fof(id6,axiom,! [Xx19,Xx20,Xx21] : ~ ((a_reverse_succeeds(Xx19,Xx20,Xx21) & a_reverse_fails(Xx19,Xx20,Xx21)))).
+fof(id7,axiom,! [Xx19,Xx20,Xx21] : (a_reverse_terminates(Xx19,Xx20,Xx21) => (a_reverse_succeeds(Xx19,Xx20,Xx21) | a_reverse_fails(Xx19,Xx20,Xx21)))).
+fof(id8,axiom,! [Xx22,Xx23] : ~ ((reverse_succeeds(Xx22,Xx23) & reverse_fails(Xx22,Xx23)))).
+fof(id9,axiom,! [Xx22,Xx23] : (reverse_terminates(Xx22,Xx23) => (reverse_succeeds(Xx22,Xx23) | reverse_fails(Xx22,Xx23)))).
+fof(id10,axiom,! [Xx24,Xx25] : ~ ((n_reverse_succeeds(Xx24,Xx25) & n_reverse_fails(Xx24,Xx25)))).
+fof(id11,axiom,! [Xx24,Xx25] : (n_reverse_terminates(Xx24,Xx25) => (n_reverse_succeeds(Xx24,Xx25) | n_reverse_fails(Xx24,Xx25)))).
+fof(id12,axiom,! [Xx26,Xx27,Xx28] : ~ ((append_succeeds(Xx26,Xx27,Xx28) & append_fails(Xx26,Xx27,Xx28)))).
+fof(id13,axiom,! [Xx26,Xx27,Xx28] : (append_terminates(Xx26,Xx27,Xx28) => (append_succeeds(Xx26,Xx27,Xx28) | append_fails(Xx26,Xx27,Xx28)))).
+fof(id14,axiom,! [Xx1,Xx2,Xx3] : (a_reverse_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : (Xx1 = cons(Xx4,Xx5) & a_reverse_succeeds(Xx5,cons(Xx4,Xx2),Xx3)) | (Xx1 = nil & Xx3 = Xx2)))).
+fof(id15,axiom,! [Xx1,Xx2,Xx3] : (a_reverse_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : (~ (Xx1 = cons(Xx4,Xx5)) | a_reverse_fails(Xx5,cons(Xx4,Xx2),Xx3)) & (~ (Xx1 = nil) | ~ (Xx3 = Xx2))))).
+fof(id16,axiom,! [Xx1,Xx2,Xx3] : (a_reverse_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = cons(Xx4,Xx5)) | a_reverse_terminates(Xx5,cons(Xx4,Xx2),Xx3))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id17,axiom,! [Xx1,Xx2] : (reverse_succeeds(Xx1,Xx2) <=> a_reverse_succeeds(Xx1,nil,Xx2))).
+fof(id18,axiom,! [Xx1,Xx2] : (reverse_fails(Xx1,Xx2) <=> a_reverse_fails(Xx1,nil,Xx2))).
+fof(id19,axiom,! [Xx1,Xx2] : (reverse_terminates(Xx1,Xx2) <=> a_reverse_terminates(Xx1,nil,Xx2))).
+fof(id20,axiom,! [Xx1,Xx2] : (n_reverse_succeeds(Xx1,Xx2) <=> (? [Xx3] : ? [Xx4] : ? [Xx5] : (Xx1 = cons(Xx3,Xx4) & (n_reverse_succeeds(Xx4,Xx5) & append_succeeds(Xx5,cons(Xx3,nil),Xx2))) | (Xx1 = nil & Xx2 = nil)))).
+fof(id21,axiom,! [Xx1,Xx2] : (n_reverse_fails(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : (~ (Xx1 = cons(Xx3,Xx4)) | (n_reverse_fails(Xx4,Xx5) | append_fails(Xx5,cons(Xx3,nil),Xx2))) & (~ (Xx1 = nil) | ~ (Xx2 = nil))))).
+fof(id22,axiom,! [Xx1,Xx2] : (n_reverse_terminates(Xx1,Xx2) <=> (! [Xx3] : ! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = cons(Xx3,Xx4)) | (n_reverse_terminates(Xx4,Xx5) & (n_reverse_fails(Xx4,Xx5) | append_terminates(Xx5,cons(Xx3,nil),Xx2))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof(id23,axiom,! [Xx1,Xx2,Xx3] : (append_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx1 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & append_succeeds(Xx5,Xx2,Xx6))) | (Xx1 = nil & Xx3 = Xx2)))).
+fof(id24,axiom,! [Xx1,Xx2,Xx3] : (append_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : (~ (Xx1 = cons(Xx4,Xx5)) | (~ (Xx3 = cons(Xx4,Xx6)) | append_fails(Xx5,Xx2,Xx6))) & (~ (Xx1 = nil) | ~ (Xx3 = Xx2))))).
+fof(id25,axiom,! [Xx1,Xx2,Xx3] : (append_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ! [Xx6] : ($true & (~ (Xx1 = cons(Xx4,Xx5)) | ($true & (~ (Xx3 = cons(Xx4,Xx6)) | append_terminates(Xx5,Xx2,Xx6))))) & ($true & (~ (Xx1 = nil) | $true))))).
+fof('lemma-a_reverse31',axiom,! [Xx1,Xx2,Xx3] : (a_reverse_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3] : ((? [Xx4] : ? [Xx5] : ? [Xx6] : (Xx1 = cons(Xx4,Xx5) & (Xx3 = cons(Xx4,Xx6) & (append_succeeds(Xx5,Xx2,Xx6) & (((((gr(Xx6) & gr(Xx2)) & gr(Xx5)) | ((~ (gr(Xx6)) & gr(Xx2)) & ~ (gr(Xx5)))) | ((~ (gr(Xx6)) & ~ (gr(Xx2))) & gr(Xx5))) | ((~ (gr(Xx6)) & ~ (gr(Xx2))) & ~ (gr(Xx5))))))) | (Xx1 = nil & Xx3 = Xx2)) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3] : (append_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1))))))).
+fof('lemma-append31',conjecture,! [Xx1,Xx2,Xx3] : (append_succeeds(Xx1,Xx2,Xx3) => (((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & ~ (gr(Xx1)))))).

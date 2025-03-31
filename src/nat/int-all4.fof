@@ -1,0 +1,43 @@
+fof(id1,axiom,! [Xx3] : ! [Xx4] : (s(Xx3) = s(Xx4) => Xx3 = Xx4)).
+fof(id2,axiom,! [Xx5] : ~ ('0' = s(Xx5))).
+fof(id3,axiom,! [Xx6] : ! [Xx7] : ~ (s(Xx6) = '-'(Xx7))).
+fof(id4,axiom,! [Xx8] : ~ ('0' = '-'(Xx8))).
+fof(id5,axiom,! [Xx9] : ! [Xx10] : ('-'(Xx9) = '-'(Xx10) => Xx9 = Xx10)).
+fof(id6,axiom,! [Xx11] : (gr(Xx11) <=> gr(s(Xx11)))).
+fof(id7,axiom,gr('0')).
+fof(id8,axiom,! [Xx12] : (gr(Xx12) <=> gr('-'(Xx12)))).
+fof(id9,axiom,! [Xx13,Xx14] : ~ ((minus_succeeds(Xx13,Xx14) & minus_fails(Xx13,Xx14)))).
+fof(id10,axiom,! [Xx13,Xx14] : (minus_terminates(Xx13,Xx14) => (minus_succeeds(Xx13,Xx14) | minus_fails(Xx13,Xx14)))).
+fof(id11,axiom,! [Xx15,Xx16,Xx17] : ~ ((minus_succeeds(Xx15,Xx16,Xx17) & minus_fails(Xx15,Xx16,Xx17)))).
+fof(id12,axiom,! [Xx15,Xx16,Xx17] : (minus_terminates(Xx15,Xx16,Xx17) => (minus_succeeds(Xx15,Xx16,Xx17) | minus_fails(Xx15,Xx16,Xx17)))).
+fof(id13,axiom,! [Xx18] : ~ ((negative_succeeds(Xx18) & negative_fails(Xx18)))).
+fof(id14,axiom,! [Xx18] : (negative_terminates(Xx18) => (negative_succeeds(Xx18) | negative_fails(Xx18)))).
+fof(id15,axiom,! [Xx19] : ~ ((int_succeeds(Xx19) & int_fails(Xx19)))).
+fof(id16,axiom,! [Xx19] : (int_terminates(Xx19) => (int_succeeds(Xx19) | int_fails(Xx19)))).
+fof(id17,axiom,! [Xx20,Xx21,Xx22] : ~ ((plus_succeeds(Xx20,Xx21,Xx22) & plus_fails(Xx20,Xx21,Xx22)))).
+fof(id18,axiom,! [Xx20,Xx21,Xx22] : (plus_terminates(Xx20,Xx21,Xx22) => (plus_succeeds(Xx20,Xx21,Xx22) | plus_fails(Xx20,Xx21,Xx22)))).
+fof(id19,axiom,! [Xx23] : ~ ((nat_succeeds(Xx23) & nat_fails(Xx23)))).
+fof(id20,axiom,! [Xx23] : (nat_terminates(Xx23) => (nat_succeeds(Xx23) | nat_fails(Xx23)))).
+fof(id21,axiom,! [Xx1,Xx2] : (minus_succeeds(Xx1,Xx2) <=> (Xx1 = '-'(Xx2) | ((Xx1 = '0' & Xx2 = '0') | ? [Xx3] : (Xx1 = s(Xx3) & Xx2 = '-'(s(Xx3))))))).
+fof(id22,axiom,! [Xx1,Xx2] : (minus_fails(Xx1,Xx2) <=> (~ (Xx1 = '-'(Xx2)) & ((~ (Xx1 = '0') | ~ (Xx2 = '0')) & ! [Xx3] : (~ (Xx1 = s(Xx3)) | ~ (Xx2 = '-'(s(Xx3)))))))).
+fof(id23,axiom,! [Xx1,Xx2] : (minus_terminates(Xx1,Xx2) <=> ($true & (($true & (~ (Xx1 = '0') | $true)) & ! [Xx3] : ($true & (~ (Xx1 = s(Xx3)) | $true)))))).
+fof(id24,axiom,! [Xx1,Xx2,Xx3] : (minus_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : (Xx3 = '-'(s(Xx4)) & plus_succeeds(Xx1,s(Xx4),Xx2)) | (plus_succeeds(Xx2,Xx3,Xx1) & negative_fails(Xx3))))).
+fof(id25,axiom,! [Xx1,Xx2,Xx3] : (minus_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : (~ (Xx3 = '-'(s(Xx4))) | plus_fails(Xx1,s(Xx4),Xx2)) & (plus_fails(Xx2,Xx3,Xx1) | negative_succeeds(Xx3))))).
+fof(id26,axiom,! [Xx1,Xx2,Xx3] : (minus_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ($true & (~ (Xx3 = '-'(s(Xx4))) | plus_terminates(Xx1,s(Xx4),Xx2))) & (plus_terminates(Xx2,Xx3,Xx1) & (plus_fails(Xx2,Xx3,Xx1) | (negative_terminates(Xx3) & gr(Xx3))))))).
+fof(id27,axiom,! [Xx1] : (negative_succeeds(Xx1) <=> ? [Xx2] : Xx1 = '-'(s(Xx2)))).
+fof(id28,axiom,! [Xx1] : (negative_fails(Xx1) <=> ! [Xx2] : ~ (Xx1 = '-'(s(Xx2))))).
+fof(id29,axiom,! [Xx1] : (negative_terminates(Xx1) <=> ! [Xx2] : $true)).
+fof(id30,axiom,! [Xx1] : (int_succeeds(Xx1) <=> (? [Xx2] : (Xx1 = '-'(s(Xx2)) & nat_succeeds(Xx2)) | nat_succeeds(Xx1)))).
+fof(id31,axiom,! [Xx1] : (int_fails(Xx1) <=> (! [Xx2] : (~ (Xx1 = '-'(s(Xx2))) | nat_fails(Xx2)) & nat_fails(Xx1)))).
+fof(id32,axiom,! [Xx1] : (int_terminates(Xx1) <=> (! [Xx2] : ($true & (~ (Xx1 = '-'(s(Xx2))) | nat_terminates(Xx2))) & nat_terminates(Xx1)))).
+fof(id33,axiom,! [Xx1,Xx2,Xx3] : (plus_succeeds(Xx1,Xx2,Xx3) <=> (? [Xx4] : ? [Xx5] : (Xx1 = s(Xx4) & (Xx3 = s(Xx5) & plus_succeeds(Xx4,Xx2,Xx5))) | (Xx1 = '0' & Xx3 = Xx2)))).
+fof(id34,axiom,! [Xx1,Xx2,Xx3] : (plus_fails(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : (~ (Xx1 = s(Xx4)) | (~ (Xx3 = s(Xx5)) | plus_fails(Xx4,Xx2,Xx5))) & (~ (Xx1 = '0') | ~ (Xx3 = Xx2))))).
+fof(id35,axiom,! [Xx1,Xx2,Xx3] : (plus_terminates(Xx1,Xx2,Xx3) <=> (! [Xx4] : ! [Xx5] : ($true & (~ (Xx1 = s(Xx4)) | ($true & (~ (Xx3 = s(Xx5)) | plus_terminates(Xx4,Xx2,Xx5))))) & ($true & (~ (Xx1 = '0') | $true))))).
+fof(id36,axiom,! [Xx1] : (nat_succeeds(Xx1) <=> (? [Xx2] : (Xx1 = s(Xx2) & nat_succeeds(Xx2)) | Xx1 = '0'))).
+fof(id37,axiom,! [Xx1] : (nat_fails(Xx1) <=> (! [Xx2] : (~ (Xx1 = s(Xx2)) | nat_fails(Xx2)) & ~ (Xx1 = '0')))).
+fof(id38,axiom,! [Xx1] : (nat_terminates(Xx1) <=> (! [Xx2] : ($true & (~ (Xx1 = s(Xx2)) | nat_terminates(Xx2))) & $true))).
+fof('lemma-plus31',axiom,! [Xx1,Xx2,Xx3] : (plus_succeeds(Xx1,Xx2,Xx3) => (((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))))).
+fof('lemma-negative11',axiom,! [Xx1] : (negative_succeeds(Xx1) => (gr(Xx1) | ~ (gr(Xx1))))).
+fof('lemma-nat11',axiom,! [Xx1] : (nat_succeeds(Xx1) => gr(Xx1))).
+fof(induction,axiom,(! [Xx1,Xx2,Xx3] : ((? [Xx4] : (Xx3 = '-'(s(Xx4)) & plus_succeeds(Xx1,s(Xx4),Xx2)) | (plus_succeeds(Xx2,Xx3,Xx1) & negative_fails(Xx3))) => ((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1))))) => ! [Xx1,Xx2,Xx3] : (minus_succeeds(Xx1,Xx2,Xx3) => ((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1))))))).
+fof('lemma-minus31',conjecture,! [Xx1,Xx2,Xx3] : (minus_succeeds(Xx1,Xx2,Xx3) => ((((gr(Xx3) & gr(Xx2)) & gr(Xx1)) | ((~ (gr(Xx3)) & ~ (gr(Xx2))) & gr(Xx1))) | ((~ (gr(Xx3)) & gr(Xx2)) & ~ (gr(Xx1)))))).
